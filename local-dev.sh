@@ -62,10 +62,10 @@ mkdir templates/
 mkdir static/
 cp ../webapp/dist/*.html templates/
 cp -r ../webapp/dist/static/* static/
-cd ..
+
 # Copy local config template if no configuration set (ignored via .gitignore)
-if [ ! -f server/config/settings.cfg ]; then
-    cp -p server/config/settings.cfg.template server/config/settings.cfg
+if [ ! -f config/settings.cfg ]; then
+    cp -p config/settings.cfg.template config/settings.cfg
 fi
 
 # Run background metrics collector
