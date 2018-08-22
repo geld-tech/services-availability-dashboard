@@ -12,7 +12,7 @@ import os
 from flask import Flask, render_template, jsonify
 
 from modules.ServiceStatus import ServiceStatus
-from modules.Models import Base, Server, Status
+from modules.Models import Base, Server, Service
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -56,12 +56,11 @@ def status():
         last_2_hours = now - datetime.timedelta(hours=2)
 
         server = db_session.query(Server).filter_by(hostname=nginx_status.get_server_hostname()).first()
-        for result in db_session.query(Status).filter_by(server=server).filter(Status.timestamp >= last_2_hours.strftime('%s')).order_by(Status.id):
+        for result in db_session.query(Service).filter_by(server=server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id):
             status = {}
-            status['active'] = result.active
-            status['reading'] = result.reading
-            status['writing'] = result.writing
-            status['waiting'] = result.waiting
+            status['uri'] = result.uri
+            status['latency'] = result.latency
+            status['available'] = result.available
             status['date_time'] = result.date_time.strftime("%H:%M")
             data.append(status)
             time_labels.append(result.date_time)
