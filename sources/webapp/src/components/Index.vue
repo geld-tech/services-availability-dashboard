@@ -10,7 +10,7 @@
             <h3>{{ msg }}</h3>
             <b-row align-v="start" align-h="around">
                 <b-col sm="4">
-                    <h5>Connections</h5>
+                    <h5>Services Status</h5>
                 </b-col>
                 <b-col sm="8">
                     <p></p>
