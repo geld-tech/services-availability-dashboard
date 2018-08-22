@@ -1,0 +1,52 @@
+#!/bin/sh
+set -e
+
+echo ""
+echo "Post-Installation Macro"
+
+IS_UPGRADE=false
+
+case "$1" in
+	configure)
+		# Set user permissions
+		chown -R root:www-data __PACKAGE_DIR__
+		chown -R root:www-data __PACKAGE_DIR__
+		chmod 775  __PACKAGE_DIR__/data
+
+		# If $1=configure and $2 is set, this is an upgrade
+		if [ "$2" != "" ]; then
+			IS_UPGRADE=true
+		fi
+
+		if [ "$IS_UPGRADE" = "true" ]; then
+			# Upgrading already installed package
+			if [ -f /tmp/__PACKAGE_NAME__.settings.cfg ]; then
+				echo -n "Restoring preserved local configuration ..."
+				cp -p /tmp/__PACKAGE_NAME__.settings.cfg __PACKAGE_DIR__/config/settings.cfg
+				rm -f /tmp/__PACKAGE_NAME__.settings.cfg
+				echo " OK"
+			fi
+			echo ""
+			echo -n "Restarting service..."
+			systemctl daemon-reload
+			systemctl start __PACKAGE_NAME__ || true
+			echo " OK"
+			echo ""
+			echo "Service __PACKAGE_NAME__ upgraded successfully!!"
+		else
+			# Performing a fresh install of the package
+			echo -n "Starting service..."
+			systemctl daemon-reload
+			systemctl enable __PACKAGE_NAME__ || true
+			echo " OK"
+			cp -p __PACKAGE_DIR__/config/settings.cfg.template __PACKAGE_DIR__/config/settings.cfg
+			echo ""
+			echo "Service __PACKAGE_NAME__ installed successfully!"
+			echo ""
+			echo "Edit the file __PACKAGE_DIR__/config/settings.cfg with your credentials, then start the service with the following:"
+			echo "  systemctl start __PACKAGE_NAME__"
+		fi
+		;;
+esac
+
+exit 0
