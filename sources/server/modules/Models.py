@@ -24,7 +24,7 @@ class Version(Base):
 
 
 class Service(Base):
-    __tablename__ = 'status'
+    __tablename__ = 'service'
     id = Column(Integer, primary_key=True)
     date_time = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
     timestamp = Column(BigInteger)

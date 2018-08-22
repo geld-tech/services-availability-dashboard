@@ -6,7 +6,7 @@ import os
 import sys
 import time
 from modules.ServiceStatus import ServiceStatus
-from modules.Models import Base, Server, Status
+from modules.Models import Base, Server, Service
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -57,13 +57,9 @@ class MetricsCollector():
 
     def store_status(self, date_time, data):
         try:
-            status = Status(active=data['active'],
-                            reading=data['reading'],
-                            writing=data['writing'],
-                            waiting=data['waiting'],
-                            timestamp=date_time.strftime('%s'),
+            service_status = Service(timestamp=date_time.strftime('%s'),
                             server=self.server)
-            self.db_session.add(status)
+            self.db_session.add(service_status)
             self.db_session.commit()
         except Exception:
             print "Error accessing nginx status"
