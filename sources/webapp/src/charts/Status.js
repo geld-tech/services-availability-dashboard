@@ -27,33 +27,12 @@ export default {
       }
       return labels
     },
-    active: function() {
-      var active = []
+    latencies: function() {
+      var latencies = []
       for (var i = 0; i < this.metrics.length; ++i) {
-        active.push(this.metrics[i].active)
+        latencies.push(this.metrics[i].latency)
       }
-      return active
-    },
-    writing: function() {
-      var writing = []
-      for (var i = 0; i < this.metrics.length; ++i) {
-        writing.push(this.metrics[i].writing)
-      }
-      return writing
-    },
-    reading: function() {
-      var reading = []
-      for (var i = 0; i < this.metrics.length; ++i) {
-        reading.push(this.metrics[i].reading)
-      }
-      return reading
-    },
-    waiting: function() {
-      var waiting = []
-      for (var i = 0; i < this.metrics.length; ++i) {
-        waiting.push(this.metrics[i].waiting)
-      }
-      return waiting
+      return latencies
     }
   },
   methods: {
@@ -62,32 +41,11 @@ export default {
         labels: this.datetimeLabels,
         datasets: [
           {
-            label: 'Active',
-            fill: false,
-            backgroundColor: chartColors.red,
-            borderColor: chartColors.red,
-            data: this.active
-          },
-          {
-            label: 'Writing',
-            fill: false,
-            backgroundColor: chartColors.yellow,
-            borderColor: chartColors.yellow,
-            data: this.writing
-          },
-          {
-            label: 'Reading',
+            label: 'Service',
             fill: false,
             backgroundColor: chartColors.blue,
             borderColor: chartColors.blue,
-            data: this.reading
-          },
-          {
-            label: 'Waiting',
-            fill: false,
-            backgroundColor: chartColors.grey,
-            borderColor: chartColors.grey,
-            data: this.waiting
+            data: this.latencies
           }
         ]
       },
@@ -114,7 +72,7 @@ export default {
             },
             scaleLabel: {
               display: true,
-              labelString: 'Count'
+              labelString: 'Latency (ms)'
             }
           }]
         }
