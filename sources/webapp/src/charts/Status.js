@@ -50,8 +50,8 @@ export default {
         ]
       },
       {
-        responsive: true,
         maintainAspectRatio: false,
+        responsive: true,
         animation: false,
         elements: {
           point: {
@@ -60,6 +60,10 @@ export default {
         },
         scales: {
           xAxes: [{
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 12
+            },
             scaleLabel: {
               display: false
             }
