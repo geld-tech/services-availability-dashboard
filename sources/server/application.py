@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-    Server Dashboard
-    Display server resources usage
+    Services Availability API and Dashboard
+    Display services metrics and provides REST API back-end
 """
 import ConfigParser
 import datetime
