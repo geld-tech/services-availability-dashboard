@@ -12,7 +12,7 @@ import os
 from flask import Flask, render_template, jsonify
 
 from modules.ServiceStatus import ServiceStatus
-from modules.Models import Base, Server, Service
+from modules.Models import Base, Server, Service, Metrics
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -56,14 +56,15 @@ def status():
         last_2_hours = now - datetime.timedelta(hours=2)
 
         server = db_session.query(Server).filter_by(hostname=nginx_status.get_server_hostname()).first()
-        for result in db_session.query(Service).filter_by(server=server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id):
-            status = {}
-            status['uri'] = result.uri
-            status['latency'] = result.latency
-            status['available'] = result.available
-            status['date_time'] = result.date_time.strftime("%H:%M")
-            data.append(status)
-            time_labels.append(result.date_time)
+        for result in db_session.query(Service).filter_by(server=server).order_by(Service.id):
+            for metric in db_session.query(Metrics).filter_by(service=result.service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
+                status = {}
+                status['uri'] = result.uri
+                status['latency'] = metric.latency
+                status['available'] = metric.available
+                status['date_time'] = metric.date_time.strftime("%H:%M")
+                data.append(status)
+                time_labels.append(result.date_time)
         return jsonify({'data': data, 'time_labels': time_labels}), 200
     except Exception, e:
         logger.error('Error retrieving nginx status: %s' % e)
