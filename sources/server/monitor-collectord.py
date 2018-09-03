@@ -60,8 +60,7 @@ class MetricsCollector():
         try:
             now = datetime.datetime.utcnow()
             last_2_hours = now - datetime.timedelta(hours=2)
-            self.services = db_session.query(Service).filter_by(server=self.server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id):
-                                     service=self.service[0])
+            self.services = self.db_session.query(Service).filter_by(server=self.server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id)
         except Exception:
             print "Error accessing nginx status"
 
