@@ -56,6 +56,15 @@ class MetricsCollector():
     def db_rollback(self):
         self.db_session.rollback()
 
+    def get_services(self):
+        try:
+            now = datetime.datetime.utcnow()
+            last_2_hours = now - datetime.timedelta(hours=2)
+            self.services = db_session.query(Service).filter_by(server=self.server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id):
+                                     service=self.service[0])
+        except Exception:
+            print "Error accessing nginx status"
+
     def store_status(self, date_time, data):
         try:
             service_status = Metrics(timestamp=date_time.strftime('%s'),
