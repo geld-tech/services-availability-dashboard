@@ -6,7 +6,7 @@ import os
 import sys
 import time
 from modules.ServiceStatus import ServiceStatus
-from modules.Models import Base, Server, Service
+from modules.Models import Base, Server, Service, Metrics
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -22,6 +22,7 @@ class MetricsCollector():
         self.db_path = db_path
         self.db_session = None
         self.server = None
+        self.services = []
         atexit.register(self.db_close)
 
     def run(self):
@@ -57,8 +58,8 @@ class MetricsCollector():
 
     def store_status(self, date_time, data):
         try:
-            service_status = Service(timestamp=date_time.strftime('%s'),
-                                     server=self.server)
+            service_status = Metrics(timestamp=date_time.strftime('%s'),
+                                     service=self.service[0])
             self.db_session.add(service_status)
             self.db_session.commit()
         except Exception:
