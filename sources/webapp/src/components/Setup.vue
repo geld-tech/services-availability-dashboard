@@ -26,8 +26,8 @@ export default {
   data () {
     return {
       msg: 'First Setup',
-      nowStep: 2,
-      stepList: ['First Step', 'Second Step', 'Third Step', 'Four Step'],
+      nowStep: 1,
+      stepList: ['First Setup', 'Password', 'Services'],
       stepperStyle: 'style2',
       stepperColor: '#0079FB'
     }
