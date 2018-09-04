@@ -17,9 +17,6 @@
 export default {
   name: 'Info',
   props: ['loading', 'data'],
-  components: {
-    Status
-  },
   data () {
     return {
       msg: 'First Setup'
