@@ -9,6 +9,8 @@
         <div v-else>
             <h3>{{ msg }}</h3>
            <stepper :length="5"></stepper>
+           <hr />
+           <vue-step :now-step="nowStep" :step-list="stepList"></vue-step>
         </div>
     </b-container>
   </div>
@@ -16,16 +18,20 @@
 
 <script>
 import Stepper from './Stepper'
+import vueStep from 'vue-step'
 
 export default {
   name: 'Info',
   props: ['loading', 'data'],
   components: {
-    Stepper
+    Stepper,
+    vueStep
   },
   data () {
     return {
-      msg: 'First Setup'
+      msg: 'First Setup',
+      nowStep: 2,
+      stepList: ['First Step', 'Second Step', 'Third Step', 'Four Step']
     }
   }
 }
