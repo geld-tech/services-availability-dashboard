@@ -8,23 +8,19 @@
         </div>
         <div v-else>
             <h3>{{ msg }}</h3>
-           <stepper :length="5"></stepper>
-           <hr />
-           <vue-step :now-step="nowStep" :step-list="stepList"></vue-step>
+           <vue-step v-bind:now-step="nowStep" v-bind:step-list="stepList"></vue-step>
         </div>
     </b-container>
   </div>
 </template>
 
 <script>
-import Stepper from './Stepper'
 import vueStep from 'vue-step'
 
 export default {
   name: 'Info',
   props: ['loading', 'data'],
   components: {
-    Stepper,
     vueStep
   },
   data () {
