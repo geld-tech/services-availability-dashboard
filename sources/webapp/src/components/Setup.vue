@@ -8,7 +8,7 @@
         </div>
         <div v-else>
             <h3>{{ msg }}</h3>
-           <vue-step v-bind:now-step="nowStep" v-bind:step-list="stepList"></vue-step>
+           <vue-step v-bind:now-step="nowStep" v-bind:step-list="stepList" v-bind:style-type="stepperStyle"></vue-step>
         </div>
     </b-container>
   </div>
@@ -27,7 +27,8 @@ export default {
     return {
       msg: 'First Setup',
       nowStep: 2,
-      stepList: ['First Step', 'Second Step', 'Third Step', 'Four Step']
+      stepList: ['First Step', 'Second Step', 'Third Step', 'Four Step'],
+      stepperStyle: 'style2'
     }
   }
 }
