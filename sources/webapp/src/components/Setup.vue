@@ -28,7 +28,7 @@ export default {
       msg: 'First Setup',
       nowStep: 2,
       stepList: ['First Step', 'Second Step', 'Third Step', 'Four Step'],
-      stepperStyle: 'style2'
+      stepperStyle: 'style2',
       stepperColor: '#0079FB'
     }
   }
