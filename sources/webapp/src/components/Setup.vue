@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import stepper from './Stepper'
+import Stepper from './Stepper'
 
 export default {
   name: 'Info',
   props: ['loading', 'data'],
   components: {
-    Stepper: 'stepper'
+    Stepper
   },
   data () {
     return {

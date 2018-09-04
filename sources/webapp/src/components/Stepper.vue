@@ -9,11 +9,11 @@
 </template>
 <script>
 export default {
-  props:['length'],
+  props: ['length'],
   data () {
     return {
     }
-  },
+  }
 }
 </script>
 
