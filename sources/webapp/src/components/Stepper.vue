@@ -26,6 +26,7 @@ export default {
 }
 .steps-bar{
   counter-reset: step;
+  list-style: none;
 }
 .steps-bar li{
   float: left;
