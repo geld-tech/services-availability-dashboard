@@ -8,50 +8,21 @@
         </div>
         <div v-else>
             <h3>{{ msg }}</h3>
-                <stepper buttons>
-                  <step name="Basic Information"
-                        icon="folder-open-o"
-                        slot="content">
-                    <h3 class="font-weight-bold pl-0 my-4"><strong>Basic Information</strong></h3>
-                    <md-input label="Email"/>
-                    <md-input label="Username"/>
-                    <md-input label="Password"/>
-                    <md-input label="Repeat Password"/>
-                  </step>
-
-                  <step name="Personal Data"
-                        icon="pencil"
-                        slot="content">
-                    <h3 class="font-weight-bold pl-0 my-4"><strong>Personal Data</strong></h3>
-                    <md-input label="First Name"/>
-                    <md-input label="Second Name"/>
-                    <md-input label="Surname"/>
-                    <md-textarea label="Address"/>
-                  </step>
-
-                  <step name="Terms and Conditions"
-                        icon="photo"
-                        slot="content">
-                    <h3 class="font-weight-bold pl-0 my-4"><strong>Terms and conditions</strong></h3>
-                    <md-input type="checkbox" id="checkbox1" label="I agree to the terms and conditions" />
-                    <md-input type="checkbox" id="checkbox2" label="I want to receive newsletter" />
-                  </step>
-                  <step name="Finish"
-                        icon="check"
-                        slot="content">
-                    <h3 class="font-weight-bold pl-0 my-4"><strong>Finish</strong></h3>
-                    <h2 class="text-center font-weight-bold my-4">Registration completed!</h2>
-                  </step>
-                </stepper>
+           <stepper :length="5"></stepper>
         </div>
     </b-container>
   </div>
 </template>
 
 <script>
+import stepper from './Stepper'
+
 export default {
   name: 'Info',
   props: ['loading', 'data'],
+  components: {
+    Stepper: 'stepper'
+  },
   data () {
     return {
       msg: 'First Setup'
