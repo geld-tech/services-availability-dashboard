@@ -9,7 +9,7 @@ import logging
 import logging.handlers
 from optparse import OptionParser
 import os
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify, render_template
 
 from modules.ServiceStatus import ServiceStatus
 from modules.Models import Base, Server, Service, Metrics
@@ -21,12 +21,8 @@ app = Flask(__name__)
 app.debug = True
 
 # Global config for API URLs and Tokens
-config = ConfigParser.ConfigParser()
-config.readfp(open('config/settings.cfg'))
-if 'ganalytics' in config.sections():
-    ganalytics_id = config.get('ganalytics', 'ua_id')
-else:
-    ganalytics_id = False
+config_file = 'config/settings.cfg'
+ganalytics_id = False
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
@@ -44,7 +40,15 @@ db_session = DBSession()
 
 @app.route("/")
 def index():
-    return render_template('index.html', ga_ua_id=ganalytics_id)
+    global ganalytics_id
+    if os.path.isfile(config_file):
+        config = ConfigParser.ConfigParser()
+        config.readfp(open('config/settings.cfg'))
+        if 'ganalytics' in config.sections():
+            ganalytics_id = config.get('ganalytics', 'ua_id')
+        return render_template('index.html', ga_ua_id=ganalytics_id)
+    else:
+        return render_template('index.html', ga_ua_id=ganalytics_id)
 
 
 @app.route("/api/services/status", strict_slashes=False)
