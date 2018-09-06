@@ -27,7 +27,7 @@ export default {
     return {
       msg: 'First Setup',
       nowStep: 1,
-      stepList: ['First Setup', 'Password', 'Services'],
+      stepList: ['First Setup', 'Password', 'Analytics', 'Services'],
       stepperStyle: 'style2',
       stepperColor: '#0079FB'
     }
