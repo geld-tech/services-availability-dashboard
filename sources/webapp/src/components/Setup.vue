@@ -54,7 +54,7 @@ a {
   font-size: 14px;
 }
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin:  0 auto;
 }
 .Chart {
