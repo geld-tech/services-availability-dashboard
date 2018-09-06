@@ -20,9 +20,8 @@ from sqlalchemy.orm import sessionmaker
 app = Flask(__name__)
 app.debug = True
 
-# Global config for API URLs and Tokens
+# Global config
 config_file = 'config/settings.cfg'
-ganalytics_id = False
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
@@ -40,15 +39,22 @@ db_session = DBSession()
 
 @app.route("/")
 def index():
-    global ganalytics_id
-    if os.path.isfile(config_file):
-        config = ConfigParser.ConfigParser()
-        config.readfp(open('config/settings.cfg'))
-        if 'ganalytics' in config.sections():
-            ganalytics_id = config.get('ganalytics', 'ua_id')
-        return render_template('index.html', ga_ua_id=ganalytics_id)
-    else:
-        return render_template('index.html', ga_ua_id=ganalytics_id)
+    global config_file
+    try:
+        settings = {'firstSetup': True}
+        ganalytics_id = False
+
+        if os.path.isfile(config_file):
+            settings = {'firstSetup': False}
+            config = ConfigParser.ConfigParser()
+            config.readfp(open(config_file))
+            if 'ganalytics' in config.sections():
+                ganalytics_id = config.get('ganalytics', 'ua_id')
+
+        return render_template('index.html', settings=settings, ga_ua_id=ganalytics_id)
+    except Exception, e:
+        logger.error('Error serving web application: %s' % e)
+        return jsonify({'data': {}, 'error': 'Could serve web application, check logs for more details..'}), 500
 
 
 @app.route("/api/services/status", strict_slashes=False)
