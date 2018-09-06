@@ -64,9 +64,9 @@ cp ../webapp/dist/*.html templates/
 cp -r ../webapp/dist/static/* static/
 
 # Copy local config template if no configuration set (ignored via .gitignore)
-if [ ! -f config/settings.cfg ]; then
-    cp -p config/settings.cfg.template config/settings.cfg
-fi
+#if [ ! -f config/settings.cfg ]; then
+#    cp -p config/settings.cfg.template config/settings.cfg
+#fi
 
 # Run background metrics collector
 echo ""
