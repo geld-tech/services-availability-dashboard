@@ -41,6 +41,10 @@ export default {
     }
   },
   created() {
+    var firstSetup = window.settings.firstSetup
+    if (firstSetup) {
+      this.$router.push('/Setup')
+    }
     this.loading = false
     /* Trick to reset/clear native browser form validation state */
     this.data = {}
