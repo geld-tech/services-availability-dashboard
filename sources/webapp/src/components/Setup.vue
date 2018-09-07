@@ -9,7 +9,9 @@
         <div v-else>
             <vue-step v-bind:now-step="nowStep" v-bind:step-list="stepList" v-bind:style-type="stepperStyle" v-bind:active-color="stepperColor"></vue-step>
             <div v-if="nowStep == 1">
-                <p>Setup step 1</p>
+                <h2>First Setup</h2>
+                <p>Welcome to the first setup!</p>
+                <p>The following pages will guide you through the configuration to start using you service.</p>
             </div>
             <div v-else-if="nowStep == 2">
                 <p>Setup step 2</p>
