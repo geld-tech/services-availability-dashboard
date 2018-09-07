@@ -15,7 +15,13 @@
                     <p>The following pages will guide you through the configuration to start using you service.</p>
                 </div>
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block">
-                    <p>Setup step 2</p>
+                    <h2>Admin Password</h2>
+                    <p>Enter the system administration password in the following input field, then press Set</p>
+                    <b-form @submit="onSubmit" @reset="onReset" id="adminPassword" v-if="show">
+                        <b-form-input type="password" v-model="form.adminPassword" required></b-form-input>
+                        <b-button type="reset" variant="danger">Clear</b-button>
+                        <b-button type="submit" variant="primary">Set</b-button>
+                    </b-form>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block">
                     <p>Setup step 3</p>
@@ -47,10 +53,14 @@ export default {
   },
   data () {
     return {
+      form: {
+        adminPassword: ''
+      },
       nowStep: 1,
       stepList: ['First Setup', 'Password', 'Analytics', 'Services'],
       stepperStyle: 'style2',
-      stepperColor: '#0079FB'
+      stepperColor: '#0079FB',
+      show: true
     }
   },
   methods: {
@@ -67,6 +77,14 @@ export default {
       } else {
         this.nowStep = 1
       }
+    },
+    onReset (evt) {
+      evt.preventDefault()
+      /* Reset our form values */
+      this.form.adminPassword = ''
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
     }
   }
 }
