@@ -37,6 +37,7 @@
                     <p>Enter the services name, url and port to monitor in the following table</p>
                 </div>
                 <div v-else class="h-100 d-inline-block">
+                    <h2>Error</h2>
                     <p>Incorrect setup step</p>
                 </div>
             </div>
