@@ -33,7 +33,7 @@
                     </b-form>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block">
-                    <p>Setup step 4</p>
+                    <h2>Services Availability</h2>
                 </div>
                 <div v-else class="h-100 d-inline-block">
                     <p>Incorrect setup step</p>
