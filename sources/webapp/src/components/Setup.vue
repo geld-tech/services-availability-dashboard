@@ -34,6 +34,7 @@
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block">
                     <h2>Services Availability</h2>
+                    <p>Enter the services name, url and port to monitor in the following table</p>
                 </div>
                 <div v-else class="h-100 d-inline-block">
                     <p>Incorrect setup step</p>
