@@ -24,7 +24,13 @@
                     </b-form>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block">
-                    <p>Setup step 3</p>
+                    <h2>Google Analytics UA ID</h2>
+                    <p>Enter the GA UA ID in the field below, then press Submit</p>
+                    <b-form @submit="onSubmit" @reset="onReset" id="gaId" v-if="show">
+                        <b-form-input type="password" v-model="form.gaId" required></b-form-input>
+                        <b-button type="reset" variant="danger">Clear</b-button>
+                        <b-button type="submit" variant="primary">Submit</b-button>
+                    </b-form>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block">
                     <p>Setup step 4</p>
@@ -54,7 +60,8 @@ export default {
   data () {
     return {
       form: {
-        adminPassword: ''
+        adminPassword: '',
+        gaId: ''
       },
       nowStep: 1,
       stepList: ['First Setup', 'Password', 'Analytics', 'Services'],
