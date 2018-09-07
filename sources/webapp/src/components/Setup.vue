@@ -27,7 +27,7 @@
                     <p>Incorrect setup step</p>
                 </div>
             </div>
-            <div>
+            <div class="float-right">
               <b-button variant="primary" v-on:click="previousStep">Back</b-button>
               <b-button variant="primary" v-on:click="nextStep">Next</b-button>
             </div>
