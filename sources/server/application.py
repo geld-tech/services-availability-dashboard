@@ -81,6 +81,27 @@ def status():
         return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
 
 
+@app.route("/setup/password/<password>")
+def set_password(password=None):
+    password = sanitize_user_input(password)
+    if admin_password:
+        data = store_password(password)
+        return jsonify({"data": data}), 200
+    else:
+        return jsonify({"data": {}}), 200
+
+
+def store_password(password):
+    return {}
+
+
+def sanitize_user_input(keyword):
+    black_list = ['__import__', '/', '\\', '&', ';']
+    for char in black_list:
+        keyword = keyword.replace(char, '')
+    return keyword
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
