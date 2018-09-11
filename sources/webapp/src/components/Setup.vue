@@ -94,7 +94,14 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
-    }
+    },
+    sanitizeString(input) {
+      input = input.trim()
+      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '') 
+      input = input.replace('/', '') 
+      input = input.trim()
+      return input
+    },
   }
 }
 </script>
