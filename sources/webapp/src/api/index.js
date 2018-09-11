@@ -7,3 +7,7 @@ export function fetchData() {
 export function fetchSearchData(keyword) {
   return axios.get('/api/services/status/' + keyword).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
+
+export function storeAdminPassword(password) {
+  return axios.get('/setup/password/').then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+}
