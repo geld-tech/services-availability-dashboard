@@ -84,7 +84,7 @@ def status():
 @app.route("/setup/password/<password>")
 def set_password(password=None):
     password = sanitize_user_input(password)
-    if admin_password:
+    if password:
         data = store_password(password)
         return jsonify({"data": data}), 200
     else:
