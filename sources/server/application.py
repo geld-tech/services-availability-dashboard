@@ -86,14 +86,19 @@ def status():
 def set_password(password=None):
     password = sanitize_user_input(password)
     if password:
-        data = store_password(password)
-        return jsonify({"data": data}), 200
+        if store_password(password):
+            return jsonify({"data": {"response": "Success!"}}), 200
+        else:
+            return jsonify({"data": {}, "error": "Could not set password"}), 500
     else:
-        return jsonify({"data": {}}), 200
+        return jsonify({"data": {}, "error": "Password can not be empty"}), 500
 
 
 def store_password(password):
-    return {}
+    try:
+        return True
+    except Exception:
+        return False
 
 
 def sanitize_user_input(keyword):
