@@ -81,6 +81,7 @@ def status():
         return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
 
 
+@app.route("/setup/password")
 @app.route("/setup/password/<password>")
 def set_password(password=None):
     password = sanitize_user_input(password)
