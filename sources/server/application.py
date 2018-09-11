@@ -84,8 +84,8 @@ def status():
 @app.route("/setup/password")
 @app.route("/setup/password/<password>")
 def set_password(password=None):
-    password = sanitize_user_input(password)
     if password:
+        password = sanitize_user_input(password)
         if store_password(password):
             return jsonify({"data": {"response": "Success!"}}), 200
         else:
@@ -95,17 +95,23 @@ def set_password(password=None):
 
 
 def store_password(password):
+    global config_file
     try:
+        with open(config_file, 'w') as outfile:
+            config = ConfigParser.ConfigParser()
+            config.add_section('admin')
+            config.set('admin', 'password', password)
+            config.write(outfile)
         return True
     except Exception:
         return False
 
 
-def sanitize_user_input(keyword):
+def sanitize_user_input(word):
     black_list = ['__import__', '/', '\\', '&', ';']
     for char in black_list:
-        keyword = keyword.replace(char, '')
-    return keyword
+        word = word.replace(char, '')
+    return word
 
 
 @app.errorhandler(404)
