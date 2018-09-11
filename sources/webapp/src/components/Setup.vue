@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="float-right">
-              <b-button variant="primary" v-on:click="previousStep">Back</b-button>
-              <b-button variant="primary" v-on:click="nextStep">Next</b-button>
+              <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1">Back</b-button>
+              <b-button variant="primary" v-on:click="nextStep" v-bind:disabled="nowStep == stepList.length">Next</b-button>
             </div>
         </div>
     </b-container>
@@ -97,11 +97,11 @@ export default {
     },
     sanitizeString(input) {
       input = input.trim()
-      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '') 
-      input = input.replace('/', '') 
+      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '')
+      input = input.replace('/', '')
       input = input.trim()
       return input
-    },
+    }
   }
 }
 </script>
