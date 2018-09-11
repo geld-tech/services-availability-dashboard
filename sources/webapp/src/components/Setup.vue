@@ -52,6 +52,7 @@
 
 <script>
 import vueStep from 'vue-step'
+import { storeAdminPassword } from '@/api'
 
 export default {
   name: 'Info',
@@ -69,6 +70,7 @@ export default {
       stepList: ['First Setup', 'Password', 'Analytics', 'Services'],
       stepperStyle: 'style2',
       stepperColor: '#0079FB',
+      error: '',
       show: true
     }
   },
@@ -85,6 +87,29 @@ export default {
         this.nowStep -= 1
       } else {
         this.nowStep = 1
+      }
+    },
+    onSubmit(evt) {
+      evt.preventDefault()
+      var password = this.sanitizeString(this.form.adminPassword)
+      this.form.adminPassword = ''
+      this.loading = false
+      if (password !== '') {
+        /* Trick to reset/clear native browser form validation state */
+        this.data = []
+        this.show = false
+        this.$nextTick(() => { this.show = true })
+        /* Fetching the data */
+        this.loading = true
+        storeAdminPassword(password)
+          .then(response => {
+            this.data = response.data
+            this.loading = false
+          })
+          .catch(err => {
+            this.error = err.message
+            this.loading = false
+          })
       }
     },
     onReset (evt) {
