@@ -17,8 +17,9 @@
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block">
                     <h2>Admin Password</h2>
                     <p>Enter the system administration password in the following input field, then press Set</p>
-                    <b-form @submit="onSubmit" @reset="onReset" id="adminPassword" v-if="show">
+                    <b-form @submit="onSubmit" @reset="onReset" id="adminPasswordForm" v-if="show">
                         <b-form-input type="password" v-model="form.adminPassword" required></b-form-input>
+                        <b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input>
                         <b-button type="reset" variant="danger">Clear</b-button>
                         <b-button type="submit" variant="primary">Set</b-button>
                     </b-form>
@@ -64,6 +65,7 @@ export default {
     return {
       form: {
         adminPassword: '',
+        adminPasswordRepeat: '',
         gaId: ''
       },
       nowStep: 1,
@@ -92,7 +94,9 @@ export default {
     onSubmit(evt) {
       evt.preventDefault()
       var password = this.sanitizeString(this.form.adminPassword)
+      var passwordRepeat = this.sanitizeString(this.form.adminPasswordRepeat)
       this.form.adminPassword = ''
+      this.form.adminPasswordRepeat = ''
       this.loading = false
       if (password !== '') {
         /* Trick to reset/clear native browser form validation state */
@@ -116,6 +120,7 @@ export default {
       evt.preventDefault()
       /* Reset our form values */
       this.form.adminPassword = ''
+      this.form.adminPasswordRepeat = ''
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
