@@ -98,7 +98,7 @@ export default {
       this.form.adminPassword = ''
       this.form.adminPasswordRepeat = ''
       this.loading = false
-      if (password !== '') {
+      if (password !== '' && password === passwordRepeat) {
         /* Trick to reset/clear native browser form validation state */
         this.data = []
         this.show = false
