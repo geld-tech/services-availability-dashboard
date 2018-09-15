@@ -69,7 +69,7 @@ export default {
         gaId: ''
       },
       nowStep: 1,
-      stepList: ['First Setup', 'Password', 'Analytics', 'Services'],
+      stepList: ['First Setup', 'Admin Password', 'Google Analytics', 'Services'],
       stepperStyle: 'style2',
       stepperColor: '#0079FB',
       error: '',
