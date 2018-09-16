@@ -18,8 +18,8 @@
                     <h2>Admin Password</h2>
                     <p>Enter the system administration password in the following input field, then press Set</p>
                     <b-form @submit="onSubmit" @reset="onReset" id="adminPasswordForm" v-if="show">
-                        <b-form-input type="password" v-model="form.adminPassword" required></b-form-input>
-                        <b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input>
+                        <label>Password</label><b-form-input type="password" v-model="form.adminPassword" required></b-form-input>
+                        <label>Password (confirmation)</label><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input>
                         <b-button type="reset" variant="danger">Clear</b-button>
                         <b-button type="submit" variant="primary">Set</b-button>
                     </b-form>
