@@ -16,19 +16,25 @@
                 </div>
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block">
                     <h2>Admin Password</h2>
-                    <p>Enter the system administration password in the following input field, then press Set</p>
+                    <p>Enter the system administration password in the following input field, then Submit</p>
                     <b-form @submit="onSubmit" @reset="onReset" id="adminPasswordForm" v-if="show">
-                        <label>Password</label><b-form-input type="password" v-model="form.adminPassword" required></b-form-input>
-                        <label>Password (confirmation)</label><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input>
+                        <b-container fluid>
+                          <b-row class="my-1">
+                            <b-col sm="5"><label>Password</label></b-col>
+                            <b-col sm="7"><b-form-input type="password" v-model="form.adminPassword" required></b-form-input></b-col>
+                            <b-col sm="5"><label>Password (Repeat)</label></b-col>
+                            <b-col sm="7"><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
+                          </b-row>
+                        </b-container>
                         <b-button type="reset" variant="danger">Clear</b-button>
-                        <b-button type="submit" variant="primary">Set</b-button>
+                        <b-button type="submit" variant="primary">Submit</b-button>
                     </b-form>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block">
                     <h2>Google Analytics UA ID</h2>
                     <p>Enter the GA UA ID in the field below, then press Submit</p>
                     <b-form @submit="onSubmit" @reset="onReset" id="gaId" v-if="show">
-                        <b-form-input type="password" v-model="form.gaId" required></b-form-input>
+                        <b-form-input type="text" v-model="form.gaId" required></b-form-input>
                         <b-button type="reset" variant="danger">Clear</b-button>
                         <b-button type="submit" variant="primary">Submit</b-button>
                     </b-form>
