@@ -138,7 +138,7 @@ export default {
   #app {
     margin-top: 5px;
     padding-top: 70px;
-    font-size: 24px;
+    font-size: 1.3em;
   }
 }
 @media screen and (max-width: 600px) {
@@ -146,7 +146,7 @@ export default {
     margin-top: 15px;
     margin-bottom: 10px;
     padding-top: 170px;
-    font-size: 14px;
+    font-size: 1em;
   }
 }
 .alerting {
