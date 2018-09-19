@@ -1,5 +1,11 @@
 <template>
   <div class="index">
+    <!-- Alerting -->
+    <div class="alerting col-md-4 col-md-offset-4">
+      <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
+        <p>{{ error }}</p>
+      </b-alert>
+    </div>
     <!-- Container -->
     <b-container class="bv-example-row">
         <div v-if="loading" class="loading">
@@ -78,6 +84,7 @@ export default {
       stepList: ['First Setup', 'Admin Password', 'Google Analytics', 'Services'],
       stepperStyle: 'style2',
       stepperColor: '#0079FB',
+      dismissCountDown: 0,
       error: '',
       show: true
     }
@@ -104,6 +111,8 @@ export default {
       this.form.adminPassword = ''
       this.form.adminPasswordRepeat = ''
       this.loading = false
+      this.dismissCountDown = 0
+      this.error = ''
       if (password !== '' && password === passwordRepeat) {
         /* Trick to reset/clear native browser form validation state */
         this.data = []
@@ -119,7 +128,11 @@ export default {
           .catch(err => {
             this.error = err.message
             this.loading = false
+            this.dismissCountDown = 6
           })
+      } else {
+        this.error = 'Passwords dont match!'
+        this.dismissCountDown = 6
       }
     },
     onReset (evt) {
@@ -137,6 +150,9 @@ export default {
       input = input.replace('/', '')
       input = input.trim()
       return input
+    },
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
     }
   }
 }
