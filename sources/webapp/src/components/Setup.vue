@@ -1,11 +1,5 @@
 <template>
   <div class="index">
-    <!-- Alerting -->
-    <div class="alerting col-md-4 col-md-offset-4">
-      <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
-        <p>{{ error }}</p>
-      </b-alert>
-    </div>
     <!-- Container -->
     <b-container class="bv-example-row">
         <div v-if="loading" class="loading">
@@ -60,6 +54,12 @@
             </div>
         </div>
     </b-container>
+    <!-- Alerting -->
+    <div class="alerting col-md-4 col-md-offset-4">
+      <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
+        <p>{{ error }}</p>
+      </b-alert>
+    </div>
   </div>
 </template>
 
