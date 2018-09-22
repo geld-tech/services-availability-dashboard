@@ -51,6 +51,12 @@
                     <h2>Error</h2>
                     <p>Incorrect setup step</p>
                 </div>
+            <!-- Alerting -->
+            <div class="alerting col-md-4 col-md-offset-4">
+              <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
+                <p>{{ error }}</p>
+              </b-alert>
+            </div>
             </div>
             <div class="float-right">
               <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1">Back</b-button>
@@ -58,12 +64,6 @@
             </div>
         </div>
     </b-container>
-    <!-- Alerting -->
-    <div class="alerting col-md-4 col-md-offset-4">
-      <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
-        <p>{{ error }}</p>
-      </b-alert>
-    </div>
   </div>
 </template>
 
