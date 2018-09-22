@@ -17,6 +17,7 @@
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block">
                     <h2>Admin Password</h2>
                     <div v-if="adminPasswordSet">
+                        <p></p>
                         <p>Password set successfully!</p>
                     </div>
                     <div v-else>
