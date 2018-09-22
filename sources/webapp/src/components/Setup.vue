@@ -177,11 +177,23 @@ li {
 .processesTable{
   font-size: 14px;
 }
+.loading {
+  width: 50%;
+  margin: 0;
+  padding-top: 40px;
+  padding-left: 40px;
+}
 .container {
   max-width: 1200px;
   margin:  0 auto;
 }
 .steps-container {
   height: 400px;
+}
+.alerting {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  line-height: 15px;
 }
 </style>
