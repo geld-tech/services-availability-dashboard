@@ -32,7 +32,7 @@
                             </b-col>
                           </b-row>
                           <b-row class="my-1">
-                            <b-col sm="6">
+                            <b-col md="6" offset-md="3">
                                <!-- Alerting -->
                                <div class="alerting">
                                  <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
