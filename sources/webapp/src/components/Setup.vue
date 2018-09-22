@@ -16,33 +16,38 @@
                 </div>
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block">
                     <h2>Admin Password</h2>
-                    <p>Enter the system administration password in the following input field, then Submit</p>
-                    <b-form @submit="onSubmit" @reset="onReset" id="adminPasswordForm" v-if="show">
-                        <b-container fluid>
-                          <b-row class="my-1">
-                            <b-col sm="5"><label>Password</label></b-col>
-                            <b-col sm="7"><b-form-input type="password" v-model="form.adminPassword" required></b-form-input></b-col>
-                            <b-col sm="5"><label>Password (repeat)</label></b-col>
-                            <b-col sm="7"><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
-                          </b-row>
-                          <b-row class="my-1">
-                            <b-col sm="12">
-                                <b-button type="reset" variant="danger">Clear</b-button>
-                                <b-button type="submit" variant="primary">Submit</b-button>
-                            </b-col>
-                          </b-row>
-                          <b-row class="my-1">
-                            <b-col md="6" offset-md="3">
-                               <!-- Alerting -->
-                               <div class="alerting">
-                                 <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
-                                   <p>{{ error }}</p>
-                                 </b-alert>
-                               </div>
-                            </b-col>
-                          </b-row>
-                        </b-container>
-                    </b-form>
+                    <div v-if="adminPasswordSet">
+                        <p>Password set successfully!</p>
+                    </div>
+                    <div v-else>
+                        <p>Enter the system administration password in the following input field, then Submit</p>
+                        <b-form @submit="onSubmit" @reset="onReset" id="adminPasswordForm" v-if="show">
+                            <b-container fluid>
+                              <b-row class="my-1">
+                                <b-col sm="5"><label>Password</label></b-col>
+                                <b-col sm="7"><b-form-input type="password" v-model="form.adminPassword" required></b-form-input></b-col>
+                                <b-col sm="5"><label>Password (repeat)</label></b-col>
+                                <b-col sm="7"><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
+                              </b-row>
+                              <b-row class="my-1">
+                                <b-col sm="12">
+                                    <b-button type="reset" variant="danger">Clear</b-button>
+                                    <b-button type="submit" variant="primary">Submit</b-button>
+                                </b-col>
+                              </b-row>
+                              <b-row class="my-1">
+                                <b-col md="6" offset-md="3">
+                                   <!-- Alerting -->
+                                   <div class="alerting">
+                                     <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
+                                       <p>{{ error }}</p>
+                                     </b-alert>
+                                   </div>
+                                </b-col>
+                              </b-row>
+                            </b-container>
+                        </b-form>
+                    </div>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block">
                     <h2>Google Analytics UA ID</h2>
