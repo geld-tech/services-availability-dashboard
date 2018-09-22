@@ -25,9 +25,13 @@
                             <b-col sm="5"><label>Password (repeat)</label></b-col>
                             <b-col sm="7"><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
                           </b-row>
+                          <b-row class="my-1">
+                            <b-col sm="12">
+                                <b-button type="reset" variant="danger">Clear</b-button>
+                                <b-button type="submit" variant="primary">Submit</b-button>
+                            </b-col>
+                          </b-row>
                         </b-container>
-                        <b-button type="reset" variant="danger">Clear</b-button>
-                        <b-button type="submit" variant="primary">Submit</b-button>
                     </b-form>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block">
