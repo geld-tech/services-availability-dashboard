@@ -94,7 +94,8 @@ export default {
       stepperColor: '#0079FB',
       dismissCountDown: 0,
       error: '',
-      show: true
+      show: true,
+      adminPasswordSet: false
     }
   },
   methods: {
@@ -132,6 +133,7 @@ export default {
           .then(response => {
             this.data = response.data
             this.loading = false
+            this.adminPasswordSet = true
           })
           .catch(err => {
             this.error = err.message
