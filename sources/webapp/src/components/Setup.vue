@@ -22,7 +22,7 @@
                     </div>
                     <div v-else>
                         <p>Enter the system administration password in the following input field, then Submit</p>
-                        <b-form @submit="onSubmit" @reset="onReset" id="adminPasswordForm" v-if="show">
+                        <b-form @submit="onSubmitPassword" @reset="onResetPassword" id="adminPasswordForm" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
                                 <b-col sm="5"><label>Password</label></b-col>
@@ -119,7 +119,7 @@ export default {
         this.nowStep = 1
       }
     },
-    onSubmit(evt) {
+    onSubmitPassword(evt) {
       evt.preventDefault()
       var password = this.sanitizeString(this.form.adminPassword)
       var passwordRepeat = this.sanitizeString(this.form.adminPasswordRepeat)
@@ -151,7 +151,7 @@ export default {
         this.dismissCountDown = 6
       }
     },
-    onReset (evt) {
+    onResetPassword(evt) {
       evt.preventDefault()
       /* Reset our form values */
       this.form.adminPassword = ''
