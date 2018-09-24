@@ -9,12 +9,12 @@
         <div v-else>
             <vue-step v-bind:now-step="nowStep" v-bind:step-list="stepList" v-bind:style-type="stepperStyle" v-bind:active-color="stepperColor"></vue-step>
             <div class="text-center steps-container">
-                <div v-if="nowStep == 1" class="h-100 d-inline-block">
+                <div v-if="nowStep == 1" class="h-100 d-inline-block pt-5">
                     <h2>First Setup</h2>
                     <p>Welcome to the first setup!</p>
                     <p>The following pages will guide you through the configuration to start using you service.</p>
                 </div>
-                <div v-else-if="nowStep == 2" class="h-100 d-inline-block">
+                <div v-else-if="nowStep == 2" class="h-100 d-inline-block pt-5">
                     <h2>Admin Password</h2>
                     <div v-if="adminPasswordSet">
                         <p></p>
@@ -50,7 +50,7 @@
                         </b-form>
                     </div>
                 </div>
-                <div v-else-if="nowStep == 3" class="h-100 d-inline-block">
+                <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
                     <h2>Google Analytics UA ID</h2>
                     <p>Enter the GA UA ID in the field below, then press Submit</p>
                     <b-form @submit="onSubmit" @reset="onReset" id="gaId" v-if="show">
@@ -59,11 +59,11 @@
                         <b-button type="submit" variant="primary">Submit</b-button>
                     </b-form>
                 </div>
-                <div v-else-if="nowStep == 4" class="h-100 d-inline-block">
+                <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <h2>Services Availability</h2>
                     <p>Enter the services name, url and port to monitor in the following table</p>
                 </div>
-                <div v-else class="h-100 d-inline-block">
+                <div v-else class="h-100 d-inline-block pt-5">
                     <h2>Error</h2>
                     <p>Incorrect setup step</p>
                 </div>
