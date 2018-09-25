@@ -68,7 +68,7 @@
                               <b-row class="my-1">
                                 <b-col sm="10">
                                   <b-button type="reset" variant="danger">Clear</b-button>
-                                  <b-button type="submit" variant="primary">Submit</b-button>
+                                  <b-button type="submit" variant="primary" v-bind:disabled="form.uaid == ''">Submit</b-button>
                                 </b-col>
                               </b-row>
                             </b-container>
