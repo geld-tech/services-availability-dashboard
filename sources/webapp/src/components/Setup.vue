@@ -25,9 +25,9 @@
                             <b-container fluid>
                               <b-row class="my-1">
                                 <b-col sm="5"><label>Password</label></b-col>
-                                <b-col sm="7"><b-form-input type="password" v-model="form.adminPassword" required></b-form-input></b-col>
+                                <b-col sm="7"><b-form-input type="password" autocomplete="new-password" v-model="form.adminPassword" required></b-form-input></b-col>
                                 <b-col sm="5"><label>Password (repeat)</label></b-col>
-                                <b-col sm="7"><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
+                                <b-col sm="7"><b-form-input type="password" autocomplete="new-password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
                               </b-row>
                               <b-row class="my-1">
                                 <b-col sm="10">
@@ -60,7 +60,7 @@
                                 <b-container fluid>
                                   <b-row class="my-1">
                                     <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
-                                    <b-col sm="6"><b-form-input type="text" v-model="form.uaid" required></b-form-input></b-col>
+                                    <b-col sm="6"><b-form-input type="text" autocomplete="new-password" v-model="form.uaid" required></b-form-input></b-col>
                                   </b-row>
                                   <b-row class="my-1">
                                     <b-col sm="10">
@@ -87,7 +87,7 @@
                 v-on:click="nextStep"
                 v-bind:disabled="nowStep == stepList.length ||
                     (nowStep > 1 && !adminPasswordSet) ||
-                    (nowStep > 2 && !ganalyticsIdSet)">Next</b-button>
+                    (nowStep > 2 && !ganalyticsIdSet)" autofocus>Next</b-button>
             </div>
         </div>
     </b-container>
