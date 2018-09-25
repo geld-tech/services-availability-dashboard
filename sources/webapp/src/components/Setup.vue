@@ -51,21 +51,26 @@
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
                     <h2>Google Analytics</h2>
-                    <p>Enter the Google Analytics UA ID in the field below (optional), then press Submit</p>
-                    <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
-                            <b-container fluid>
-                              <b-row class="my-1">
-                                <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
-                                <b-col sm="6"><b-form-input type="text" v-model="form.uaid" required></b-form-input></b-col>
-                              </b-row>
-                              <b-row class="my-1">
-                                <b-col sm="10">
-                                  <b-button type="reset" variant="danger">Clear</b-button>
-                                  <b-button type="submit" variant="primary">Submit</b-button>
-                                </b-col>
-                              </b-row>
-                            </b-container>
-                    </b-form>
+                    <div v-if="ganalyticsIdSet" class="pt-1">
+                        <p>Analytics UA ID set successfully!</p>
+                    </div>
+                    <div v-else>
+                        <p>Enter the Google Analytics UA ID in the field below (optional), then press Submit</p>
+                        <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
+                                <b-container fluid>
+                                  <b-row class="my-1">
+                                    <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
+                                    <b-col sm="6"><b-form-input type="text" v-model="form.uaid" required></b-form-input></b-col>
+                                  </b-row>
+                                  <b-row class="my-1">
+                                    <b-col sm="10">
+                                      <b-button type="reset" variant="danger">Clear</b-button>
+                                      <b-button type="submit" variant="primary">Submit</b-button>
+                                    </b-col>
+                                  </b-row>
+                                </b-container>
+                        </b-form>
+                    </div>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <h2>Services Availability</h2>
@@ -110,7 +115,7 @@ export default {
       error: '',
       show: true,
       adminPasswordSet: false,
-      gaIdSet: false
+      ganalyticsIdSet: false
     }
   },
   methods: {
@@ -186,7 +191,7 @@ export default {
           .then(response => {
             this.data = response.data
             this.loading = false
-            this.gaIdSet = true
+            this.ganalyticsIdSet = true
           })
           .catch(err => {
             this.error = err.message
