@@ -30,7 +30,7 @@
                                 <b-col sm="7"><b-form-input type="password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
                               </b-row>
                               <b-row class="my-1">
-                                <b-col sm="12">
+                                <b-col sm="10">
                                     <b-button type="reset" variant="danger">Clear</b-button>
                                     <b-button type="submit" variant="primary">Submit</b-button>
                                 </b-col>
@@ -50,12 +50,21 @@
                     </div>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
-                    <h2>Google Analytics UA ID</h2>
-                    <p>Enter the GA UA ID in the field below, then press Submit</p>
+                    <h2>Google Analytics</h2>
+                    <p>Enter the Google Analytics UA ID in the field below (optional), then press Submit</p>
                     <b-form @submit="onSubmit" @reset="onReset" id="gaId" v-if="show">
-                        <b-form-input type="text" v-model="form.gaId" required></b-form-input>
-                        <b-button type="reset" variant="danger">Clear</b-button>
-                        <b-button type="submit" variant="primary">Submit</b-button>
+                            <b-container fluid>
+                              <b-row class="my-1">
+                                <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
+                                <b-col sm="6"><b-form-input type="text" v-model="form.gaId" required></b-form-input></b-col>
+                              </b-row>
+                              <b-row class="my-1">
+                                <b-col sm="10">
+                                  <b-button type="reset" variant="danger">Clear</b-button>
+                                  <b-button type="submit" variant="primary">Submit</b-button>
+                                </b-col>
+                              </b-row>
+                            </b-container>
                     </b-form>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
