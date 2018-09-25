@@ -77,31 +77,31 @@
                     <p>Enter the services name, url and port to monitor in the following table</p>
                     <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
                         <b-container fluid>
-                          <b-row class="my-1">
+                          <b-row class="my-1" no-gutters>
                             <b-col sm="5"><label>Service Name</label></b-col>
                             <b-col sm="4"><label>URL</label></b-col>
                             <b-col sm="2"><label>Port</label></b-col>
                             <b-col sm="1"></b-col>
                           </b-row>
-                          <b-row class="my-1">
+                          <b-row class="my-1" no-gutters>
                             <b-col sm="5"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="4"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="2"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="1"><b-button><strong> + </strong></b-button></b-col>
                           </b-row>
-                          <b-row class="my-1">
+                          <b-row class="my-1" no-gutters>
                             <b-col sm="5"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="4"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="2"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="1"><b-button><strong> + </strong></b-button></b-col>
                           </b-row>
-                          <b-row class="my-1">
+                          <b-row class="my-1" no-gutters>
                             <b-col sm="5"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="4"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="2"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="1"><b-button><strong> + </strong></b-button></b-col>
                           </b-row>
-                          <b-row class="my-1">
+                          <b-row class="my-1" no-gutters>
                             <b-col sm="10">
                               <b-button type="reset" variant="danger">Clear</b-button>
                               <b-button type="submit" variant="primary">Save</b-button>
