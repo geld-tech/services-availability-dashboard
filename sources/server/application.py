@@ -97,10 +97,36 @@ def set_password(password=None):
 def store_password(password):
     global config_file
     try:
-        with open(config_file, 'w') as outfile:
+        with open(config_file, 'wb') as outfile:
             config = ConfigParser.ConfigParser()
             config.add_section('admin')
             config.set('admin', 'password', password)
+            config.write(outfile)
+        return True
+    except Exception:
+        return False
+
+
+@app.route("/setup/ganalytics")
+@app.route("/setup/ganalytics/<ua_id>")
+def set_ganalytics(ua_id=None):
+    if ua_id:
+        ua_id = sanitize_user_input(ua_id)
+        if store_ua_id(ua_id):
+            return jsonify({"data": {"response": "Success!"}}), 200
+        else:
+            return jsonify({"data": {}, "error": "Could not set UA ID"}), 500
+    else:
+        return jsonify({"data": {}, "error": "UA ID can not be empty"}), 500
+
+
+def store_ua_id(ua_id):
+    global config_file
+    try:
+        with open(config_file, 'wb') as outfile:
+            config = ConfigParser.ConfigParser()
+            config.add_section('ganalytics')
+            config.set('ganalytics', 'ua_id', ua_id)
             config.write(outfile)
         return True
     except Exception:
