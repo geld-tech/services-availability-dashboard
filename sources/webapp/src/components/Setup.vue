@@ -153,7 +153,8 @@ export default {
       error: '',
       show: true,
       adminPasswordSet: false,
-      ganalyticsIdSet: false
+      ganalyticsIdSet: false,
+      services: []
     }
   },
   methods: {
