@@ -52,11 +52,11 @@
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
                     <h2>Google Analytics</h2>
                     <p>Enter the Google Analytics UA ID in the field below (optional), then press Submit</p>
-                    <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="gaId" v-if="show">
+                    <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
                                 <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
-                                <b-col sm="6"><b-form-input type="text" v-model="form.gaId" required></b-form-input></b-col>
+                                <b-col sm="6"><b-form-input type="text" v-model="form.uaid" required></b-form-input></b-col>
                               </b-row>
                               <b-row class="my-1">
                                 <b-col sm="10">
@@ -87,7 +87,7 @@
 
 <script>
 import vueStep from 'vue-step'
-import { storeAdminPassword } from '@/api'
+import { storeAdminPassword, storeGaId } from '@/api'
 
 export default {
   name: 'Info',
@@ -100,7 +100,7 @@ export default {
       form: {
         adminPassword: '',
         adminPasswordRepeat: '',
-        gaId: ''
+        uaid: ''
       },
       nowStep: 1,
       stepList: ['First Setup', 'Admin Password', 'Google Analytics', 'Services'],
@@ -171,18 +171,18 @@ export default {
     },
     onSubmitGaId(evt) {
       evt.preventDefault()
-      var gaId = this.sanitizeString(this.form.gaId)
-      this.form.gaId = ''
+      var uaid = this.sanitizeString(this.form.uaid)
+      this.form.uaid = ''
       this.loading = false
       this.error = ''
-      if (gaId !== '' ) {
+      if (uaid !== '' ) {
         /* Trick to reset/clear native browser form validation state */
         this.data = []
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
         this.loading = true
-        storeGaId(gaId)
+        storeGanalytics(uaid)
           .then(response => {
             this.data = response.data
             this.loading = false
