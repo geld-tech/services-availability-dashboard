@@ -97,7 +97,7 @@ def set_password(password=None):
 def store_password(password):
     global config_file
     try:
-        with open(config_file, 'wb') as outfile:
+        with open(config_file, 'ab') as outfile:
             config = ConfigParser.ConfigParser()
             config.add_section('admin')
             config.set('admin', 'password', password)
@@ -123,7 +123,7 @@ def set_ganalytics(ua_id=None):
 def store_ua_id(ua_id):
     global config_file
     try:
-        with open(config_file, 'wb') as outfile:
+        with open(config_file, 'ab') as outfile:
             config = ConfigParser.ConfigParser()
             config.add_section('ganalytics')
             config.set('ganalytics', 'ua_id', ua_id)
