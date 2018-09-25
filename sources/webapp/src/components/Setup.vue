@@ -52,7 +52,7 @@
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
                     <h2>Google Analytics</h2>
                     <p>Enter the Google Analytics UA ID in the field below (optional), then press Submit</p>
-                    <b-form @submit="onSubmit" @reset="onReset" id="gaId" v-if="show">
+                    <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="gaId" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
                                 <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
@@ -109,7 +109,8 @@ export default {
       dismissCountDown: 0,
       error: '',
       show: true,
-      adminPasswordSet: false
+      adminPasswordSet: false,
+      gaIdSet: false
     }
   },
   methods: {
@@ -160,6 +161,42 @@ export default {
       }
     },
     onResetPassword(evt) {
+      evt.preventDefault()
+      /* Reset our form values */
+      this.form.adminPassword = ''
+      this.form.adminPasswordRepeat = ''
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
+    },
+    onSubmitGaId(evt) {
+      evt.preventDefault()
+      var gaId = this.sanitizeString(this.form.gaId)
+      this.form.gaId = ''
+      this.loading = false
+      this.error = ''
+      if (gaId !== '' ) {
+        /* Trick to reset/clear native browser form validation state */
+        this.data = []
+        this.show = false
+        this.$nextTick(() => { this.show = true })
+        /* Fetching the data */
+        this.loading = true
+        storeGaId(gaId)
+          .then(response => {
+            this.data = response.data
+            this.loading = false
+            this.gaIdSet = true
+          })
+          .catch(err => {
+            this.error = err.message
+            this.loading = false
+          })
+      } else {
+        this.error = 'GA UA ID cant be empty!'
+      }
+    },
+    onResetGaId(evt) {
       evt.preventDefault()
       /* Reset our form values */
       this.form.adminPassword = ''
