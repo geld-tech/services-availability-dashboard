@@ -87,7 +87,7 @@
 
 <script>
 import vueStep from 'vue-step'
-import { storeAdminPassword, storeGaId } from '@/api'
+import { storeAdminPassword, storeGanalytics } from '@/api'
 
 export default {
   name: 'Info',
@@ -175,7 +175,7 @@ export default {
       this.form.uaid = ''
       this.loading = false
       this.error = ''
-      if (uaid !== '' ) {
+      if (uaid !== '') {
         /* Trick to reset/clear native browser form validation state */
         this.data = []
         this.show = false
