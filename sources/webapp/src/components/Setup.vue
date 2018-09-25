@@ -83,7 +83,11 @@
             </div>
             <div class="float-right">
               <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1">Back</b-button>
-              <b-button variant="primary" v-on:click="nextStep" v-bind:disabled="nowStep == stepList.length">Next</b-button>
+              <b-button variant="primary"
+                v-on:click="nextStep"
+                v-bind:disabled="nowStep == stepList.length ||
+                    (nowStep > 1 && !adminPasswordSet) ||
+                    (nowStep > 2 && !ganalyticsIdSet)">Next</b-button>
             </div>
         </div>
     </b-container>
