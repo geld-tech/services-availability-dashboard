@@ -251,8 +251,7 @@ export default {
     onResetGaId(evt) {
       evt.preventDefault()
       /* Reset our form values */
-      this.form.adminPassword = ''
-      this.form.adminPasswordRepeat = ''
+      this.form.uaid = ''
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
