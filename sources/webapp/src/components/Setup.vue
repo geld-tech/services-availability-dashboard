@@ -64,7 +64,7 @@
                               </b-row>
                               <b-row class="my-1">
                                 <b-col sm="10">
-                                  <b-button type="reset" variant="danger">Clear</b-button>
+                                  <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdResetButton">Clear</b-button>
                                   <b-button type="submit" variant="primary" v-bind:disabled="form.uaid == ''">Submit</b-button>
                                 </b-col>
                               </b-row>
@@ -160,6 +160,9 @@ export default {
   computed: {
     disableAdminResetButton() {
       return (this.form.adminPassword === '' && this.form.adminPasswordRepeat === '')
+    },
+    disableGaIdResetButton() {
+      return (this.form.uaid === '')
     }
   },
   methods: {
