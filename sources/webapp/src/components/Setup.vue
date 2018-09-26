@@ -87,7 +87,7 @@
                             <b-col sm="5"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="4"><b-form-input type="text"></b-form-input></b-col>
                             <b-col sm="2"><b-form-input type="text"></b-form-input></b-col>
-                            <b-col sm="1"><b-button><strong> + </strong></b-button></b-col>
+                            <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
                           </b-row>
                           <b-row class="my-1" no-gutters>
                             <b-col sm="5"><b-form-input type="text"></b-form-input></b-col>
@@ -268,6 +268,16 @@ export default {
     },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
+    },
+    addRow() {
+      this.services.push({
+        name: '',
+        url: '',
+        port: ''
+      })
+    },
+    deleteRow(index){
+      this.services.splice(index, 1)
     }
   }
 }
