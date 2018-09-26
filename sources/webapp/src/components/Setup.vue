@@ -161,6 +161,9 @@ export default {
     disableAdminResetButton() {
       return (this.form.adminPassword === '' && this.form.adminPasswordRepeat === '')
     },
+    disableAdminSubmitButton() {
+      return (this.form.adminPassword === '' || this.form.adminPasswordRepeat === '')
+    },
     disableGaIdResetButton() {
       return (this.form.uaid === '')
     }
