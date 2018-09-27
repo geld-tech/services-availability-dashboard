@@ -75,7 +75,7 @@
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <h2>Services Availability</h2>
                     <p>Enter the name, URL and port of the service(s) to monitor the availability for:</p>
-                    <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
+                    <b-form @submit="onSubmitService" @reset="onResetService" id="serviceForm" v-if="show">
                         <b-container fluid>
                           <b-row class="my-1" no-gutters>
                             <b-col sm="5"><label>Service Name</label></b-col>
