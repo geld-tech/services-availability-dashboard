@@ -276,7 +276,7 @@ export default {
         port: ''
       })
     },
-    deleteRow(index){
+    deleteRow(index) {
       this.services.splice(index, 1)
     }
   }
