@@ -84,9 +84,9 @@
                             <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
                           </b-row>
                           <b-row class="my-1" no-gutters v-if="services" v-for="(service, index) in services" v-bind:key="index">
-                            <b-col sm="5"> service.name </b-col>
-                            <b-col sm="4"> service.url </b-col>
-                            <b-col sm="2"> service.port </b-col>
+                            <b-col sm="5">{{ service.name }}</b-col>
+                            <b-col sm="4">{{ service.url }}</b-col>
+                            <b-col sm="2">{{ service.port }}</b-col>
                             <b-col sm="1"></b-col>
                           </b-row>
                           <b-row class="my-1" no-gutters>
