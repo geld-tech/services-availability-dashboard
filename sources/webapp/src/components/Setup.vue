@@ -83,10 +83,10 @@
                             <b-col sm="2"><label>Port</label></b-col>
                             <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
                           </b-row>
-                          <b-row class="my-1" no-gutters v-for="(service, index) in services" v-bind:key="index">
-                            <b-col sm="5">{{ service.name }}</b-col>
-                            <b-col sm="4">{{ service.url }}</b-col>
-                            <b-col sm="2">{{ service.port }}</b-col>
+                          <b-row class="my-1" no-gutters v-if="services" v-for="(service, index) in services" v-bind:key="index">
+                            <b-col sm="5"> service.name </b-col>
+                            <b-col sm="4"> service.url </b-col>
+                            <b-col sm="2"> service.port </b-col>
                             <b-col sm="1"></b-col>
                           </b-row>
                           <b-row class="my-1" no-gutters>
@@ -243,6 +243,27 @@ export default {
       evt.preventDefault()
       /* Reset our form values */
       this.form.uaid = ''
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
+    },
+    onSubmitService(evt) {
+      evt.preventDefault()
+      this.loading = false
+      this.error = ''
+      if (this.error !== '') {
+        /* Trick to reset/clear native browser form validation state */
+        this.data = []
+        this.show = false
+        this.$nextTick(() => { this.show = true })
+        /* Fetching the data */
+      } else {
+        this.error = 'GA UA ID cant be empty!'
+      }
+    },
+    onResetService(evt) {
+      evt.preventDefault()
+      /* Reset our form values */
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
