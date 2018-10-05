@@ -90,9 +90,9 @@
                             <b-col sm="1"></b-col>
                           </b-row>
                           <b-row class="my-1" no-gutters>
-                            <b-col sm="5"><b-form-input type="text"></b-form-input></b-col>
-                            <b-col sm="4"><b-form-input type="text"></b-form-input></b-col>
-                            <b-col sm="2"><b-form-input type="text"></b-form-input></b-col>
+                            <b-col sm="5"><b-form-input type="text" v-model="form.serviceName"></b-form-input></b-col>
+                            <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl"></b-form-input></b-col>
+                            <b-col sm="2"><b-form-input type="text" v-model="form.servicePort"></b-form-input></b-col>
                             <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
                           </b-row>
                           <b-row class="my-1" no-gutters>
@@ -137,7 +137,10 @@ export default {
       form: {
         adminPassword: '',
         adminPasswordRepeat: '',
-        uaid: ''
+        uaid: '',
+        serviceName: '',
+        serviceUrl: '',
+        servicePort: ''
       },
       nowStep: 1,
       stepList: ['First Setup', 'Admin Password', 'Google Analytics', 'Services'],
