@@ -289,9 +289,9 @@ export default {
     },
     addRow() {
       this.services.push({
-        name: 'ServiceName',
-        url: 'https://geld.tech',
-        port: '443'
+        name: this.form.serviceName,
+        url: this.form.serviceUrl,
+        port: this.form.servicePort
       })
     },
     deleteRow(index) {
