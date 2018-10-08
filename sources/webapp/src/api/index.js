@@ -15,3 +15,9 @@ export function storeAdminPassword(password) {
 export function storeGanalytics(uaid) {
   return axios.get('/setup/ganalytics/' + uaid).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
+
+export function storeServices(services) {
+  var payload = { services: services }
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+  return axios.post('/setup/services/', payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+}
