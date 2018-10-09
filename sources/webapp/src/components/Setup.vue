@@ -159,7 +159,7 @@ export default {
       return (this.form.adminPassword === '' && this.form.adminPasswordRepeat === '')
     },
     disableAdminSubmitButton() {
-      return (this.form.adminPassword === '' || this.form.adminPasswordRepeat === '')
+      return (this.form.adminPassword === '' || this.form.adminPasswordRepeat === '' || this.form.adminPassword !== this.form.adminPasswordRepeat)
     },
     disableGaIdButtons() {
       return (this.form.uaid === '')
