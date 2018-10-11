@@ -136,7 +136,6 @@ def store_ua_id(ua_id):
 @app.route("/setup/setup")
 @app.route("/setup/services/<services>")
 def set_services(services=[], methods=['GET', 'POST']):
-
     if request.method == 'POST':
         if services:
             if store_services(services):
@@ -146,7 +145,23 @@ def set_services(services=[], methods=['GET', 'POST']):
         else:
             return jsonify({"data": {}, "error": "Services can not be empty"}), 500
     else:
-        return jsonify({"data": {"response": "Success!"}}), 200
+        services = get_services()
+        if services:
+            return jsonify({"data": {"response": "Success!"}, "services": services}), 200
+        else:
+            return jsonify({"data": {}, "error": "Could not get services"}), 500
+
+
+def get_services():
+    global config_file
+    try:
+        with open(config_file, 'r') as infile:
+            config = ConfigParser.ConfigParser()
+            config.read(infile)
+            return config.get_section('services')
+        return True
+    except Exception:
+        return False
 
 
 def store_services(services):
