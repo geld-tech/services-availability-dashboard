@@ -133,6 +133,31 @@ def store_ua_id(ua_id):
         return False
 
 
+@app.route("/setup/setup")
+@app.route("/setup/services/<services>")
+def set_services(services=[]):
+    if services:
+        if store_services(services):
+            return jsonify({"data": {"response": "Success!"}}), 200
+        else:
+            return jsonify({"data": {}, "error": "Could not set services"}), 500
+    else:
+        return jsonify({"data": {}, "error": "Services can not be empty"}), 500
+
+
+def store_services(services):
+    global config_file
+    try:
+        with open(config_file, 'ab') as outfile:
+            config = ConfigParser.ConfigParser()
+            config.add_section('services')
+            config.set('services', 'services', services)
+            config.write(outfile)
+        return True
+    except Exception:
+        return False
+
+
 def sanitize_user_input(word):
     black_list = ['__import__', '/', '\\', '&', ';']
     for char in black_list:
