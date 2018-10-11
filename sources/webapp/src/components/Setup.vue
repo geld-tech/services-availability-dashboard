@@ -115,7 +115,8 @@
                 v-on:click="nextStep"
                 v-bind:disabled="nowStep == stepList.length ||
                     (nowStep > 1 && !adminPasswordSet) ||
-                    (nowStep > 2 && !ganalyticsIdSet)" autofocus>Next</b-button>
+                    (nowStep > 2 && !ganalyticsIdSet) ||
+                    (nowStep > 3 && !servicesSet)" autofocus>Next</b-button>
             </div>
         </div>
     </b-container>
@@ -147,11 +148,12 @@ export default {
       stepperStyle: 'style2',
       stepperColor: '#0079FB',
       dismissCountDown: 0,
-      error: '',
-      show: true,
       adminPasswordSet: false,
       ganalyticsIdSet: false,
-      services: []
+      servicesSet: false,
+      services: [],
+      error: '',
+      show: true
     }
   },
   computed: {
@@ -163,6 +165,9 @@ export default {
     },
     disableGaIdButtons() {
       return (this.form.uaid === '')
+    },
+    disableServicesButtons() {
+      return (this.servicesSet === true)
     }
   },
   methods: {
@@ -260,14 +265,24 @@ export default {
       evt.preventDefault()
       this.loading = false
       this.error = ''
-      if (this.error !== []) {
+      if (this.services !== []) {
         /* Trick to reset/clear native browser form validation state */
         this.data = []
         this.show = false
         this.$nextTick(() => { this.show = true })
-        /* Fetching the data */
+        /* Storing the data */
+        storeServices(this.services)
+          .then(response => {
+            this.data = response.data
+            this.loading = false
+            this.services = true
+          })
+          .catch(err => {
+            this.error = err.message
+            this.loading = false
+          })
       } else {
-        this.error = 'GA UA ID cant be empty!'
+        this.error = 'Services cant be empty!'
       }
     },
     onResetServices(evt) {
