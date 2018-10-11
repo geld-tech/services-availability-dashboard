@@ -135,14 +135,18 @@ def store_ua_id(ua_id):
 
 @app.route("/setup/setup")
 @app.route("/setup/services/<services>")
-def set_services(services=[]):
-    if services:
-        if store_services(services):
-            return jsonify({"data": {"response": "Success!"}}), 200
+def set_services(services=[], methods=['GET', 'POST']):
+
+    if request.method == 'POST':
+        if services:
+            if store_services(services):
+                return jsonify({"data": {"response": "Success!"}}), 200
+            else:
+                return jsonify({"data": {}, "error": "Could not set services"}), 500
         else:
-            return jsonify({"data": {}, "error": "Could not set services"}), 500
+            return jsonify({"data": {}, "error": "Services can not be empty"}), 500
     else:
-        return jsonify({"data": {}, "error": "Services can not be empty"}), 500
+        return jsonify({"data": {"response": "Success!"}}), 200
 
 
 def store_services(services):
