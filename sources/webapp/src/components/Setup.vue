@@ -304,10 +304,13 @@ export default {
     },
     addRow() {
       this.services.push({
-        name: this.form.serviceName,
-        url: this.form.serviceUrl,
-        port: this.form.servicePort
+        name: this.form.servicename,
+        url: this.form.serviceurl,
+        port: this.form.serviceport
       })
+      this.form.servicename = ''
+      this.form.serviceurl = ''
+      this.form.serviceport = ''
     },
     deleteRow(index) {
       this.services.splice(index, 1)
