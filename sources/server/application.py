@@ -9,7 +9,7 @@ import logging
 import logging.handlers
 from optparse import OptionParser
 import os
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 
 from modules.ServiceStatus import ServiceStatus
 from modules.Models import Base, Server, Service, Metrics
@@ -133,10 +133,11 @@ def store_ua_id(ua_id):
         return False
 
 
-@app.route("/setup/setup")
-@app.route("/setup/services/<services>")
+@app.route("/setup/services")
+@app.route("/setup/services/")
 def set_services(services=[], methods=['GET', 'POST']):
     if request.method == 'POST':
+        services = request.data
         if services:
             if store_services(services):
                 return jsonify({"data": {"response": "Success!"}}), 200
