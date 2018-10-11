@@ -75,7 +75,7 @@
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <h2>Services Availability</h2>
                     <p>Enter the name, URL and port of the service(s) to monitor the availability for:</p>
-                    <b-form @submit="onSubmitService" @reset="onResetService" id="serviceForm" v-if="show">
+                    <b-form @submit="onSubmitServices" @reset="onResetServices" id="servicesForm" v-if="show">
                         <b-container fluid>
                           <b-row class="my-1" no-gutters>
                             <b-col sm="5"><label>Service Name</label></b-col>
@@ -256,11 +256,11 @@ export default {
       this.show = false
       this.$nextTick(() => { this.show = true })
     },
-    onSubmitService(evt) {
+    onSubmitServices(evt) {
       evt.preventDefault()
       this.loading = false
       this.error = ''
-      if (this.error !== '') {
+      if (this.error !== []) {
         /* Trick to reset/clear native browser form validation state */
         this.data = []
         this.show = false
@@ -270,7 +270,7 @@ export default {
         this.error = 'GA UA ID cant be empty!'
       }
     },
-    onResetService(evt) {
+    onResetServices(evt) {
       evt.preventDefault()
       /* Reset our form values */
       /* Trick to reset/clear native browser form validation state */
