@@ -133,9 +133,9 @@ def store_ua_id(ua_id):
         return False
 
 
-@app.route("/setup/services")
-@app.route("/setup/services/")
-def set_services(services=[], methods=['GET', 'POST']):
+@app.route("/setup/services", methods=['GET', 'POST'])
+@app.route("/setup/services/", methods=['GET', 'POST'])
+def set_services(services=[]):
     if request.method == 'POST':
         services = request.data
         if services:
