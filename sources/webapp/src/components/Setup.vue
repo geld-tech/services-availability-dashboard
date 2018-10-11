@@ -125,7 +125,7 @@
 
 <script>
 import vueStep from 'vue-step'
-import { storeAdminPassword, storeGanalytics } from '@/api'
+import { storeAdminPassword, storeGanalytics, storeServices } from '@/api'
 
 export default {
   name: 'Info',
