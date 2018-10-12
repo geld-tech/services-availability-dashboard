@@ -4,6 +4,7 @@
     Services Availability API and Dashboard
     Display services metrics and provides REST API back-end
 """
+import ast
 import base64
 import ConfigParser
 from codecs import encode
@@ -172,6 +173,7 @@ def get_services():
 def store_services(services):
     global config_file
     try:
+        services = ast.literal_eval(services)
         with open(config_file, 'ab') as outfile:
             config = ConfigParser.ConfigParser()
             config.add_section('services')
