@@ -87,15 +87,15 @@
                             <b-col sm="5">{{ service.name }}</b-col>
                             <b-col sm="4">{{ service.url }}</b-col>
                             <b-col sm="2">{{ service.port }}</b-col>
-                            <b-col sm="1"><b-button @click="deleteRow(index)"><strong> - </strong></b-button></b-col>
+                            <b-col sm="1"><b-button @click="deleteRow(index)" v-if="!servicesSet"><strong> - </strong></b-button></b-col>
                           </b-row>
-                          <b-row class="my-1" no-gutters>
+                          <b-row class="my-1" no-gutters v-if="!servicesSet">
                             <b-col sm="5"><b-form-input type="text" v-model="form.serviceName"></b-form-input></b-col>
                             <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl"></b-form-input></b-col>
                             <b-col sm="2"><b-form-input type="text" v-model="form.servicePort"></b-form-input></b-col>
                             <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
                           </b-row>
-                          <b-row class="my-1" no-gutters>
+                          <b-row class="my-1" no-gutters v-if="!servicesSet">
                             <b-col sm="10">
                               <b-button type="reset" variant="danger">Clear</b-button>
                               <b-button type="submit" variant="primary">Save</b-button>
@@ -275,7 +275,7 @@ export default {
           .then(response => {
             this.data = response.data
             this.loading = false
-            this.services = true
+            this.servicesSet = true
           })
           .catch(err => {
             this.error = err.message
