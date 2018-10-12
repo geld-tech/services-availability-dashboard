@@ -173,7 +173,8 @@ def store_services(services):
         with open(config_file, 'ab') as outfile:
             config = ConfigParser.ConfigParser()
             config.add_section('services')
-            config.set('services', 'services', services)
+            for service in services:
+                config.set('services', service.name, '%s:%s' % (service.url, service.port))
             config.write(outfile)
         return True
     except Exception:
