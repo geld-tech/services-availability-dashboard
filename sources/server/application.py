@@ -179,7 +179,9 @@ def store_services(services):
                 config.set('services', service.name, '%s:%s' % (service.url, service.port))
             config.write(outfile)
         return True
-    except Exception:
+    except Exception, e:
+        logger.error('Error while storing services: %s' % e)
+        logger.error('Services: %s' % services)
         return False
 
 
