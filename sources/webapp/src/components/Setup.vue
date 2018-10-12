@@ -74,35 +74,40 @@
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <h2>Services Availability</h2>
-                    <p>Enter the name, URL and port of the service(s) to monitor the availability for:</p>
-                    <b-form @submit="onSubmitServices" @reset="onResetServices" id="servicesForm" v-if="show">
-                        <b-container fluid>
-                          <b-row class="my-1" no-gutters>
-                            <b-col sm="5"><label>Service Name</label></b-col>
-                            <b-col sm="4"><label>URL</label></b-col>
-                            <b-col sm="2"><label>Port</label></b-col>
-                            <b-col sm="1"></b-col>
-                          </b-row>
-                          <b-row class="my-1" no-gutters v-if="services" v-for="(service, index) in services" v-bind:key="index">
-                            <b-col sm="5">{{ service.name }}</b-col>
-                            <b-col sm="4">{{ service.url }}</b-col>
-                            <b-col sm="2">{{ service.port }}</b-col>
-                            <b-col sm="1"><b-button @click="deleteRow(index)" v-if="!servicesSet"><strong> - </strong></b-button></b-col>
-                          </b-row>
-                          <b-row class="my-1" no-gutters v-if="!servicesSet">
-                            <b-col sm="5"><b-form-input type="text" v-model="form.serviceName"></b-form-input></b-col>
-                            <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl"></b-form-input></b-col>
-                            <b-col sm="2"><b-form-input type="text" v-model="form.servicePort"></b-form-input></b-col>
-                            <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
-                          </b-row>
-                          <b-row class="my-1" no-gutters v-if="!servicesSet">
-                            <b-col sm="10">
-                              <b-button type="reset" variant="danger">Clear</b-button>
-                              <b-button type="submit" variant="primary">Save</b-button>
-                            </b-col>
-                          </b-row>
-                        </b-container>
-                    </b-form>
+                    <div v-if="servicesSet" class="pt-1">
+                        <p>Services Availability monitor successfully configured!</p>
+                    </div>
+                    <div v-else>
+                        <p>Enter the name, URL and port of the service(s) to monitor the availability for:</p>
+                        <b-form @submit="onSubmitServices" @reset="onResetServices" id="servicesForm" v-if="show">
+                            <b-container fluid>
+                              <b-row class="my-1" no-gutters>
+                                <b-col sm="5"><label>Service Name</label></b-col>
+                                <b-col sm="4"><label>URL</label></b-col>
+                                <b-col sm="2"><label>Port</label></b-col>
+                                <b-col sm="1"></b-col>
+                              </b-row>
+                              <b-row class="my-1" no-gutters v-if="services" v-for="(service, index) in services" v-bind:key="index">
+                                <b-col sm="5">{{ service.name }}</b-col>
+                                <b-col sm="4">{{ service.url }}</b-col>
+                                <b-col sm="2">{{ service.port }}</b-col>
+                                <b-col sm="1"><b-button @click="deleteRow(index)"><strong> - </strong></b-button></b-col>
+                              </b-row>
+                              <b-row class="my-1" no-gutters>
+                                <b-col sm="5"><b-form-input type="text" v-model="form.serviceName"></b-form-input></b-col>
+                                <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl"></b-form-input></b-col>
+                                <b-col sm="2"><b-form-input type="text" v-model="form.servicePort"></b-form-input></b-col>
+                                <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
+                              </b-row>
+                              <b-row class="my-1" no-gutters>
+                                <b-col sm="10">
+                                  <b-button type="reset" variant="danger">Clear</b-button>
+                                  <b-button type="submit" variant="primary">Save</b-button>
+                                </b-col>
+                              </b-row>
+                            </b-container>
+                        </b-form>
+                    </div>
                 </div>
                 <div v-else class="h-100 d-inline-block pt-5">
                     <h2>Error</h2>
