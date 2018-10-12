@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
     Services Availability API and Dashboard
     Display services metrics and provides REST API back-end
 """
 import ConfigParser
+from codecs import encode
 import datetime
 import logging
 import logging.handlers
@@ -185,6 +187,17 @@ def sanitize_user_input(word):
     return word
 
 
+def obfuscate(text, decode=False):
+    try:
+        if decode:
+            return base64.b64decode(decode(text, 'rot13'))
+        else:
+            return base64.b64encode(encode(text, 'rot13'))
+    except Exception, e:
+        logger.error('Error retrieving nginx status: %s' % e)
+        return text
+
+    
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
