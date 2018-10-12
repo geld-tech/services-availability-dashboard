@@ -176,7 +176,7 @@ def store_services(services):
             config = ConfigParser.ConfigParser()
             config.add_section('services')
             for service in services.get('services', []):
-                config.set('services', service.get('name'), '%s:%s' % (service.get('url'), service..get('port')))
+                config.set('services', service.get('name'), '%s:%s' % (service.get('url'), service.get('port')))
             config.write(outfile)
         return True
     except Exception, e:
