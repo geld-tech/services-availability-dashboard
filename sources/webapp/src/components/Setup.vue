@@ -116,7 +116,7 @@
                 v-bind:disabled="nowStep == stepList.length ||
                     (nowStep > 1 && !adminPasswordSet) ||
                     (nowStep > 2 && !ganalyticsIdSet) ||
-                    (nowStep > 3 && !servicesSet)" autofocus>Next</b-button>
+                    (nowStep > 3 && servicesSet)" autofocus>Next</b-button>
             </div>
         </div>
     </b-container>
