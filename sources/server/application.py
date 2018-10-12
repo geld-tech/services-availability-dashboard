@@ -194,7 +194,7 @@ def obfuscate(text, decode=False):
         else:
             return base64.b64encode(encode(text, 'rot13'))
     except Exception, e:
-        logger.error('Error retrieving nginx status: %s' % e)
+        logger.error('Error while encoding or decoding text: %s' % e)
         return text
 
     
