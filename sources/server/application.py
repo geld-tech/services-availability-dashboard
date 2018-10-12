@@ -102,7 +102,7 @@ def store_password(password):
         with open(config_file, 'ab') as outfile:
             config = ConfigParser.ConfigParser()
             config.add_section('admin')
-            config.set('admin', 'password', password)
+            config.set('admin', 'password', obfuscate(password))
             config.write(outfile)
         return True
     except Exception:
