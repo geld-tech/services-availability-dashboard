@@ -308,9 +308,6 @@ export default {
         url: this.form.serviceurl,
         port: this.form.serviceport
       })
-      this.form.servicename = ''
-      this.form.serviceurl = ''
-      this.form.serviceport = ''
     },
     deleteRow(index) {
       this.services.splice(index, 1)
