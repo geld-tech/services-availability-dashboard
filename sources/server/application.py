@@ -4,6 +4,7 @@
     Services Availability API and Dashboard
     Display services metrics and provides REST API back-end
 """
+import base64
 import ConfigParser
 from codecs import encode
 import datetime
@@ -198,7 +199,7 @@ def obfuscate(text, decode=False):
         logger.error('Error while encoding or decoding text: %s' % e)
         return text
 
-    
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
