@@ -20,23 +20,27 @@ class MetricsCollector():
         self.pidfile_path = pid_file
         self.poll_interval = poll_interval
         self.db_path = db_path
+        self.config_file = config_file
         self.db_session = None
         self.server = None
         self.services = []
         atexit.register(self.db_close)
 
     def run(self):
-        # Initialise object to collect metrics
-        services_status = ServiceStatus()
-        # Connect to database
-        self.db_open(services_status.get_server_hostname())
-        # First metrics poll to instantiate system information
-        while True:
-            # Poll and store
-            dt = datetime.datetime.utcnow()
-            data = services_status.poll_metrics()
-            self.store_status(dt, data)
-            time.sleep(self.poll_interval)
+        if os.path.isfile(self.config_file):
+            # Initialise object to collect metrics
+            services_status = ServiceStatus()
+            # Connect to database
+            self.db_open(services_status.get_server_hostname())
+            # First metrics poll to instantiate system information
+            while True:
+                # Poll and store
+                dt = datetime.datetime.utcnow()
+                data = services_status.poll_metrics()
+                self.store_status(dt, data)
+                time.sleep(self.poll_interval)
+        else:
+            time.sleep(10*self.poll_interval)
 
     def db_open(self, hostname='localhost'):
         engine = create_engine('sqlite:///'+self.db_path)
