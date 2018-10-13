@@ -27,14 +27,14 @@ class MetricsCollector():
 
     def run(self):
         # Initialise object to collect metrics
-        nginx_status = ServiceStatus()
+        services_status = ServiceStatus()
         # Connect to database
-        self.db_open(nginx_status.get_server_hostname())
+        self.db_open(services_status.get_server_hostname())
         # First metrics poll to instantiate system information
         while True:
             # Poll and store
             dt = datetime.datetime.utcnow()
-            data = nginx_status.poll_metrics()
+            data = services_status.poll_metrics()
             self.store_status(dt, data)
             time.sleep(self.poll_interval)
 
@@ -62,7 +62,7 @@ class MetricsCollector():
             last_2_hours = now - datetime.timedelta(hours=2)
             self.services = self.db_session.query(Service).filter_by(server=self.server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id)
         except Exception:
-            print "Error accessing nginx status"
+            print "Error accessing services status"
 
     def store_status(self, date_time, data):
         try:
@@ -71,7 +71,7 @@ class MetricsCollector():
             self.db_session.add(service_status)
             self.db_session.commit()
         except Exception:
-            print "Error accessing nginx status"
+            print "Error accessing services status"
         finally:
             self.db_close()
 
