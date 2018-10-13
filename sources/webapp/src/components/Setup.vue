@@ -55,7 +55,7 @@
                         <p>Analytics UA ID set successfully!</p>
                     </div>
                     <div v-else>
-                        <p>Enter the Google Analytics UA ID in the field below (optional), then press Submit</p>
+                        <p>Enter the Google Analytics UA ID in the field below, then press Submit</p>
                         <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
@@ -76,6 +76,7 @@
                     <h2>Services Availability</h2>
                     <div v-if="servicesSet" class="pt-1">
                         <p>Services Availability monitor successfully configured!</p>
+                        <p>Press Next to start using the application.</p>
                     </div>
                     <div v-else>
                         <p>Enter the name, URL and port of the service(s) to monitor the availability for:</p>
@@ -114,14 +115,17 @@
                     <p>Incorrect setup step</p>
                 </div>
             </div>
-            <div class="float-right">
+            <div class="float-right" v-if="servicesSet">
+              <b-button variant="primary" disabled>Back</b-button>
+              <b-button variant="primary" v-on:click="startApplication" autofocus>Next</b-button>
+            </div>
+            <div class="float-right" v-else>
               <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1">Back</b-button>
               <b-button variant="primary"
                 v-on:click="nextStep"
                 v-bind:disabled="nowStep == stepList.length ||
                     (nowStep > 1 && !adminPasswordSet) ||
-                    (nowStep > 2 && !ganalyticsIdSet) ||
-                    (nowStep > 2 && !servicesSet)" autofocus>Next</b-button>
+                    (nowStep > 2 && !ganalyticsIdSet)" autofocus>Next</b-button>
             </div>
         </div>
     </b-container>
@@ -276,11 +280,12 @@ export default {
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Storing the data */
+        this.loading = true
         storeServices(this.services)
           .then(response => {
             this.data = response.data
-            this.loading = false
             this.servicesSet = true
+            this.loading = false
           })
           .catch(err => {
             this.error = err.message
@@ -319,6 +324,9 @@ export default {
     },
     deleteRow(index) {
       this.services.splice(index, 1)
+    },
+    startApplication() {
+      this.services = []
     }
   }
 }
