@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 class MetricsCollector():
-    def __init__(self, pid_file, poll_interval=60, db_path='/dev/shm/metrics.sqlite3'):
+    def __init__(self, pid_file, poll_interval=60, db_path, config_file):
         self.stdin_path = '/dev/null'
         self.stdout_path = '/dev/null'
         self.stderr_path = '/dev/null'
@@ -94,6 +94,7 @@ def is_running(pid_file):
 # Main
 DB_PATH = os.path.abspath(os.path.dirname(__file__))+'/data/metrics.sqlite3'
 PID_FILE = '/tmp/sla-monitor-collectord.pid'
+CONFIG_FILE = 'config/settings.cfg'
 POLL_INTERVAL = 30
 
 if __name__ == "__main__":
@@ -107,7 +108,10 @@ if __name__ == "__main__":
         elif 'stop' == sys.argv[1] and not is_running(PID_FILE)[0]:
             print '%s is not running.' % sys.argv[0]
         else:
-            collector = MetricsCollector(PID_FILE, poll_interval=POLL_INTERVAL, db_path=DB_PATH)
+            collector = MetricsCollector(PID_FILE,
+                            poll_interval=POLL_INTERVAL,
+                            db_path=DB_PATH,
+                            config_file=CONFIG_FILE)
             daemon = runner.DaemonRunner(collector)
             daemon.do_action()  # start|stop|restart as sys.argv[1]
             running, pid = is_running(PID_FILE)
