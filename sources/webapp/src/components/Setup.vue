@@ -326,7 +326,7 @@ export default {
       this.services.splice(index, 1)
     },
     startApplication() {
-      this.services = []
+      this.$router.push('/')
     }
   }
 }
