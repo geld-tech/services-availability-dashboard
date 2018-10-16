@@ -82,7 +82,7 @@ def status():
                 time_labels.append(result.date_time)
         return jsonify({'data': data, 'time_labels': time_labels}), 200
     except Exception, e:
-        logger.error('Error retrieving nginx status: %s' % e)
+        logger.error('Error retrieving services status: %s' % e)
         return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
 
 
