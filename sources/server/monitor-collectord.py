@@ -41,7 +41,7 @@ class MetricsCollector():
                 time.sleep(self.poll_interval)
         else:
             print "Sleeping as no %s" % self.config_file
-            time.sleep(5*self.poll_interval)
+            time.sleep(3*self.poll_interval)
 
     def db_open(self, hostname='localhost'):
         engine = create_engine('sqlite:///'+self.db_path)
