@@ -27,13 +27,16 @@ class MetricsCollector():
         atexit.register(self.db_close)
 
     def run(self):
+        print "Running..."
         if os.path.isfile(self.config_file):
+            print "creating DB..."
             # Initialise object to collect metrics
             services_status = ServiceStatus()
             # Connect to database
             self.db_open(services_status.get_server_hostname())
             # First metrics poll to instantiate system information
             while True:
+                print "Polling ..."
                 # Poll and store
                 dt = datetime.datetime.utcnow()
                 data = services_status.poll_metrics()
