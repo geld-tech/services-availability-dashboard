@@ -27,24 +27,27 @@ class MetricsCollector():
         atexit.register(self.db_close)
 
     def run(self):
-        print "Running..."
-        if os.path.isfile(self.config_file):
-            print "creating DB..."
-            # Initialise object to collect metrics
-            services_status = ServiceStatus()
-            # Connect to database
-            self.db_open(services_status.get_server_hostname())
-            # First metrics poll to instantiate system information
-            while True:
-                print "Polling ..."
-                # Poll and store
-                dt = datetime.datetime.utcnow()
-                data = services_status.poll_metrics()
-                self.store_status(dt, data)
-                time.sleep(self.poll_interval)
-        else:
-            print "Sleeping as no %s" % self.config_file
-            time.sleep(3*self.poll_interval)
+        try:
+            print "Running..."
+            if os.path.isfile(self.config_file):
+                print "creating DB..."
+                # Initialise object to collect metrics
+                services_status = ServiceStatus()
+                # Connect to database
+                self.db_open(services_status.get_server_hostname())
+                # First metrics poll to instantiate system information
+                while True:
+                    print "Polling ..."
+                    # Poll and store
+                    dt = datetime.datetime.utcnow()
+                    data = services_status.poll_metrics()
+                    self.store_status(dt, data)
+                    time.sleep(self.poll_interval)
+            else:
+                print "Sleeping as no %s" % self.config_file
+                time.sleep(3*self.poll_interval)
+        except Exception, e:
+            print "Collector error: %s" % e
 
     def db_open(self, hostname='localhost'):
         engine = create_engine('sqlite:///'+self.db_path)
