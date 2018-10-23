@@ -28,13 +28,13 @@ class MetricsCollector():
 
     def run(self):
         try:
-            print "Running..."
+            print "creating DB..."
+            # Initialise object to collect metrics
+            services_status = ServiceStatus()
+            # Connect to database
+            self.db_open(services_status.get_server_hostname())
             if os.path.isfile(self.config_file):
-                print "creating DB..."
-                # Initialise object to collect metrics
-                services_status = ServiceStatus()
-                # Connect to database
-                self.db_open(services_status.get_server_hostname())
+                print "Running..."
                 # First metrics poll to instantiate system information
                 while True:
                     print "Polling ..."
