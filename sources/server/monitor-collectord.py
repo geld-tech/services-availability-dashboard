@@ -67,7 +67,17 @@ class MetricsCollector():
     def db_rollback(self):
         self.db_session.rollback()
 
-    def get_services(self):
+    def get_services(config_file):
+        try:
+            with open(config_file, 'r') as infile:
+                config = ConfigParser.ConfigParser()
+                config.read(infile)
+                return config.get_section('services')
+            return True
+        except Exception:
+            return False
+
+    def get_services_last2hours(self):
         try:
             now = datetime.datetime.utcnow()
             last_2_hours = now - datetime.timedelta(hours=2)
