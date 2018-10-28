@@ -121,9 +121,12 @@ DB_PATH = os.path.abspath(os.path.dirname(__file__))+'/data/metrics.sqlite3'
 PID_FILE = '/tmp/sla-monitor-collectord.pid'
 CONFIG_FILE = 'config/settings.cfg'
 POLL_INTERVAL = 30
+DEBUG = False
 
 if __name__ == "__main__":
-    if len(sys.argv) == 2:
+    if len(sys.argv) >= 2:
+        if len(sys.argv) == 3:
+            DEBUG = True
         if 'status' == sys.argv[1]:
             running, pid = is_running(PID_FILE)
             if running:
@@ -133,7 +136,7 @@ if __name__ == "__main__":
         elif 'stop' == sys.argv[1] and not is_running(PID_FILE)[0]:
             print '%s is not running.' % sys.argv[0]
         else:
-            collector = MetricsCollector(PID_FILE, DB_PATH, CONFIG_FILE, poll_interval=POLL_INTERVAL)
+            collector = MetricsCollector(PID_FILE, DB_PATH, CONFIG_FILE, poll_interval=POLL_INTERVAL, debug=DEBUG)
             daemon = runner.DaemonRunner(collector)
             daemon.do_action()  # start|stop|restart as sys.argv[1]
             running, pid = is_running(PID_FILE)
