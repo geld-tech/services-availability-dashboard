@@ -73,7 +73,7 @@ echo ""
 echo "### METRICS COLLECTOR ###"
 trap hupexit HUP
 trap intexit INT
-python monitor-collectord.py start
+python monitor-collectord.py start debug
 sleep 5
 
 # Run application locally on port :5000 (Press CTRL+C to quit)
