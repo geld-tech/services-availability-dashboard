@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { fetchData } from '@/api'
 import Status from '../charts/Status.js'
 
 export default {
