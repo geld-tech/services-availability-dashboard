@@ -47,7 +47,38 @@ export default {
   },
   data () {
     return {
+      data: {},
+      show: true,
       msg: 'Services Status'
+    }
+  },
+  created() {
+    this.loading = false
+    /* Trick to reset/clear native browser form validation state */
+    this.data = {}
+    this.show = false
+    this.$nextTick(() => { this.show = true })
+    /* Fetching the data */
+    this.loading = true
+    this.fetchResourcesData()
+    /* Sets interval for auto-refresh */
+    this.refreshInterval = window.setInterval(this.fetchResourcesData, 15000)
+  },
+  beforeDestroy() {
+    window.clearInterval(this.refreshInterval)
+  },
+  methods: {
+    fetchResourcesData() {
+      this.loading = true
+      fetchData()
+        .then(response => {
+          this.data = response.data
+          this.loading = false
+        })
+        .catch(err => {
+          this.error = err.message
+          this.loading = false
+        })
     }
   }
 }
