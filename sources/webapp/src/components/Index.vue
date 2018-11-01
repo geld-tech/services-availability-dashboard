@@ -2,7 +2,7 @@
   <div class="index">
     <!-- Container -->
     <b-container class="bv-example-row">
-        <div v-if="Object.keys(data).length === 0" class="loading">
+        <div v-if="loading" class="loading">
             <h6>Loading...</h6>
             <img src="/static/images/spinner.gif" width="32" height="32"/>
         </div>
