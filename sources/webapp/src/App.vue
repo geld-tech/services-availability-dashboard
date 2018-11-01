@@ -42,19 +42,20 @@ export default {
   },
   created() {
     var firstSetup = window.settings.firstSetup
+
+    this.loading = false
+    /* Trick to reset/clear native browser form validation state */
+    this.data = {}
+    this.show = false
+    this.$nextTick(() => { this.show = true })
+    /* Fetching the data */
+    this.loading = true
+    this.fetchResourcesData()
+    /* Sets interval for auto-refresh */
+    this.refreshInterval = window.setInterval(this.fetchResourcesData, 15000)
+
     if (firstSetup) {
       this.$router.push('/Setup')
-    } else {
-      this.loading = false
-      /* Trick to reset/clear native browser form validation state */
-      this.data = {}
-      this.show = false
-      this.$nextTick(() => { this.show = true })
-      /* Fetching the data */
-      this.loading = true
-      this.fetchResourcesData()
-      /* Sets interval for auto-refresh */
-      this.refreshInterval = window.setInterval(this.fetchResourcesData, 15000)
     }
   },
   beforeDestroy() {
