@@ -9,7 +9,9 @@ export function fetchSearchData(keyword) {
 }
 
 export function storeAdminPassword(password) {
-  return axios.get('/setup/password/' + password).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  var payload = { password: password }
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+  return axios.post('/setup/password/', payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function storeGanalytics(uaid) {
