@@ -86,15 +86,19 @@ def status():
         return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
 
 
-@app.route("/setup/password")
-@app.route("/setup/password/<password>")
+@app.route("/setup/password", methods=['GET', 'POST'])
+@app.route("/setup/password/", methods=['GET', 'POST'])
 def set_password(password=None):
-    if password:
-        password = sanitize_user_input(password)
-        if store_password(password):
-            return jsonify({"data": {"response": "Success!"}}), 200
+    if request.method == 'POST':
+        data = ast.literal_eval(request.data)
+        if 'password' in data:
+            password = sanitize_user_input(data['password'])
+            if store_password(password):
+                return jsonify({"data": {"response": "Success!"}}), 200
+            else:
+                return jsonify({"data": {}, "error": "Could not set password"}), 500
         else:
-            return jsonify({"data": {}, "error": "Could not set password"}), 500
+            return jsonify({"data": {}, "error": "Password needs to be specified"}), 500
     else:
         return jsonify({"data": {}, "error": "Password can not be empty"}), 500
 
