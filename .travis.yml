@@ -26,9 +26,9 @@ node_js:
 cache:
   bundler: true
   directories:
-    - $HOME/.npm
+    - $HOME/.npm          # NPM Packages
     - node_modules        # NPM packages
-    - $HOME/.rvm/  # Ruby packages (e.g. Bintray)
+    - $HOME/.rvm/         # Ruby packages (e.g. Bintray)
 
 env:
   global:
