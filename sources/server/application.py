@@ -116,15 +116,19 @@ def store_password(password):
         return False
 
 
-@app.route("/setup/ganalytics")
-@app.route("/setup/ganalytics/<ua_id>")
+@app.route("/setup/ganalytics", methods=['GET', 'POST'])
+@app.route("/setup/ganalytics/<ua_id>", methods=['GET', 'POST'])
 def set_ganalytics(ua_id=None):
-    if ua_id:
-        ua_id = sanitize_user_input(ua_id)
-        if store_ua_id(ua_id):
-            return jsonify({"data": {"response": "Success!"}}), 200
+    if request.method == 'POST':
+        data = ast.literal_eval(request.data)
+        if 'uaid' in data:
+            ua_id = sanitize_user_input(data['uaid'])
+            if store_ua_id(ua_id):
+                return jsonify({"data": {"response": "Success!"}}), 200
+            else:
+                return jsonify({"data": {}, "error": "Could not set UA ID"}), 500
         else:
-            return jsonify({"data": {}, "error": "Could not set UA ID"}), 500
+            return jsonify({"data": {}, "error": "Google Analytics User Agent ID needs to be specified"}), 500
     else:
         return jsonify({"data": {}, "error": "UA ID can not be empty"}), 500
 
