@@ -102,8 +102,8 @@
                               </b-row>
                               <b-row class="my-1" no-gutters>
                                 <b-col sm="10">
-                                  <b-button type="reset" variant="danger">Clear</b-button>
-                                  <b-button type="submit" variant="primary">Save</b-button>
+                                  <b-button type="reset" variant="danger" v-bind:disabled="disableServicesButtons">Clear</b-button>
+                                  <b-button type="submit" variant="primary" v-bind:disabled="disableServicesButtons">Submit</b-button>
                                 </b-col>
                               </b-row>
                             </b-container>
@@ -297,6 +297,7 @@ export default {
     },
     onResetServices(evt) {
       evt.preventDefault()
+      this.services = []
       /* Reset our form values */
       /* Trick to reset/clear native browser form validation state */
       this.show = false
