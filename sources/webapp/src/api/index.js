@@ -8,8 +8,7 @@ export function fetchSearchData(keyword) {
   return axios.get('/api/services/status/' + keyword).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
-export function postPayload(url, data) {
-  var payload = { data: data }
+export function postPayload(url, payload) {
   axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
   return axios.post(url, payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
