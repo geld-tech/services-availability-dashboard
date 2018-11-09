@@ -176,7 +176,7 @@ export default {
       return (this.form.uaid === '')
     },
     disableServicesButtons() {
-      return (this.services === [])
+      return (this.services === undefined || this.services.length == 0)
     }
   },
   methods: {
