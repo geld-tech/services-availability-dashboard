@@ -25,3 +25,9 @@ export function storeServices(services) {
   axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
   return axios.post('/setup/services/', payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
+
+export function postPayload(url, data) {
+  var payload = { data: data }
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+  return axios.post(url, payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+}
