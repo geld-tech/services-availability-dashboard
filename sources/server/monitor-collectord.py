@@ -125,9 +125,9 @@ POLL_INTERVAL = 30
 DEBUG = False
 
 if __name__ == "__main__":
+    if len(sys.argv) == 3:
+        DEBUG = True
     if len(sys.argv) >= 2:
-        if len(sys.argv) == 3:
-            DEBUG = True
         if 'status' == sys.argv[1]:
             running, pid = is_running(PID_FILE)
             if running:
