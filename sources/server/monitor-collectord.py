@@ -50,7 +50,7 @@ class MetricsCollector():
                     time.sleep(self.poll_interval)
             else:
                 print "Sleeping as no %s" % self.config_file
-                time.sleep(3*self.poll_interval)
+                time.sleep(self.poll_interval)
         except Exception, e:
             print "Collector error: %s" % e
 
