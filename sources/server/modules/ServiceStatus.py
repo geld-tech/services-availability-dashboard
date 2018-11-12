@@ -35,7 +35,7 @@ class ServiceStatus:
             data = {}
             return data
         except Exception, e:
-            self.logger.error('Error retrieving nginx status: %s' % e)
+            self.logger.error('Error retrieving service status (%s): %s' % (self.url, e))
             return {}
 
     def _get_server_hostname(self):
