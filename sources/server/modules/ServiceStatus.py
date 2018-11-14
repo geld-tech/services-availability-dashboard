@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-    NginxStatus Class
+    ServiceStatus Class
 """
 import logging
 import logging.handlers
