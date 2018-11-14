@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
     ServiceStatus Class
+
+    Polls service metrics on availability and latency
 """
 import logging
 import logging.handlers
