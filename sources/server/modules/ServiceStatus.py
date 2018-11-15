@@ -3,6 +3,7 @@
     ServiceStatus Class
 
     Polls service metrics on availability and latency
+
 """
 import logging
 import logging.handlers
@@ -28,6 +29,16 @@ class ServiceStatus:
 
     def collect_metrics(self):
         self._data = self._get_metrics()
+
+    def is_reachable(self):
+        try:
+            req = urllib2.Request(self.url)
+            response = urllib2.urlopen(req)
+            response.close()
+            return True
+        except Exception, e:
+            self.logger.debug('Error retrieving service status (%s): %s' % (self.url, e))
+            return False
 
     def _get_metrics(self):
         try:
