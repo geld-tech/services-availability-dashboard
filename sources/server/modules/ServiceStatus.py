@@ -30,10 +30,10 @@ class ServiceStatus:
     def collect_metrics(self):
         self._data = self._get_metrics()
 
-    def is_reachable(self):
+    def is_reachable(self, timeout=5):
         try:
             req = urllib2.Request(self.url)
-            response = urllib2.urlopen(req)
+            response = urllib2.urlopen(req, timeout=timeout)
             response.close()
             return True
         except Exception, e:
