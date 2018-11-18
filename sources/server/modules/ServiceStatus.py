@@ -48,8 +48,8 @@ class ServiceStatus:
             start = time.time()
             page = req.read()
             end = time.time()
-            nf.close()
-            return float(end - start) # time interval in seconds
+            req.close()
+            return float(end - start)  # time interval in seconds
         except Exception, e:
             self.logger.debug('Error retrieving latency status (%s): %s' % (self.url, e))
             return False
