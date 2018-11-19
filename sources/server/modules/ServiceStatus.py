@@ -55,6 +55,19 @@ class ServiceStatus:
             self.logger.debug('Error retrieving latency status (%s): %s' % (self.url, e))
             return False
 
+    def get_metrics(self):
+        try:
+            data = {}
+            data['reachable'] = False
+            if self.is_reachable():
+                latency = self.measure_latency()
+                if latency:
+                    data['latency'] = latency
+            return data
+        except Exception, e:
+            self.logger.error('Error retrieving service metrics (%s): %s' % (self.url, e))
+            return {}
+
     def _get_metrics(self):
         try:
             req = urllib2.Request(self.url)
