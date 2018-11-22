@@ -39,17 +39,16 @@ class MetricsCollector():
             # Connect to database
             self.db_open(services_status.get_server_hostname())
             if os.path.isfile(self.config_file):
-                print "Running..."
+                print "Configuration file found, polling.."
                 # First metrics poll to instantiate system information
                 while True:
-                    print "Polling ..."
                     # Poll and store
                     dt = datetime.datetime.utcnow()
                     data = services_status.poll_metrics()
                     self.store_status(dt, data)
                     time.sleep(self.poll_interval)
             else:
-                print "Sleeping as no %s" % self.config_file
+                print "Sleeping as no configuration file found (%s)" % self.config_file
                 time.sleep(self.poll_interval)
         except Exception, e:
             print "Collector error: %s" % e
