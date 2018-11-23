@@ -86,8 +86,8 @@ def status():
         return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
 
 
-@app.route("/setup/password", methods=['GET', 'POST'])
-@app.route("/setup/password/", methods=['GET', 'POST'])
+@app.route("/setup/password", methods=['POST'])
+@app.route("/setup/password/", methods=['POST'])
 def set_password(password=None):
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
@@ -116,8 +116,8 @@ def store_password(password):
         return False
 
 
-@app.route("/setup/ganalytics", methods=['GET', 'POST'])
-@app.route("/setup/ganalytics/<ua_id>", methods=['GET', 'POST'])
+@app.route("/setup/ganalytics", methods=['POST'])
+@app.route("/setup/ganalytics/<ua_id>", methods=['POST'])
 def set_ganalytics(ua_id=None):
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
@@ -146,8 +146,8 @@ def store_ua_id(ua_id):
         return False
 
 
-@app.route("/setup/services", methods=['GET', 'POST'])
-@app.route("/setup/services/", methods=['GET', 'POST'])
+@app.route("/setup/services", methods=['POST'])
+@app.route("/setup/services/", methods=['POST'])
 def set_services(services=[]):
     if request.method == 'POST':
         services = request.data
