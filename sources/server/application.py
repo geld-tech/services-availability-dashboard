@@ -87,7 +87,7 @@ def status():
 
 
 @app.route("/setup/password/", methods=['POST'], strict_slashes=False)
-def set_password(password=None):
+def set_password():
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
         if 'password' in data:
@@ -116,7 +116,7 @@ def store_password(password):
 
 
 @app.route("/setup/ganalytics/", methods=['POST'], strict_slashes=False)
-def set_ganalytics(ua_id=None):
+def set_ganalytics():
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
         if 'uaid' in data:
