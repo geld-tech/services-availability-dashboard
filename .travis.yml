@@ -80,6 +80,7 @@ install:
   # Enforce syntax errors, undefined names, and other other potential issues with coding style
   - flake8 . --show-source --max-line-length=239 --max-complexity=10 --statistics --count
   - cd ../..
+  # Unit tests
 
 before_script:
   #  DEBIAN
