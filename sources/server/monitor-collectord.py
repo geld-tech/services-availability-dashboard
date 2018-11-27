@@ -18,12 +18,13 @@ class MetricsCollector():
         if debug:
             self.stdout_path = '/dev/tty'
             self.stderr_path = '/dev/tty'
+            self.poll_interval = int(poll_interval/3)
         else:
             self.stdout_path = '/dev/null'
             self.stderr_path = '/dev/null'
+            self.poll_interval = poll_interval
         self.pidfile_timeout = 5
         self.pidfile_path = pid_file
-        self.poll_interval = poll_interval
         self.db_path = db_path
         self.config_file = config_file
         self.db_session = None
@@ -38,17 +39,22 @@ class MetricsCollector():
             services_status = ServiceStatus()
             # Connect to database
             self.db_open(services_status.get_server_hostname())
-            if os.path.isfile(self.config_file):
-                print "Configuration file found, polling.."
-                # First metrics poll to instantiate system information
-                while True:
-                    # Poll and store
-                    dt = datetime.datetime.utcnow()
-                    data = services_status.poll_metrics()
-                    self.store_status(dt, data)
+
+            # Hold off until configuration file created
+            while True:
+                if not os.path.isfile(self.config_file):
+                    print "Sleeping as no configuration file found (%s)" % self.config_file
                     time.sleep(self.poll_interval)
-            else:
-                print "Sleeping as no configuration file found (%s)" % self.config_file
+                else:
+                    break
+
+            print "Configuration file found, polling.."
+            # First metrics poll to instantiate system information
+            while True:
+                # Poll and store
+                dt = datetime.datetime.utcnow()
+                data = services_status.poll_metrics()
+                self.store_status(dt, data)
                 time.sleep(self.poll_interval)
         except Exception, e:
             print "Collector error: %s" % e
