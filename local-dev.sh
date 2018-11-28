@@ -76,6 +76,19 @@ trap intexit INT
 python monitor-collectord.py start debug
 sleep 5
 
+# Example of config.settings.cfg
+TEST_DATA="
+[admin]
+password = Y25mZmpiZXE=
+
+[ganalytics]
+ua_id = 1234567
+
+[services]
+newrelic.com = newrelic.com:443
+" # TEST_DATA
+
+
 # Run application locally on port :5000 (Press CTRL+C to quit)
 echo ""
 echo "### RUN ###"
