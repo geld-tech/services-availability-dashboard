@@ -86,7 +86,7 @@ ua_id = 1234567
 
 [services]
 newrelic.com = newrelic.com:443
-" # TEST_DATA
+"  # echo $TEST_DATA > .local_dev/server/config/settings.cfg
 
 
 # Run application locally on port :5000 (Press CTRL+C to quit)
