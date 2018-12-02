@@ -102,7 +102,7 @@ class MetricsCollector():
             self.db_session.add(service_status)
             self.db_session.commit()
         except Exception:
-            print "Error accessing services status"
+            print "Error storing services status"
         finally:
             self.db_close()
 
