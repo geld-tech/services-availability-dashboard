@@ -98,7 +98,7 @@ class MetricsCollector():
     def store_status(self, date_time, data):
         try:
             service_status = Metrics(timestamp=date_time.strftime('%s'),
-                                     service=self.service[0])
+                                     service=self.services[0])
             self.db_session.add(service_status)
             self.db_session.commit()
         except Exception, e:
