@@ -56,6 +56,7 @@ export default {
 
     if (firstSetup) {
       this.$router.push('/Setup')
+      window.clearInterval(this.refreshInterval)
     }
   },
   beforeDestroy() {
