@@ -165,6 +165,9 @@ export default {
       show: true
     }
   },
+  created() {
+    window.clearInterval(this.refreshInterval)
+  },
   computed: {
     disableAdminResetButton() {
       return (this.form.adminPassword === '' && this.form.adminPasswordRepeat === '')
