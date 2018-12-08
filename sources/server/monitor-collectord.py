@@ -49,6 +49,8 @@ class MetricsCollector():
                     break
 
             print "Configuration file found, polling.."
+            services = self.get_services()
+            print "Services: %s" % services
             # First metrics poll to instantiate system information
             while True:
                 # Poll and store
