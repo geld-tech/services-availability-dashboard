@@ -77,17 +77,17 @@ python monitor-collectord.py start debug
 sleep 5
 
 # Example of config.settings.cfg
-TEST_DATA="
+cat > .local_dev/server/config/settings.cfg.dev << EOM
 [admin]
-password = Y25mZmpiZXE=
+password=Y25mZmpiZXE=
 
 [ganalytics]
-ua_id = 1234567
+ua_id=1234567
 
 [services]
-newrelic.com = newrelic.com:443
-"  # echo $TEST_DATA > .local_dev/server/config/settings.cfg
-
+newrelic.com=newrelic.com:443
+EOM
+# cp .local_dev/server/config/settings.cfg.dev .local_dev/server/config/settings.cfg
 
 # Run application locally on port :5000 (Press CTRL+C to quit)
 echo ""
