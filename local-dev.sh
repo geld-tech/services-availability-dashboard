@@ -77,7 +77,7 @@ python monitor-collectord.py start debug
 sleep 5
 
 # Example of config.settings.cfg
-cat > .local_dev/server/config/settings.cfg.dev << EOM
+cat > config/settings.cfg.dev << EOM
 [admin]
 password=Y25mZmpiZXE=
 

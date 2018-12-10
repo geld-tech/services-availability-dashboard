@@ -79,7 +79,7 @@ class MetricsCollector():
     def db_rollback(self):
         self.db_session.rollback()
 
-    def get_services(config_file):
+    def get_services(self, config_file):
         try:
             with open(config_file, 'r') as infile:
                 config = ConfigParser.ConfigParser()
