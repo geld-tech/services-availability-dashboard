@@ -86,7 +86,8 @@ class MetricsCollector():
                 config.read(infile)
                 return config.get_section('services')
             return True
-        except Exception:
+        except Exception, e:
+            print "Exception while reading services from configuration: %s" % e
             return False
 
     def get_services_last2hours(self):
