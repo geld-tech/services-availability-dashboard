@@ -59,11 +59,11 @@
                         <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
-                                <b-col sm="4"><label>Google Analytics UA ID</label></b-col>
-                                <b-col sm="6"><b-form-input type="text" autocomplete="new-password" v-model="form.uaid" required></b-form-input></b-col>
+                                <b-col sm="5"><label>Google Analytics UA ID</label></b-col>
+                                <b-col sm="7"><b-form-input type="text" autocomplete="new-password" v-model="form.uaid" required></b-form-input></b-col>
                               </b-row>
                               <b-row class="my-1">
-                                <b-col sm="10">
+                                <b-col sm="12">
                                   <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons">Clear</b-button>
                                   <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons">Submit</b-button>
                                 </b-col>
