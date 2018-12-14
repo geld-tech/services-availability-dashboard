@@ -84,7 +84,7 @@ class MetricsCollector():
             with open(config_file, 'r') as infile:
                 config = ConfigParser.ConfigParser()
                 config.read(infile)
-                return config.get_section('services')
+                return list(config.items('services'))
             return True
         except Exception, e:
             print "Exception while reading services from configuration: %s" % e
