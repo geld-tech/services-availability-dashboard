@@ -86,7 +86,7 @@ class MetricsCollector():
                 config.read(infile)
                 if 'services' in config.sections():
                     return list(config.items('services'))
-            return True
+            return list()
         except Exception, e:
             print "Exception while reading services from configuration: %s" % e
             return False
