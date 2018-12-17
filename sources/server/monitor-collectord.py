@@ -101,10 +101,10 @@ class MetricsCollector():
 
     def store_status(self, date_time, data):
         try:
-            service_status = Metrics(timestamp=date_time.strftime('%s'),
-                                     service=self.services[0])
-            self.db_session.add(service_status)
-            self.db_session.commit()
+            for service in self.services:
+                service_status = Metrics(timestamp=date_time.strftime('%s'), service=self.service)
+                self.db_session.add(service_status)
+                self.db_session.commit()
         except Exception, e:
             print "Error storing services status: %s" % e
         finally:
