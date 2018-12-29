@@ -102,6 +102,7 @@ class MetricsCollector():
     def store_status(self, date_time, data):
         try:
             for service in self.services:
+                print "Service: %s" % service
                 service_status = Metrics(timestamp=date_time.strftime('%s'), service=self.service)
                 self.db_session.add(service_status)
                 self.db_session.commit()
