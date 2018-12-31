@@ -79,13 +79,13 @@ sleep 5
 # Example of config.settings.cfg
 cat > ./config/settings.cfg.dev << EOM
 [admin]
-password=Y25mZmpiZXE=
+password = Y25mZmpiZXE=
 
 [ganalytics]
-ua_id=1234567
+ua_id = 1234567
 
 [services]
-newrelic.com=newrelic.com:443
+newrelic.com = newrelic.com:443
 EOM
 # cp .local_dev/server/config/settings.cfg.dev .local_dev/server/config/settings.cfg
 
