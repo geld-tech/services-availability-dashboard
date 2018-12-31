@@ -81,11 +81,10 @@ class MetricsCollector():
 
     def get_services(self, config_file):
         try:
-            with open(config_file, 'r') as infile:
-                config = ConfigParser.ConfigParser()
-                config.read(infile)
-                if 'services' in config.sections():
-                    return list(config.items('services'))
+            config = ConfigParser.ConfigParser()
+            config.read(config_file)
+            if 'services' in config.sections():
+                return list(config.items('services'))
             return list()
         except Exception, e:
             print "Exception while reading services from configuration: %s" % e
