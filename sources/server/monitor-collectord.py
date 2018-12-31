@@ -80,12 +80,12 @@ class MetricsCollector():
         self.db_session.rollback()
 
     def get_services(self, config_file):
-        services = {}
+        services = list()
         try:
             config = ConfigParser.ConfigParser()
             config.read(config_file)
             if 'services' in config.sections():
-                for service in list(config.items('services')):
+                for service in config.items('services'):
                     name = service[0]
                     uri = service[1].split(':')[0]
                     port = service[1].split(':')[1]
