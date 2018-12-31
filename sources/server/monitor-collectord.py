@@ -87,8 +87,8 @@ class MetricsCollector():
             if 'services' in config.sections():
                 for service in list(config.items('services')):
                     name = service[0]
-                    uri = services[1].split(':')[0]
-                    port = services[1].split(':')[1]
+                    uri = service[1].split(':')[0]
+                    port = service[1].split(':')[1]
                     services.append({'name': name, 'uri': uri, 'port': port})
             return services
         except Exception, e:
