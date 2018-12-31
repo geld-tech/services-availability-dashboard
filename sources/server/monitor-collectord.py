@@ -80,12 +80,17 @@ class MetricsCollector():
         self.db_session.rollback()
 
     def get_services(self, config_file):
+        services = {}
         try:
             config = ConfigParser.ConfigParser()
             config.read(config_file)
             if 'services' in config.sections():
-                return list(config.items('services'))
-            return list()
+                for service in list(config.items('services')):
+                    name = service[0]
+                    uri = services[1].split(':')[0]
+                    port = services[1].split(':')[1]
+                    services.append({'name': name, 'uri': uri, 'port': port})
+            return services
         except Exception, e:
             print "Exception while reading services from configuration: %s" % e
             return False
