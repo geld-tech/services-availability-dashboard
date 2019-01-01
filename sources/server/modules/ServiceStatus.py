@@ -20,7 +20,7 @@ class ServiceStatus:
         self.hostname = self._get_server_hostname()
         self._data = {}
         self.url = url
-        self.collect_metrics()
+        self.collect_metrics(list())
 
     def get(self):
         return self._data
