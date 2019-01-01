@@ -52,10 +52,10 @@ class MetricsCollector():
             # First metrics poll to instantiate system information
             while True:
                 # Poll and store
+                dt = datetime.datetime.utcnow()
                 services = self.get_services(self.config_file)
                 #print "Services: %s" % services
-                dt = datetime.datetime.utcnow()
-                data = services_status.poll_metrics()
+                data = services_status.poll_metrics(services)
                 self.store_status(dt, data)
                 time.sleep(self.poll_interval)
         except Exception, e:
