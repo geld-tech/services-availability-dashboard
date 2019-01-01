@@ -25,12 +25,12 @@ class ServiceStatus:
     def get(self):
         return self._data
 
-    def poll_metrics(self):
-        self.collect_metrics()
+    def poll_metrics(self, services):
+        self.collect_metrics(services)
         return self._data
 
-    def collect_metrics(self):
-        self._data = self._get_metrics()
+    def collect_metrics(self, services):
+        self._data = self._get_metrics(services)
 
     def is_reachable(self, timeout=5):
         try:
@@ -68,7 +68,7 @@ class ServiceStatus:
             self.logger.error('Error retrieving service metrics (%s): %s' % (self.url, e))
             return {}
 
-    def _get_metrics(self):
+    def _get_metrics(self, services):
         try:
             req = urllib2.Request(self.url)
             response = urllib2.urlopen(req)
