@@ -70,10 +70,12 @@ class ServiceStatus:
 
     def _get_metrics(self, services):
         try:
-            req = urllib2.Request(self.url)
-            response = urllib2.urlopen(req)
-            response.close()
             data = {}
+            for service in services:
+                url = service.url
+                req = urllib2.Request(url)
+                response = urllib2.urlopen(req)
+                response.close()
             return data
         except Exception, e:
             self.logger.error('Error retrieving service status (%s): %s' % (self.url, e))
