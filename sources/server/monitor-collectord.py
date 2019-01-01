@@ -51,9 +51,9 @@ class MetricsCollector():
             print "Configuration file found, polling.."
             # First metrics poll to instantiate system information
             while True:
-                services = self.get_services(self.config_file)
-                print "Services: %s" % services
                 # Poll and store
+                services = self.get_services(self.config_file)
+                #print "Services: %s" % services
                 dt = datetime.datetime.utcnow()
                 data = services_status.poll_metrics()
                 self.store_status(dt, data)
