@@ -42,9 +42,9 @@ class ServiceStatus:
             self.logger.debug('Error reaching service (%s): %s' % (self.url, e))
             return False
 
-    def measure_latency(self):
+    def measure_latency(self, url):
         try:
-            req = urllib.urlopen(self.url)
+            req = urllib.urlopen(url)
             start = time.time()
             page = req.read()
             end = time.time()
@@ -52,27 +52,27 @@ class ServiceStatus:
             del page  # Avoids linter issue
             return float(end - start)  # Time interval in seconds
         except Exception, e:
-            self.logger.debug('Error retrieving latency status (%s): %s' % (self.url, e))
+            self.logger.debug('Error retrieving latency status (%s): %s' % (url, e))
             return False
 
-    def get_metrics(self):
+    def get_metrics(self, url):
         try:
             data = {}
             data['reachable'] = False
-            if self.is_reachable():
-                latency = self.measure_latency()
+            if self.is_reachable(url):
+                latency = self.measure_latency(url)
                 if latency:
                     data['latency'] = latency
             return data
         except Exception, e:
-            self.logger.error('Error retrieving service metrics (%s): %s' % (self.url, e))
+            self.logger.error('Error retrieving service metrics (%s): %s' % (url, e))
             return {}
 
     def _get_metrics(self, services):
         try:
             data = {}
             for service in services:
-                req = urllib2.Request(service.get('uri'))
+                req = urllib2.Request(service.get('url'))
                 response = urllib2.urlopen(req)
                 response.close()
             return data
