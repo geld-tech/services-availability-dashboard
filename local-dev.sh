@@ -85,7 +85,9 @@ password = Y25mZmpiZXE=
 ua_id = 1234567
 
 [services]
-geld.tech = https://geld.tech:443
+geld.tech = https://geld.tech
+wikipedia = https://en.wikipedia.org
+yahoo.co.jp = https://www.yahoo.co.jp
 EOM
 # cp .local_dev/server/config/settings.cfg.dev .local_dev/server/config/settings.cfg
 
