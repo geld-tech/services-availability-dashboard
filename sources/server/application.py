@@ -72,6 +72,7 @@ def status():
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
+            status['name'] = metric.service_name
             status['latency'] = metric.latency
             status['available'] = metric.available
             status['date_time'] = metric.date_time.strftime("%H:%M")
