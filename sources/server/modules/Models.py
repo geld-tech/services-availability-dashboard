@@ -40,5 +40,4 @@ class Metrics(Base):
     timestamp = Column(BigInteger)
     latency = Column(Integer)
     available = Column(Integer)
-    service_id = Column(Integer, ForeignKey('service.id'))
-    service = relationship(Service)
+    service_name = Column(String(128))
