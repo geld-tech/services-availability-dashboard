@@ -32,14 +32,14 @@ class ServiceStatus:
     def collect_metrics(self, services):
         self._data = self._get_metrics(services)
 
-    def is_reachable(self, timeout=5):
+    def is_reachable(self, url, timeout=5):
         try:
-            req = urllib2.Request(self.url)
+            req = urllib2.Request(url)
             response = urllib2.urlopen(req, timeout=timeout)
             response.close()
             return True
         except Exception, e:
-            self.logger.debug('Error reaching service (%s): %s' % (self.url, e))
+            self.logger.debug('Error reaching service (%s): %s' % (url, e))
             return False
 
     def measure_latency(self, url):
@@ -63,6 +63,7 @@ class ServiceStatus:
                 latency = self.measure_latency(url)
                 if latency:
                     data['latency'] = latency
+                    data['reachable'] = True
             return data
         except Exception, e:
             self.logger.error('Error retrieving service metrics (%s): %s' % (url, e))
