@@ -85,7 +85,7 @@ password = Y25mZmpiZXE=
 ua_id = 1234567
 
 [services]
-newrelic.com = newrelic.com:443
+geld.tech = https://geld.tech:443
 EOM
 # cp .local_dev/server/config/settings.cfg.dev .local_dev/server/config/settings.cfg
 
