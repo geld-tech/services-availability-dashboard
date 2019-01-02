@@ -104,9 +104,11 @@ class MetricsCollector():
 
     def store_status(self, date_time, data):
         try:
-            for service in self.services:
-                print "Service: %s" % service
-                service_status = Metrics(timestamp=date_time.strftime('%s'), service=self.service)
+            for service in data:
+                service_status = Metrics(timestamp=date_time.strftime('%s'),
+                                         latency=data[service].get('latency', -1),
+                                         available=data[service].get('reachable'),
+                                         service_name=service)
                 self.db_session.add(service_status)
                 self.db_session.commit()
         except Exception, e:
