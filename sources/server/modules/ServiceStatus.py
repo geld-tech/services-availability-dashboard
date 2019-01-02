@@ -72,7 +72,7 @@ class ServiceStatus:
         try:
             data = {}
             for service in services:
-                req = urllib2.Request(service.get('url'))
+                req = urllib2.Request(service.get('uri'))
                 response = urllib2.urlopen(req)
                 response.close()
             return data
