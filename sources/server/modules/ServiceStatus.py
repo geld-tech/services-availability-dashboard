@@ -74,7 +74,7 @@ class ServiceStatus:
             for service in services:
                 name = service.get('name')
                 url = service.get('url')
-                data[service] = self.get_metrics(url)
+                data[name] = self.get_metrics(url)
             return data
         except Exception, e:
             self.logger.error('Error retrieving service status (%s): %s' % (services, e))
