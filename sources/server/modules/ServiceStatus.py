@@ -72,9 +72,9 @@ class ServiceStatus:
         try:
             data = {}
             for service in services:
-                req = urllib2.Request(service.get('url'))
-                response = urllib2.urlopen(req)
-                response.close()
+                name = service.get('name')
+                url = service.get('url')
+                data[service] = self.get_metrics(url)
             return data
         except Exception, e:
             self.logger.error('Error retrieving service status (%s): %s' % (services, e))
