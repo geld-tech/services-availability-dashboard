@@ -77,7 +77,7 @@ class ServiceStatus:
                 response.close()
             return data
         except Exception, e:
-            self.logger.error('Error retrieving service status (%s): %s' % (self.url, e))
+            self.logger.error('Error retrieving service status (%s): %s' % (services, e))
             return {}
 
     def _get_server_hostname(self):
