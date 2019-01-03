@@ -28,8 +28,9 @@ clean:
 	rm -rf $(LOCAL_DEV_ENV)
 
 clean-pyc:
-	find $(LOCAL_DEV_ENV) -name '*.pyc' -exec rm --force {} + 2> /dev/null
-	find $(LOCAL_DEV_ENV) -name '*.pyo' -exec rm --force {} + 2> /dev/null
+	find . -name '*.pyc' -exec rm --force {} +
+	find . -name '*.pyo' -exec rm --force {} +
 
 isort:
-	sh -c "isort --skip-glob=.tox --recursive . "
+	sh -c "isort --skip-glob=.tox --recursive sources/server/ "
+	sh -c "isort --skip-glob=.tox --recursive sources/server/modules/ "
