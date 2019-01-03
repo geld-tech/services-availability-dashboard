@@ -4,7 +4,7 @@ NPM_DEV_ENV=local-dev-env/webapp
 
 .PHONY:  clean clean-pyc isort lint test all
 
-all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build
+all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
 	@echo ""
 
 help:
