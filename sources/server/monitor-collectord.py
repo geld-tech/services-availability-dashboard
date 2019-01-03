@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 import atexit
 import ConfigParser
-from daemon import runner
 import datetime
 import os
 import sys
 import time
-from modules.ServiceStatus import ServiceStatus
-from modules.Models import Base, Server, Service, Metrics
+
+from daemon import runner
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from modules.Models import Base, Metrics, Server, Service
+from modules.ServiceStatus import ServiceStatus
 
 
 class MetricsCollector():

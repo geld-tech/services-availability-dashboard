@@ -7,19 +7,19 @@
 import ast
 import base64
 import ConfigParser
-from codecs import encode
 import datetime
 import logging
 import logging.handlers
-from optparse import OptionParser
 import os
+from codecs import encode
+from optparse import OptionParser
+
 from flask import Flask, jsonify, render_template, request
-
-from modules.ServiceStatus import ServiceStatus
-from modules.Models import Base, Metrics
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from modules.Models import Base, Metrics
+from modules.ServiceStatus import ServiceStatus
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
