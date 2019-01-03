@@ -1,4 +1,5 @@
 LOCAL_DEV_ENV=local-dev-env
+NPM_DEV_ENV=local-dev-env/webapp
 
 .PHONY:  clean clean-pyc isort lint test all
 
@@ -48,9 +49,10 @@ isort:
 	sh -c "isort --skip-glob=.tox --recursive sources/server/modules/ "
 
 
+# Flask application, enforce no syntax errors or undefined names, and flags other issues
 lint:
 	@echo ""
-	@echo "### PYTHON FLAKE8 ###" # Flask application, enforce no syntax errors or undefined names, and flags other issues
+	@echo "### PYTHON FLAKE8 ###"
 	@echo ""
 	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
 
@@ -60,12 +62,12 @@ test:
 	@echo "XXX TODO"
 
 local-dev-env:
+	@echo ""
 	@echo "### LOCAL DEV ENV ###"
 	@echo "== Prepare folders =="
 	mkdir -p $(LOCAL_DEV_ENV)
 	cp -r sources/server/ $(LOCAL_DEV_ENV)
 	cp -r sources/webapp/ $(LOCAL_DEV_ENV)
-	cd  $(LOCAL_DEV_ENV)
 	@echo "== Replace place holders =="
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/localdev/localdev/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/Running application locally/Running application locally/g"
@@ -73,3 +75,26 @@ local-dev-env:
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/0.0.1/0.0.1/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/01-01-1970/01-01-1970/g"
 
+# Build Vue application with DevTools enabled (Firefox or Chrome plugin)
+vue-dev-tools:
+	@echo ""
+	@echo "### VUE DEVTOOLS ###"
+	sed -i '/Vue.config.productionTip = false/a Vue.config.devtools = true' $(LOCAL_DEV_ENV)/webapp/src/main.js
+
+npm-install:
+	@echo "### NPM INSTALL ###"
+	cd $(NPM_DEV_ENV) ; npm install
+
+npm-run-lint: npm-install
+	@echo ""
+	@echo "### NPM LINT ###"
+	cd $(NPM_DEV_ENV) ; npm run lint
+
+npm-audit: npm-install
+	@echo ""
+	@echo "### NPM AUDIT ###"
+	-cd $(NPM_DEV_ENV) ; npm audit 2> /dev/null # Run conditionally as not installed on all systems (ignore failures with -)
+
+npm-run-build: npm-install
+	@echo "### NPM BUILD ###"
+	cd $(NPM_DEV_ENV) ; npm run build
