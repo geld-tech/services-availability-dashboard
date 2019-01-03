@@ -1,4 +1,5 @@
 LOCAL_DEV_ENV=local-dev-env
+SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 .PHONY:  clean clean-pyc isort lint test all
@@ -98,3 +99,48 @@ npm-audit: npm-install
 npm-run-build: npm-install
 	@echo "### NPM BUILD ###"
 	cd $(NPM_DEV_ENV) ; npm run build
+
+# Prepare application
+setup-app: npm-run-build
+	@echo ""
+	@echo "### PREPARE ###"
+	mkdir $(SRV_DEV_ENV)/templates/
+	mkdir $(SRV_DEV_ENV)/static/
+	cp $(NPM_DEV_ENV)/dist/*.html $(SRV_DEV_ENV)/templates/
+	cp -r $(NPM_DEV_ENV)/dist/static/* $(SRV_DEV_ENV)/static/
+
+# Example of config.settings.cfg
+create-stub-config:
+	@echo ""
+	@echo "### CREATE STUB SETTINGS ###"
+	@touch $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "[admin]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "password = Y25mZmpiZXE=" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "[ganalytics]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "ua_id = 1234567" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "[services]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "geld.tech = https://geld.tech" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "wikipedia = https://en.wikipedia.org" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "yahoo.co.jp = https://www.yahoo.co.jp" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+
+setup-stub-config:
+	@echo ""
+	@echo "### SETUP STUB SETTINGS ###"
+	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
+
+# # Run background metrics collector
+# echo ""
+# echo "### METRICS COLLECTOR ###"
+# trap hupexit HUP
+# trap intexit INT
+# python monitor-collectord.py start debug
+# sleep 5
+#
+#
+# # Run application locally on port :5000 (Press CTRL+C to quit)
+# echo ""
+# echo "### RUN ###"
+# python application.py
+#
