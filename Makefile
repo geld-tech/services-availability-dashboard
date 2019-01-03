@@ -25,12 +25,21 @@ help:
 	@echo ""
 
 clean:
+	@echo "### LOCAL DEV ENV CLEANUP ###"
 	rm -rf $(LOCAL_DEV_ENV)
 
 clean-pyc:
+	@echo "### PYTHON FILES CLEANUP ###"
 	find . -name '*.pyc' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
 
 isort:
+	@echo "### PYTHON ISORT ###"
 	sh -c "isort --skip-glob=.tox --recursive sources/server/ "
 	sh -c "isort --skip-glob=.tox --recursive sources/server/modules/ "
+
+# Flask application, enforce no syntax errors or undefined names, and flags other issues
+lint:
+	@echo "### PYTHON FLAKE8 ###"
+	@echo ""
+	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
