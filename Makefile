@@ -1,27 +1,27 @@
 LOCAL_DEV_ENV=.local_dev
 
-.PHONY:  clean clean-pyc isort lint build test local-run
+.PHONY:  clean clean-pyc isort lint test all
 
 help:
 	@echo "Makefile targets:"
 	@echo ""
 	@echo "    clean"
-	@echo "        Remove all local build artifacts."
+	@echo "        Remove all local build artifacts"
 	@echo ""
 	@echo "    clean-pyc"
-	@echo "        Remove python artifacts."
+	@echo "        Remove python artifacts"
 	@echo ""
 	@echo "    isort"
-	@echo "        Sort import statements."
+	@echo "        Sort import statements"
 	@echo ""
 	@echo "    lint"
-	@echo "        Check style with flake8."
+	@echo "        Check style with flake8"
 	@echo ""
 	@echo "    test"
 	@echo "        Run unit tests"
 	@echo ""
-	@echo "    local-run"
-	@echo "        Run the project onlocal machine."
+	@echo "    all"
+	@echo "        Run all targets locally"
 	@echo ""
 
 clean:
