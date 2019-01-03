@@ -2,8 +2,6 @@ LOCAL_DEV_ENV=local-dev-env
 SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
-.PHONY: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
-
 ## Run all targets locally
 all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
 	@echo ""
@@ -117,22 +115,46 @@ setup-stub-config:
 	@echo "### SETUP STUB SETTINGS ###"
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
-# # Run background metrics collector
-# echo ""
-# echo "### METRICS COLLECTOR ###"
-# trap hupexit HUP
-# trap intexit INT
-# python monitor-collectord.py start debug
-# sleep 5
-#
-#
-# # Run application locally on port :5000 (Press CTRL+C to quit)
-# echo ""
-# echo "### RUN ###"
-# python application.py
-#
+## Start metrics collector daemon
+start-metrics-daemon:
+	@echo ""
+	@echo "### START METRICS DAEMON ###"
+	python $(SRV_DEV_ENV)/monitor-collectord.py start debug
+	sleep 3
 
-# Self-documentated make file
+## Stop metrics collector daemon
+stop-metrics-daemon:
+	@echo ""
+	@echo "### STOP METRICS DAEMON ###"
+	-python $(SRV_DEV_ENV)/monitor-collectord.py stop
+	-pkill -f $(SRV_DEV_ENV)/monitor-collectord.py
+
+## Start web application
+start-webapp:
+	@echo ""
+	@echo "### START WEB APPLICATION ###"
+	python $(SRV_DEV_ENV)/application.py &
+
+## Stop web application
+stop-webapp:
+	@echo ""
+	@echo "### STOP WEB APPLICATION ###"
+	-pkill -f $(SRV_DEV_ENV)/application.py
+
+## Start local development environment
+start-local-dev: all start-metrics-daemon start-webapp
+
+## Stop local development environment
+stop-local-dev: stop-metrics-daemon stop-webapp
+
+
+# PHONYs
+.PHONY: clean isort lint test local-dev-env
+.PHONY: vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
+.PHONY: setup-app create-stub-config setup-stub-config
+.PHONY: start-metrics-daemon stop-metrics-daemon start-webapp stop-webapp
+
+# Self-documentated makefile (DO NOT EDIT PAST THIS LINE)
 .DEFAULT_GOAL := show-help
 .PHONY: show-help
 show-help:
