@@ -1,7 +1,7 @@
-Name:       __PACKAGE_NAME__
+Name:       localdev
 Version:    __SOFTWARE_VERSION__
 Release:    __RELEASE_VERSION__
-Summary:    __PACKAGE_DESC__
+Summary:    Running application locally
 
 License:    __LICENSE__
 
@@ -11,7 +11,7 @@ Requires:   bash, python, nginx, python-daemon, python-flask, python-httplib2, p
 # description macro to include information in the RPM header
 ##############################################################################
 %description
-__PACKAGE_DESC__
+Running application locally
 
 
 ##############################################################################
@@ -51,22 +51,22 @@ if [ $1 -gt 1 ] ; then
     # Upgrading already installed package
     echo -n "Restarting service..."
     systemctl daemon-reload
-    systemctl start __PACKAGE_NAME__ || true
+    systemctl start localdev || true
     echo " OK"
     echo ""
-    echo "Service __PACKAGE_NAME__ upgraded successfully!!"
+    echo "Service localdev upgraded successfully!!"
 
 else
     # Performing a fresh install of  the package
     echo -n "Starting service..."
     systemctl daemon-reload
-    systemctl enable __PACKAGE_NAME__ || true
+    systemctl enable localdev || true
     echo " OK"
     echo ""
-    echo "Service __PACKAGE_NAME__ installed successfully!"
+    echo "Service localdev installed successfully!"
     echo ""
     echo "Edit the file __PACKAGE_DIR__/config/settings.cfg with your credentials, then start the service with the following:"
-    echo "  systemctl start __PACKAGE_NAME__"
+    echo "  systemctl start localdev"
 
 fi
 

@@ -20,31 +20,31 @@ case "$1" in
 
 		if [ "$IS_UPGRADE" = "true" ]; then
 			# Upgrading already installed package
-			if [ -f /tmp/__PACKAGE_NAME__.settings.cfg ]; then
+			if [ -f /tmp/localdev.settings.cfg ]; then
 				echo -n "Restoring preserved local configuration ..."
-				cp -p /tmp/__PACKAGE_NAME__.settings.cfg __PACKAGE_DIR__/config/settings.cfg
-				rm -f /tmp/__PACKAGE_NAME__.settings.cfg
+				cp -p /tmp/localdev.settings.cfg __PACKAGE_DIR__/config/settings.cfg
+				rm -f /tmp/localdev.settings.cfg
 				echo " OK"
 			fi
 			echo ""
 			echo -n "Restarting service..."
 			systemctl daemon-reload
-			systemctl start __PACKAGE_NAME__ || true
+			systemctl start localdev || true
 			echo " OK"
 			echo ""
-			echo "Service __PACKAGE_NAME__ upgraded successfully!!"
+			echo "Service localdev upgraded successfully!!"
 		else
 			# Performing a fresh install of the package
 			echo -n "Starting service..."
 			systemctl daemon-reload
-			systemctl enable __PACKAGE_NAME__ || true
+			systemctl enable localdev || true
 			echo " OK"
 			cp -p __PACKAGE_DIR__/config/settings.cfg.template __PACKAGE_DIR__/config/settings.cfg
 			echo ""
-			echo "Service __PACKAGE_NAME__ installed successfully!"
+			echo "Service localdev installed successfully!"
 			echo ""
 			echo "Edit the file __PACKAGE_DIR__/config/settings.cfg with your credentials, then start the service with the following:"
-			echo "  systemctl start __PACKAGE_NAME__"
+			echo "  systemctl start localdev"
 		fi
 		;;
 esac

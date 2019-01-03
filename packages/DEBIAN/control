@@ -1,6 +1,6 @@
-Package: __PACKAGE_NAME__
-Version: __VERSION__
+Package: localdev
+Version: 0.0.1
 Depends: bash, python, nginx, python-daemon, python-flask, python-httplib2, python-requests, python-sqlalchemy, gunicorn, nodejs, npm
 Architecture: all
 Maintainer: __USER__
-Description: __PACKAGE_DESC__ (build date: __DATE__)
+Description: Running application locally (build date: 01-01-1970)

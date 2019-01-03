@@ -3,7 +3,7 @@
     <!-- Navigation -->
     <b-navbar class="navbar-expand-lg navbar-light bg-white fixed-top" toggleable>
         <b-navbar-nav>
-          <b-navbar-brand href="/"><img src="/static/images/geld.tech_32x32.png" width="30" height="30" alt="" /> __PACKAGE_NAME__</b-navbar-brand>
+          <b-navbar-brand href="/"><img src="/static/images/geld.tech_32x32.png" width="30" height="30" alt="" /> localdev</b-navbar-brand>
         </b-navbar-nav>
     </b-navbar>
     <!-- Alerting -->

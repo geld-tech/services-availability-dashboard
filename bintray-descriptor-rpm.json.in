@@ -6,14 +6,14 @@
 	},
 	
 	"version": {
-		"name": "__VERSION__",
-		"desc": "__NAME__ __VERSION__ by __SUBJECT__",
+		"name": "0.0.1",
+		"desc": "__NAME__ 0.0.1 by __SUBJECT__",
 		"gpgSign": true
 	},
 
 	"licenses": ["__LICENSE__"],
 
-	"desc": "__PACKAGE_DESC__",
+	"desc": "Running application locally",
 
 	"files": [
         {
