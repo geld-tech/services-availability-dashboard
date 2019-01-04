@@ -107,7 +107,8 @@ start-daemon:
 	@echo "Starting stub background daemon locally, use 'make stop-daemon' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/monitor-collectord.py start debug
-	sleep 3
+	@echo ""
+	@sleep 3
 
 ## Stop metrics collector daemon
 stop-daemon:
@@ -121,7 +122,8 @@ start-webapp:
 	@echo "Starting web application locally, use 'make stop-webapp' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
-	sleep 
+	@echo ""
+	@sleep 1
 
 ## Stop web application
 stop-webapp:
