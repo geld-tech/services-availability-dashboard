@@ -20,15 +20,14 @@ clean-pyc:
 
 ## Sort Python import statements
 isort:
-	$(call echo_title, "PYTHON FILES CLEANUP")
+	$(call echo_title, "PYTHON ISORT")
 	sh -c "isort --skip-glob=.tox --recursive sources/server/ "
 	sh -c "isort --skip-glob=.tox --recursive sources/server/modules/ "
 
 
 ## Check coding style of Flask application, enforce no syntax errors or undefined names, and flags other issues
 lint:
-	$(call echo_title, "PYTHON FILES CLEANUP")
-	@echo ""
+	$(call echo_title, "PYTHON FLAKE8 (LINTER)")
 	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
 
 ## Run unit tests
@@ -106,7 +105,6 @@ setup-stub-config:
 ## Start metrics collector daemon
 start-metrics-daemon:
 	$(call echo_title, "START METRICS DAEMON")
-	@echo ""
 	@echo "Starting stub background daemon locally, use 'make stop-metrics-daemon' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/monitor-collectord.py start debug
@@ -121,7 +119,6 @@ stop-metrics-daemon:
 ## Start web application
 start-webapp:
 	$(call echo_title, "START WEB APPLICATION")
-	@echo ""
 	@echo "Starting web application locally, use 'make stop-webapp' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
@@ -147,7 +144,9 @@ stop-local-dev: stop-metrics-daemon stop-webapp
 # Functions
 define echo_title
 	@echo ""
+	@echo ""
 	@echo "$$(tput bold)### $(1) ###$$(tput sgr0)"
+	@echo ""
 endef
 
 # Self-documentated makefile (DO NOT EDIT PAST THIS LINE)
