@@ -33,6 +33,7 @@ lint:
 
 ## Run unit tests
 test:
+	$(call echo_title, "PYTHON UNIT TESTS")
 	@echo "XXX TODO"
 
 ## Prepare local development environment
