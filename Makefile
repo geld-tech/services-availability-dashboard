@@ -3,7 +3,7 @@ SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 ## Run all targets locally
-all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
+all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-webapp create-stub-config
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
@@ -74,7 +74,7 @@ npm-run-build: npm-install
 	cd $(NPM_DEV_ENV) ; npm run build
 
 ## Prepare application
-setup-app: npm-run-build
+setup-webapp: npm-run-build
 	$(call echo_title, "PREPARE")
 	mkdir $(SRV_DEV_ENV)/templates/
 	mkdir $(SRV_DEV_ENV)/static/
@@ -129,16 +129,16 @@ stop-webapp:
 	-pkill -f $(SRV_DEV_ENV)/application.py
 
 ## Start local development environment
-start-local-dev: all start-metrics-daemon start-webapp
+start: all start-metrics-daemon start-webapp
 
 ## Stop local development environment
-stop-local-dev: stop-metrics-daemon stop-webapp
+stop: stop-metrics-daemon stop-webapp
 
 
 # PHONYs
 .PHONY: clean isort lint test local-dev-env
-.PHONY: vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
-.PHONY: setup-app create-stub-config setup-stub-config
+.PHONY: vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build
+.PHONY: setup-webapp create-stub-config setup-stub-config
 .PHONY: start-metrics-daemon stop-metrics-daemon start-webapp stop-webapp
 
 # Functions
