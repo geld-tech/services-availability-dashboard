@@ -50,11 +50,11 @@ local-dev-env:
 	cp -r sources/server/ $(LOCAL_DEV_ENV)
 	cp -r sources/webapp/ $(LOCAL_DEV_ENV)
 	@echo "== Replace place holders =="
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/localdev/localdev/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/Running application locally/Running application locally/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/geld.tech/geld.tech/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/0.0.1/0.0.1/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/01-01-1970/01-01-1970/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_NAME__/localdev/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_DESC__/Running application locally/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_AUTHOR__//geld.tech/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__VERSION__/0.0.1/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__DATE__//01-01-1970/g"
 
 ## Ensure Vue application is built with DevTools enabled (requires Firefox or Chrome plugin)
 vue-dev-tools:
