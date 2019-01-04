@@ -119,6 +119,9 @@ setup-stub-config:
 start-metrics-daemon:
 	@echo ""
 	@echo "### START METRICS DAEMON ###"
+	@echo ""
+	@echo "Starting stub background daemon locally, use 'make stop-metrics-daemon' to terminate.."
+	@echo ""
 	python $(SRV_DEV_ENV)/monitor-collectord.py start debug
 	sleep 3
 
@@ -133,6 +136,9 @@ stop-metrics-daemon:
 start-webapp:
 	@echo ""
 	@echo "### START WEB APPLICATION ###"
+	@echo ""
+	@echo "Starting web application locally, use 'make stop-webapp' to terminate.."
+	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
 
 ## Stop web application
