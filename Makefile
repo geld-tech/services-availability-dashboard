@@ -4,7 +4,6 @@ NPM_DEV_ENV=local-dev-env/webapp
 
 ## Run all targets locally
 all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-app create-stub-config
-	@echo ""
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
@@ -27,7 +26,7 @@ isort:
 
 ## Check coding style of Flask application, enforce no syntax errors or undefined names, and flags other issues
 lint:
-	$(call echo_title, "PYTHON FLAKE8 (LINTER)")
+	$(call echo_title, "PYTHON LINTER")
 	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
 
 ## Run unit tests
@@ -122,6 +121,7 @@ start-webapp:
 	@echo "Starting web application locally, use 'make stop-webapp' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
+	sleep 
 
 ## Stop web application
 stop-webapp:
