@@ -14,36 +14,30 @@ clean:
 
 ## Remove python artifacts
 clean-pyc:
-	@echo ""
-	@echo "### PYTHON FILES CLEANUP ###"
+	$(call echo_title, "PYTHON FILES CLEANUP")
 	find . -name '*.pyc' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
 
 ## Sort Python import statements
 isort:
-	@echo ""
-	@echo "### PYTHON ISORT ###"
+	$(call echo_title, "PYTHON FILES CLEANUP")
 	sh -c "isort --skip-glob=.tox --recursive sources/server/ "
 	sh -c "isort --skip-glob=.tox --recursive sources/server/modules/ "
 
 
 ## Check coding style of Flask application, enforce no syntax errors or undefined names, and flags other issues
 lint:
-	@echo ""
-	@echo "### PYTHON FLAKE8 ###"
+	$(call echo_title, "PYTHON FILES CLEANUP")
 	@echo ""
 	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
 
 ## Run unit tests
 test:
-	@echo ""
-	@echo "### PYTHON UNIT TESTS ###"
 	@echo "XXX TODO"
 
 ## Prepare local development environment
 local-dev-env:
-	@echo ""
-	@echo "### LOCAL DEV ENV ###"
+	$(call echo_title, "LOCAL DEV ENV")
 	@echo "== Prepare folders =="
 	mkdir -p $(LOCAL_DEV_ENV)
 	cp -r sources/server/ $(LOCAL_DEV_ENV)
@@ -57,36 +51,32 @@ local-dev-env:
 
 ## Ensure Vue application is built with DevTools enabled (requires Firefox or Chrome plugin)
 vue-dev-tools:
-	@echo ""
-	@echo "### VUE DEVTOOLS ###"
+	$(call echo_title, "VUE DEVTOOLS")
 	sed -i '/Vue.config.productionTip = false/a Vue.config.devtools = true' $(LOCAL_DEV_ENV)/webapp/src/main.js
 
 ## Install NPM Modules in local dev environment
 npm-install:
-	@echo "### NPM INSTALL ###"
+	$(call echo_title, "NPM INSTALL")
 	cd $(NPM_DEV_ENV) ; npm install
 
 ## Runs linter on Vue web application files
 npm-run-lint: npm-install
-	@echo ""
-	@echo "### NPM LINT ###"
+	$(call echo_title, "NPM LINT")
 	cd $(NPM_DEV_ENV) ; npm run lint
 
 ## Runs NPM audit to flag security issues
 npm-audit: npm-install
-	@echo ""
-	@echo "### NPM AUDIT ###"
+	$(call echo_title, "NPM AUDIT")
 	-cd $(NPM_DEV_ENV) ; npm audit 2> /dev/null # Run conditionally as not installed on all systems (ignore failures with -)
 
 ## Runs a full build using NPM
 npm-run-build: npm-install
-	@echo "### NPM BUILD ###"
+	$(call echo_title, "NPM BUILD")
 	cd $(NPM_DEV_ENV) ; npm run build
 
 ## Prepare application
 setup-app: npm-run-build
-	@echo ""
-	@echo "### PREPARE ###"
+	$(call echo_title, "PREPARE")
 	mkdir $(SRV_DEV_ENV)/templates/
 	mkdir $(SRV_DEV_ENV)/static/
 	cp $(NPM_DEV_ENV)/dist/*.html $(SRV_DEV_ENV)/templates/
@@ -94,8 +84,7 @@ setup-app: npm-run-build
 
 ## Create a stub settings.cfg file
 create-stub-config:
-	@echo ""
-	@echo "### CREATE STUB SETTINGS ###"
+	$(call echo_title, "CREATE STUB SETTINGS")
 	@touch $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "[admin]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "password = Y25mZmpiZXE=" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
@@ -110,14 +99,12 @@ create-stub-config:
 
 ## Configure stub settings.cfg
 setup-stub-config:
-	@echo ""
-	@echo "### SETUP STUB SETTINGS ###"
+	$(call echo_title, "SETUP STUB SETTINGS")
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
 ## Start metrics collector daemon
 start-metrics-daemon:
-	@echo ""
-	@echo "### START METRICS DAEMON ###"
+	$(call echo_title, "START METRICS DAEMON")
 	@echo ""
 	@echo "Starting stub background daemon locally, use 'make stop-metrics-daemon' to terminate.."
 	@echo ""
@@ -126,15 +113,13 @@ start-metrics-daemon:
 
 ## Stop metrics collector daemon
 stop-metrics-daemon:
-	@echo ""
-	@echo "### STOP METRICS DAEMON ###"
+	$(call echo_title, "STOP METRICS DAEMON")
 	-python $(SRV_DEV_ENV)/monitor-collectord.py stop
 	-pkill -f $(SRV_DEV_ENV)/monitor-collectord.py
 
 ## Start web application
 start-webapp:
-	@echo ""
-	@echo "### START WEB APPLICATION ###"
+	$(call echo_title, "START WEB APPLICATION")
 	@echo ""
 	@echo "Starting web application locally, use 'make stop-webapp' to terminate.."
 	@echo ""
@@ -142,8 +127,7 @@ start-webapp:
 
 ## Stop web application
 stop-webapp:
-	@echo ""
-	@echo "### STOP WEB APPLICATION ###"
+	$(call echo_title, "STOP WEB APPLICATION")
 	-pkill -f $(SRV_DEV_ENV)/application.py
 
 ## Start local development environment
