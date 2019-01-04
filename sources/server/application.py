@@ -32,7 +32,7 @@ config_file = 'config/settings.cfg'
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
 logger = logging.getLogger('root')
 
-nginx_status = ServiceStatus()
+service_status = ServiceStatus()
 
 # DB Session
 db_path = os.path.dirname(os.path.abspath(__file__))+'/data/metrics.sqlite3'
