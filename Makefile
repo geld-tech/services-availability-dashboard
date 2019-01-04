@@ -160,6 +160,12 @@ stop-local-dev: stop-metrics-daemon stop-webapp
 .PHONY: setup-app create-stub-config setup-stub-config
 .PHONY: start-metrics-daemon stop-metrics-daemon start-webapp stop-webapp
 
+# Functions
+define echo_title
+	@echo ""
+	@echo "$$(tput bold)### $(1) ###$$(tput sgr0)"
+endef
+
 # Self-documentated makefile (DO NOT EDIT PAST THIS LINE)
 .DEFAULT_GOAL := show-help
 .PHONY: show-help
