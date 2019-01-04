@@ -102,15 +102,15 @@ setup-stub-config:
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
 ## Start metrics collector daemon
-start-metrics-daemon:
+start-daemon:
 	$(call echo_title, "START METRICS DAEMON")
-	@echo "Starting stub background daemon locally, use 'make stop-metrics-daemon' to terminate.."
+	@echo "Starting stub background daemon locally, use 'make stop-daemon' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/monitor-collectord.py start debug
 	sleep 3
 
 ## Stop metrics collector daemon
-stop-metrics-daemon:
+stop-daemon:
 	$(call echo_title, "STOP METRICS DAEMON")
 	-python $(SRV_DEV_ENV)/monitor-collectord.py stop
 	-pkill -f $(SRV_DEV_ENV)/monitor-collectord.py
@@ -129,17 +129,17 @@ stop-webapp:
 	-pkill -f $(SRV_DEV_ENV)/application.py
 
 ## Start local development environment
-start: all start-metrics-daemon start-webapp
+start: all start-daemon start-webapp
 
 ## Stop local development environment
-stop: stop-metrics-daemon stop-webapp
+stop: stop-daemon stop-webapp
 
 
 # PHONYs
 .PHONY: clean isort lint test local-dev-env
 .PHONY: vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build
 .PHONY: setup-webapp create-stub-config setup-stub-config
-.PHONY: start-metrics-daemon stop-metrics-daemon start-webapp stop-webapp
+.PHONY: start-daemon stop-daemon start-webapp stop-webapp
 
 # Functions
 define echo_title
