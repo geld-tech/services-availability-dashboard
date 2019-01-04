@@ -9,8 +9,7 @@ all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint 
 
 ## Remove all local build artifacts
 clean:
-	@echo ""
-	@echo "### LOCAL DEV ENV CLEANUP ###"
+	$(call echo_title, "LOCAL DEV ENV CLEANUP")
 	rm -rf $(LOCAL_DEV_ENV)
 
 ## Remove python artifacts
