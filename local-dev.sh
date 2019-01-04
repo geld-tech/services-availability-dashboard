@@ -20,11 +20,11 @@ cp -r sources/server/ .local_dev/
 cp -r sources/webapp/ .local_dev/
 cd .local_dev/
 # Replace place holders
-find . -type f | xargs sed -i "s/localdev/localdev/g"
-find . -type f | xargs sed -i "s/Running application locally/Running application locally/g"
-find . -type f | xargs sed -i "s/geld.tech/geld.tech/g"
-find . -type f | xargs sed -i "s/0.0.1/0.0.1/g"
-find . -type f | xargs sed -i "s/01-01-1970/01-01-1970/g"
+find . -type f | xargs sed -i "s/__PACKAGE_NAME__/localdev/g"
+find . -type f | xargs sed -i "s/__PACKAGE_DESC__/Running application locally/g"
+find . -type f | xargs sed -i "s/__PACKAGE_AUTHOR__/geld.tech/g"
+find . -type f | xargs sed -i "s/__VERSION__/0.0.1/g"
+find . -type f | xargs sed -i "s/__DATE__/01-01-1970/g"
 
 # Flask application, enforce no syntax errors or undefined names, and flags other issues
 echo ""
