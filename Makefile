@@ -32,7 +32,7 @@ lint:
 ## Run unit tests
 test:
 	$(call echo_title, "PYTHON UNIT TESTS")
-	python -m unittest discover -s tests/
+	python -m unittest discover -s tests -p "*_test.py"
 
 ## Prepare local development environment
 local-dev-env:
