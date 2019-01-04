@@ -1,4 +1,10 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/../sources/server/')
 import unittest
+
+from modules.ServiceStatus import ServiceStatus
+
 
 class TestServiceStatus(unittest.TestCase):
     """ServiceStatus Unit Tests"""
