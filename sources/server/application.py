@@ -79,7 +79,8 @@ def status():
             status['available'] = metric.available
             status['date_time'] = metric.date_time.strftime("%H:%M")
             data.append(status)
-        return jsonify({'data': data, 'time_labels': time_labels, 'services': list(services_labels)}), 200
+        return jsonify({'data': data, 'time_labels': time_labels,
+                        'services': {'names': list(services_labels), 'metrics': data, 'times': time_labels}}), 200
     except Exception, e:
         logger.error('Error retrieving services status: %s' % e)
         return jsonify({'data': {}, 'error': 'Could not retrieve service status, check logs for more details..'}), 500
