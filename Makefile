@@ -21,8 +21,6 @@ clean-pyc:
 isort:
 	$(call echo_title, "PYTHON ISORT")
 	sh -c "isort --skip-glob=.tox --recursive sources/server/ "
-	sh -c "isort --skip-glob=.tox --recursive sources/server/modules/ "
-
 
 ## Check coding style of Flask application, enforce no syntax errors or undefined names, and flags other issues
 lint:
@@ -143,6 +141,7 @@ stop: stop-daemon stop-webapp
 .PHONY: setup-webapp create-stub-config setup-stub-config
 .PHONY: start-daemon stop-daemon start-webapp stop-webapp
 
+
 # Functions
 define echo_title
 	@echo ""
@@ -150,6 +149,7 @@ define echo_title
 	@echo "$$(tput bold)### $(1) ###$$(tput sgr0)"
 	@echo ""
 endef
+
 
 # Self-documentated makefile (DO NOT EDIT PAST THIS LINE)
 .DEFAULT_GOAL := show-help
