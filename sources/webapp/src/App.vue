@@ -16,6 +16,7 @@
     <div id="app-container">
         <router-view
             v-bind:data="data"
+            v-bind:services="services"
             v-bind:loading="loading">
         </router-view>
     </div>
@@ -33,6 +34,7 @@ export default {
         keyword: ''
       },
       data: {},
+      services: {},
       dismissCountDown: 0,
       error: '',
       loading: false,
@@ -46,6 +48,7 @@ export default {
     this.loading = false
     /* Trick to reset/clear native browser form validation state */
     this.data = {}
+    this.services = {}
     this.show = false
     this.$nextTick(() => { this.show = true })
     /* Fetching the data */
@@ -67,6 +70,7 @@ export default {
       fetchData()
         .then(response => {
           this.data = response.data
+          this.services = response.services
           this.loading = false
         })
         .catch(err => {
@@ -84,6 +88,7 @@ export default {
       if (searchKeyword !== '') {
         /* Trick to reset/clear native browser form validation state */
         this.data = {}
+        this.services = {}
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
@@ -91,6 +96,7 @@ export default {
         fetchData(searchKeyword)
           .then(response => {
             this.data = response.data
+            this.services = response.services
             this.loading = false
           })
           .catch(err => {
@@ -105,6 +111,7 @@ export default {
       /* Reset our form values */
       this.form.keyword = ''
       this.data = {}
+      this.services = {}
       this.loading = false
       /* Trick to reset/clear native browser form validation state */
       this.show = false
