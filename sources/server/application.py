@@ -82,7 +82,7 @@ def status():
         return jsonify({'data': data, 'time_labels': time_labels, 'services': services_labels}), 200
     except Exception, e:
         logger.error('Error retrieving services status: %s' % e)
-        return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
+        return jsonify({'data': {}, 'error': 'Could not retrieve service status, check logs for more details..'}), 500
 
 
 @app.route("/setup/password/", methods=['POST'], strict_slashes=False)
