@@ -67,17 +67,19 @@ def status():
     try:
         data = []
         time_labels = []
+        services_labels = set()
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
+            services_labels.add(metric.service_name)
             status['name'] = metric.service_name
             status['latency'] = metric.latency
             status['available'] = metric.available
             status['date_time'] = metric.date_time.strftime("%H:%M")
             data.append(status)
-        return jsonify({'data': data, 'time_labels': time_labels}), 200
+        return jsonify({'data': data, 'time_labels': time_labels, 'services': services_labels}), 200
     except Exception, e:
         logger.error('Error retrieving services status: %s' % e)
         return jsonify({'data': {}, 'error': 'Could not retrieve nginx status, check logs for more details..'}), 500
