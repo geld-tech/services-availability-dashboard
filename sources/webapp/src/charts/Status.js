@@ -12,7 +12,7 @@ var chartColors = {
 
 export default {
   extends: Line,
-  props: ['metrics'],
+  props: ['metrics', 'services'],
   mounted () {
     this.renderLinesChart()
   },
