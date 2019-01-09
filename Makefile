@@ -3,7 +3,7 @@ SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 ## Run all targets locally
-all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
+all: stop clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
