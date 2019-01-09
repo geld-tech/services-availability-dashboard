@@ -95,7 +95,7 @@ webapp-settings:
 	@echo "yahoo.co.jp = https://www.yahoo.co.jp" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 
 ## Configure stub settings.cfg
-webapp-config:
+webapp-config: webapp-settings
 	$(call echo_title, "SETUP STUB SETTINGS")
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
