@@ -1,9 +1,10 @@
 LOCAL_DEV_ENV=local-dev-env
+LOCAL_CACHE=.cache
 SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 ## Run all targets locally
-all: stop clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
+all: stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
@@ -16,6 +17,20 @@ clean-pyc:
 	$(call echo_title, "PYTHON FILES CLEANUP")
 	find . -name '*.pyc' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
+
+## Clean all files including cache for NPM
+clean-all: clean
+	$(call echo_title, "CACHE FILES CLEANUP")
+	-rm -rf $(LOCAL_CACHE)
+
+## Save NPM cache
+save-cache:
+	$(call echo_title, "SAVE CACHE")
+	@echo "== NPM =="
+	@if [ -d "$(LOCAL_DEV_ENV)/webapp/node_modules/" ]; then \
+		@mkdir -p $(LOCAL_CACHE) ; \
+		@-mv $(LOCAL_DEV_ENV)/webapp/node_modules/ $(LOCAL_CACHE) ; \
+	fi
 
 ## Sort Python import statements
 isort:
@@ -39,6 +54,7 @@ local-dev-env:
 	mkdir -p $(LOCAL_DEV_ENV)
 	cp -r sources/server/ $(LOCAL_DEV_ENV)
 	cp -r sources/webapp/ $(LOCAL_DEV_ENV)
+	-cp -r $(LOCAL_CACHE)/node_modules/ $(LOCAL_DEV_ENV)/webapp/node_modules/
 	@echo "== Replace place holders =="
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_NAME__/localdev/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_DESC__/Running application locally/g"
