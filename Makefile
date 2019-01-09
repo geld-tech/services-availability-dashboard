@@ -3,7 +3,7 @@ SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 ## Run all targets locally
-all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-config
+all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
@@ -80,7 +80,7 @@ webapp-setup: npm-build
 	cp -r $(NPM_DEV_ENV)/dist/static/* $(SRV_DEV_ENV)/static/
 
 ## Create a stub settings.cfg file
-webapp-config:
+webapp-settings:
 	$(call echo_title, "CREATE STUB SETTINGS")
 	@touch $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "[admin]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
@@ -95,7 +95,7 @@ webapp-config:
 	@echo "yahoo.co.jp = https://www.yahoo.co.jp" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 
 ## Configure stub settings.cfg
-setup-stub-config:
+webapp-config:
 	$(call echo_title, "SETUP STUB SETTINGS")
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
@@ -138,7 +138,7 @@ stop: daemon-stop webapp-stop
 # PHONYs
 .PHONY: clean isort lint test local-dev-env
 .PHONY: vue-dev-tools npm-install npm-lint npm-audit npm-build
-.PHONY: webapp-setup webapp-config setup-stub-config
+.PHONY: webapp-setup webapp-settings webapp-config
 .PHONY: daemon-start daemon-stop webapp-start webapp-stop
 
 
