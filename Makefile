@@ -3,7 +3,7 @@ SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 ## Run all targets locally
-all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build setup-webapp create-stub-config
+all: clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-config
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
@@ -57,7 +57,7 @@ npm-install: local-dev-env
 	cd $(NPM_DEV_ENV) ; npm install
 
 ## Runs linter on Vue web application files
-npm-run-lint: npm-install
+npm-lint: npm-install
 	$(call echo_title, "NPM LINT")
 	cd $(NPM_DEV_ENV) ; npm run lint
 
@@ -67,12 +67,12 @@ npm-audit: npm-install
 	-cd $(NPM_DEV_ENV) ; npm audit 2> /dev/null # Run conditionally as not installed on all systems (ignore failures with -)
 
 ## Runs a full build using NPM
-npm-run-build: npm-install
+npm-build: npm-install
 	$(call echo_title, "NPM BUILD")
 	cd $(NPM_DEV_ENV) ; npm run build
 
 ## Prepare application
-setup-webapp: npm-run-build
+webapp-setup: npm-build
 	$(call echo_title, "PREPARE")
 	mkdir $(SRV_DEV_ENV)/templates/
 	mkdir $(SRV_DEV_ENV)/static/
@@ -80,7 +80,7 @@ setup-webapp: npm-run-build
 	cp -r $(NPM_DEV_ENV)/dist/static/* $(SRV_DEV_ENV)/static/
 
 ## Create a stub settings.cfg file
-create-stub-config:
+webapp-config:
 	$(call echo_title, "CREATE STUB SETTINGS")
 	@touch $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "[admin]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
@@ -100,46 +100,46 @@ setup-stub-config:
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
 ## Start metrics collector daemon
-start-daemon:
+daemon-start:
 	$(call echo_title, "START METRICS DAEMON")
-	@echo "Starting stub background daemon locally, use 'make stop-daemon' to terminate.."
+	@echo "Starting stub background daemon locally, use 'make daemon-stop' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/monitor-collectord.py start debug
 	@echo ""
 	@sleep 3
 
 ## Stop metrics collector daemon
-stop-daemon:
+daemon-stop:
 	$(call echo_title, "STOP METRICS DAEMON")
 	-python $(SRV_DEV_ENV)/monitor-collectord.py stop
 	-pkill -f $(SRV_DEV_ENV)/monitor-collectord.py
 
 ## Start web application
-start-webapp:
+webapp-start:
 	$(call echo_title, "START WEB APPLICATION")
-	@echo "Starting web application locally, use 'make stop-webapp' to terminate.."
+	@echo "Starting web application locally, use 'make webapp-stop' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
 	@echo ""
 	@sleep 1
 
 ## Stop web application
-stop-webapp:
+webapp-stop:
 	$(call echo_title, "STOP WEB APPLICATION")
 	-pkill -f $(SRV_DEV_ENV)/application.py
 
 ## Start local development environment
-start: all start-daemon start-webapp
+start: all daemon-start webapp-start
 
 ## Stop local development environment
-stop: stop-daemon stop-webapp
+stop: daemon-stop webapp-stop
 
 
 # PHONYs
 .PHONY: clean isort lint test local-dev-env
-.PHONY: vue-dev-tools npm-install npm-run-lint npm-audit npm-run-build
-.PHONY: setup-webapp create-stub-config setup-stub-config
-.PHONY: start-daemon stop-daemon start-webapp stop-webapp
+.PHONY: vue-dev-tools npm-install npm-lint npm-audit npm-build
+.PHONY: webapp-setup webapp-config setup-stub-config
+.PHONY: daemon-start daemon-stop webapp-start webapp-stop
 
 
 # Functions
