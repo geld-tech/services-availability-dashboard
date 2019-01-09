@@ -55,13 +55,16 @@ local-dev-env:
 	mkdir -p $(LOCAL_DEV_ENV)
 	cp -r sources/server/ $(LOCAL_DEV_ENV)
 	cp -r sources/webapp/ $(LOCAL_DEV_ENV)
-	-cp -r $(LOCAL_CACHE)/node_modules/ $(LOCAL_DEV_ENV)/webapp/node_modules/
 	@echo "== Replace place holders =="
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_NAME__/localdev/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_DESC__/Running application locally/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_AUTHOR__/geld.tech/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__VERSION__/0.0.1/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__DATE__/01-01-1970/g"
+	@if [ -d "$(LOCAL_CACHE)/node_modules/" ]; then \
+	    echo "== Restore NPM cache =="; \
+	    mv $(LOCAL_CACHE)/node_modules/ $(LOCAL_DEV_ENV)/webapp/ ||: ; \
+	fi
 
 ## Ensure Vue application is built with DevTools enabled (requires Firefox or Chrome plugin)
 vue-dev-tools:
