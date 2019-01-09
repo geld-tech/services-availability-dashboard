@@ -28,8 +28,9 @@ save-cache:
 	$(call echo_title, "SAVE CACHE")
 	@echo "== NPM =="
 	@if [ -d "$(LOCAL_DEV_ENV)/webapp/node_modules/" ]; then \
-		@mkdir -p $(LOCAL_CACHE) ; \
-		@-mv $(LOCAL_DEV_ENV)/webapp/node_modules/ $(LOCAL_CACHE) ; \
+	    rm -rf $(LOCAL_CACHE)/node_modules/; \
+	    mkdir -p $(LOCAL_CACHE); \
+	    mv $(LOCAL_DEV_ENV)/webapp/node_modules/ $(LOCAL_CACHE) ||: ; \
 	fi
 
 ## Sort Python import statements
