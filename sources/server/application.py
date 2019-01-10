@@ -26,7 +26,8 @@ app.url_map.strict_slashes = False
 app.debug = True
 
 # Global config
-config_file = 'config/settings.cfg'
+local_path = os.path.dirname(os.path.abspath(__file__))
+config_file = local_path+'/config/settings.cfg'
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
@@ -35,7 +36,7 @@ logger = logging.getLogger('root')
 service_status = ServiceStatus()
 
 # DB Session
-db_path = os.path.dirname(os.path.abspath(__file__))+'/data/metrics.sqlite3'
+db_path = local_path+'/data/metrics.sqlite3'
 engine = create_engine('sqlite:///'+db_path)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
