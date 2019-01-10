@@ -62,8 +62,10 @@ local-dev-env:
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__VERSION__/0.0.1/g"
 	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__DATE__/01-01-1970/g"
 	@if [ -d "$(LOCAL_CACHE)/node_modules/" ]; then \
-	    echo "== Restore NPM cache =="; \
-	    mv $(LOCAL_CACHE)/node_modules/ $(LOCAL_DEV_ENV)/webapp/ ||: ; \
+		echo "== Restore NPM cache =="; \
+		set -x; \
+		mv $(LOCAL_CACHE)/node_modules/ $(LOCAL_DEV_ENV)/webapp/ ||: ; \
+		set +x; \
 	fi
 
 ## Ensure Vue application is built with DevTools enabled (requires Firefox or Chrome plugin)

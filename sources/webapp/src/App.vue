@@ -39,12 +39,13 @@ export default {
       error: '',
       loading: false,
       refreshInterval: 0,
-      show: true
+      show: true,
+      settings: {}
     }
   },
   created() {
     var firstSetup = window.settings.firstSetup
-
+    this.settings = window.settings
     this.loading = false
     /* Trick to reset/clear native browser form validation state */
     this.data = {}
