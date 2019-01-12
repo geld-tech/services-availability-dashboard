@@ -166,6 +166,10 @@ export default {
     }
   },
   created() {
+    var firstSetup = window.settings.firstSetup
+    if (!firstSetup) {
+      this.$router.push({name: 'Index'})
+    }
     window.clearInterval(this.refreshInterval)
   },
   computed: {

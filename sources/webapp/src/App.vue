@@ -57,7 +57,7 @@ export default {
     this.refreshInterval = window.setInterval(this.fetchResourcesData, 15000)
 
     if (firstSetup) {
-      this.$router.push('/setup')
+      this.$router.push('/Setup')
     }
   },
   beforeDestroy() {
