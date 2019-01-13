@@ -72,14 +72,17 @@ def status():
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
 
+        for service in session.query(Metrics).distinct(Metrics.service_name).group_by(Metrics.service_name).count():
+            services_labels.add(service.service_name)
+
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
-            services_labels.add(metric.service_name)
             status['name'] = metric.service_name
             status['latency'] = metric.latency
             status['available'] = metric.available
             status['date_time'] = metric.date_time.strftime("%H:%M")
             data.append(status)
+
         return jsonify({'data': data, 'time_labels': time_labels,
                         'services': {'names': list(services_labels), 'metrics': data, 'times': time_labels}}), 200
     except Exception, e:
