@@ -72,7 +72,7 @@ def status():
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
 
-        for service in db_session.query(Metrics).distinct(Metrics.service_name).group_by(Metrics.service_name).count():
+        for service in db_session.query(Metrics).distinct(Metrics.service_name).group_by(Metrics.service_name):
             services_labels.add(service.service_name)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
