@@ -11,6 +11,7 @@ import datetime
 import logging
 import logging.handlers
 import os
+import sys
 from codecs import encode
 from optparse import OptionParser
 
@@ -68,12 +69,9 @@ def status():
     try:
         data = []
         time_labels = []
-        services_labels = set()
+        services = set()
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
-
-        for service in db_session.query(Metrics).distinct(Metrics.service_name).group_by(Metrics.service_name):
-            services_labels.add(service.service_name)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
@@ -81,12 +79,16 @@ def status():
             status['latency'] = metric.latency
             status['available'] = metric.available
             status['date_time'] = metric.date_time.strftime("%H:%M")
+            services.add(metric.service_name)
             data.append(status)
 
         return jsonify({'data': data, 'time_labels': time_labels,
-                        'services': {'names': list(services_labels), 'metrics': data, 'times': time_labels}}), 200
+                        'services': {'names': list(services), 'metrics': data, 'times': time_labels}}), 200
     except Exception, e:
-        logger.error('Error retrieving services status: %s' % e)
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        del exc_type
+        del exc_obj
+        logger.error('Error retrieving services status (line %d): %s' % (exc_tb.tb_lineno, e))
         return jsonify({'data': {}, 'error': 'Could not retrieve service status, check logs for more details..'}), 500
 
 
