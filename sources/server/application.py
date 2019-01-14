@@ -82,7 +82,8 @@ def status():
             services.add(metric.service_name)
             data.append(status)
 
-        return jsonify({'data': data, 'time_labels': time_labels,
+        return jsonify({'datasets': [],
+                        'data': data, 'time_labels': time_labels,
                         'services': {'names': list(services), 'metrics': data, 'times': time_labels}}), 200
     except Exception, e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
