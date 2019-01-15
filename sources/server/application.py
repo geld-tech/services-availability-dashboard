@@ -67,11 +67,15 @@ def index():
 @app.route("/api/services/status", strict_slashes=False)
 def status():
     try:
+        services = []
+        datasets = []
         data = []
         time_labels = []
-        services = set()
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
+
+        for service in db_session.query(Metrics.service_name).distinct().all():
+            services.append(service)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
@@ -79,7 +83,6 @@ def status():
             status['latency'] = metric.latency
             status['available'] = metric.available
             status['date_time'] = metric.date_time.strftime("%H:%M")
-            services.add(metric.service_name)
             data.append(status)
 
         return jsonify({'datasets': [],
