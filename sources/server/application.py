@@ -68,14 +68,19 @@ def index():
 def status():
     try:
         services = []
-        datasets = []
+        datasets = {}
         data = []
         time_labels = []
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
 
         for service in db_session.query(Metrics.service_name).distinct().all():
+            service = ''.join(service)
             services.append(service)
+
+        for service in services:
+            service_metrics = db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90)
+            datasets[service] = list(service_metrics)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
@@ -85,9 +90,12 @@ def status():
             status['date_time'] = metric.date_time.strftime("%H:%M")
             data.append(status)
 
-        return jsonify({'datasets': [],
+        return jsonify({'datasets': datasets,
                         'data': data, 'time_labels': time_labels,
-                        'services': {'names': list(services), 'metrics': data, 'times': time_labels}}), 200
+                        'services':
+                        {'names': services,
+                         'metrics': data,
+                         'times': time_labels}}), 200
     except Exception, e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         del exc_type
