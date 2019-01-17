@@ -91,11 +91,11 @@ def status():
             data.append(status)
 
         return jsonify({'datasets': datasets,
-                        'data': data, 'time_labels': time_labels,
+                        'data': data,
+                        'time_labels': time_labels,
                         'services':
                         {'names': services,
-                         'metrics': data,
-                         'times': time_labels}}), 200
+                         'metrics': data}}), 200
     except Exception, e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         del exc_type
