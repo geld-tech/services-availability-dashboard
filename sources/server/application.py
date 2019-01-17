@@ -79,8 +79,13 @@ def status():
             services.append(service)
 
         for service in services:
-            service_metrics = db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90)
-            datasets[service] = list(service_metrics)
+            datasets[service] = []
+            for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90):
+                metric = {}
+                metric['latency'] = service_metrics.latency
+                metric['available'] = service_metrics.available
+                metric['date_time'] = service_metrics.date_time.strftime("%H:%M")
+                datasets[service].append(metric)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
             status = {}
