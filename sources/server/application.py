@@ -87,7 +87,7 @@ def status():
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90):
                 xaxis_labels.add(service_metrics.date_time.strftime("%H:%M"))
                 dataset["data"].append(service_metrics.latency)
-                dataset["availability"].append(service_metrics.availability)
+                dataset["availability"].append(service_metrics.available)
             datasets.append(dataset)
 
         for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
