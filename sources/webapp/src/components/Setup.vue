@@ -137,7 +137,7 @@ import vueStep from 'vue-step'
 import { storeAdminPassword, storeGanalytics, storeServices } from '@/api'
 
 export default {
-  name: 'Info',
+  name: 'Setup',
   props: ['loading', 'data'],
   components: {
     vueStep
