@@ -35,6 +35,7 @@ export default {
       },
       data: {},
       services: {},
+      datasets: [],
       dismissCountDown: 0,
       error: '',
       loading: false,
@@ -48,6 +49,7 @@ export default {
     /* Trick to reset/clear native browser form validation state */
     this.data = {}
     this.services = {}
+    this.datasets = []
     this.show = false
     this.$nextTick(() => { this.show = true })
     /* Fetching the data */
@@ -70,6 +72,7 @@ export default {
         .then(response => {
           this.data = response.data
           this.services = response.services
+          this.datasets = response.datasets
           this.loading = false
         })
         .catch(err => {
@@ -88,6 +91,7 @@ export default {
         /* Trick to reset/clear native browser form validation state */
         this.data = {}
         this.services = {}
+        this.datasets = []
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
@@ -96,6 +100,7 @@ export default {
           .then(response => {
             this.data = response.data
             this.services = response.services
+            this.datasets = response.datasets
             this.loading = false
           })
           .catch(err => {
@@ -111,6 +116,7 @@ export default {
       this.form.keyword = ''
       this.data = {}
       this.services = {}
+      this.datasets = []
       this.loading = false
       /* Trick to reset/clear native browser form validation state */
       this.show = false

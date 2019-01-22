@@ -20,7 +20,9 @@
                 <b-col sm="12">
                     <div v-if="data" class="Chart__list">
                         <div class="Chart">
-                            <status v-bind:metrics="data" v-bind:services="services">
+                            <status v-bind:metrics="data"
+                                    v-bind:services="services"
+                                    v-bind:datasets="datasets">
                             </status>
                         </div>
                     </div>
@@ -41,7 +43,7 @@ import Status from '../charts/Status.js'
 
 export default {
   name: 'Info',
-  props: ['loading', 'data', 'services'],
+  props: ['loading', 'data', 'services', 'datasets'],
   components: {
     Status
   },

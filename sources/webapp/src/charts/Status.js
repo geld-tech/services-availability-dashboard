@@ -12,7 +12,7 @@ var chartColors = {
 
 export default {
   extends: Line,
-  props: ['metrics', 'services'],
+  props: ['metrics', 'services', 'datasets'],
   mounted () {
     this.renderLinesChart()
   },
@@ -20,7 +20,7 @@ export default {
     linesChartData: function() {
       return this.metrics
     },
-    datetimeLabels: function() {
+    xaxisLabels: function() {
       var labels = []
       for (var i = 0; i < this.metrics.length; ++i) {
         labels.push(this.metrics[i].date_time)
@@ -33,12 +33,19 @@ export default {
         latencies.push(this.metrics[i].latency)
       }
       return latencies
+    },
+    datasets: function() {
+      var latencies = []
+      for (var i = 0; i < this.metrics.length; ++i) {
+        latencies.push(this.metrics[i].latency)
+      }
+      return latencies
     }
   },
   methods: {
     renderLinesChart: function() {
       this.renderChart({
-        labels: this.datetimeLabels,
+        labels: this.xaxisLabels,
         datasets: [
           {
             label: 'Service',
