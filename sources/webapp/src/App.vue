@@ -17,7 +17,8 @@
         <router-view
             v-bind:data="data"
             v-bind:services="services"
-            v-bind:loading="loading">
+            v-bind:loading="loading"
+            v-bind:datasets="datasets">
         </router-view>
     </div>
   </div>
