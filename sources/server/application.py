@@ -132,7 +132,7 @@ def set_password():
 
 
 def colors_generator():
-    colors = ["#3E95CD", "#8E5EA2", "#3CBA9F", "#E8C3B9", "#C45850",
+    colors = ["#3E95BC", "#8E5EA2", "#3CBA9F", "#E8C3B9", "#C45850",
             "#FF6384", "#36A2EB", "#CC65FE", "#FFCE56", "#803690",
             "#00ADF9", "#DCDCDC", "#46BFBD", "#FDB45C", "#949FB1",
             "#4D5360", "#80B6F4", "#94D973", "#FAD874", "#F49080"]
