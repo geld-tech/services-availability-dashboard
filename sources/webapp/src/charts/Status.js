@@ -42,15 +42,14 @@ export default {
     renderLinesChart: function() {
       this.renderChart({
         labels: this.xaxisLabels,
-        datasets: [
-          {
+        datasets: this.datasets
+          /* [ {
             label: 'Service',
             fill: false,
             backgroundColor: chartColors.blue,
             borderColor: chartColors.blue,
             data: this.latencies
-          }
-        ]
+          } ]*/
       },
       {
         maintainAspectRatio: false,
