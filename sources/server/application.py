@@ -66,7 +66,7 @@ def index():
 
 @app.route("/api/services/status", strict_slashes=False)
 def status():
-    colors = ["#3e95cd","#8e5ea2","#3cba9f","#e8c3b9","#c45850","#ff6384","#36a2eb","#cc65fe","#ffce56"]
+    colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]
     try:
         services = []
         datasets = []
