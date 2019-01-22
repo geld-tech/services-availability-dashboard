@@ -35,11 +35,7 @@ export default {
       return latencies
     },
     datasets: function() {
-      var latencies = []
-      for (var i = 0; i < this.metrics.length; ++i) {
-        latencies.push(this.metrics[i].latency)
-      }
-      return latencies
+      return this.datasets
     }
   },
   methods: {
