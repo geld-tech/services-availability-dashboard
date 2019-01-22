@@ -22,7 +22,8 @@
                         <div class="Chart">
                             <status v-bind:metrics="data"
                                     v-bind:services="services"
-                                    v-bind:datasets="datasets">
+                                    v-bind:datasets="datasets"
+                                    v-bind:labels="labels">
                             </status>
                         </div>
                     </div>
@@ -43,7 +44,7 @@ import Status from '../charts/Status.js'
 
 export default {
   name: 'Info',
-  props: ['loading', 'data', 'services', 'datasets'],
+  props: ['loading', 'data', 'services', 'datasets', 'labels'],
   components: {
     Status
   },

@@ -18,7 +18,8 @@
             v-bind:data="data"
             v-bind:services="services"
             v-bind:loading="loading"
-            v-bind:datasets="datasets">
+            v-bind:datasets="datasets"
+            v-bind:labels="labels">
         </router-view>
     </div>
   </div>
@@ -37,6 +38,7 @@ export default {
       data: {},
       services: {},
       datasets: [],
+      labels: [],
       dismissCountDown: 0,
       error: '',
       loading: false,
@@ -51,6 +53,7 @@ export default {
     this.data = {}
     this.services = {}
     this.datasets = []
+    this.labels = []
     this.show = false
     this.$nextTick(() => { this.show = true })
     /* Fetching the data */
@@ -74,6 +77,7 @@ export default {
           this.data = response.data
           this.services = response.services
           this.datasets = response.datasets
+          this.labels = response.labels
           this.loading = false
         })
         .catch(err => {
@@ -93,6 +97,7 @@ export default {
         this.data = {}
         this.services = {}
         this.datasets = []
+        this.labels = []
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
@@ -102,6 +107,7 @@ export default {
             this.data = response.data
             this.services = response.services
             this.datasets = response.datasets
+            this.labels = response.labels
             this.loading = false
           })
           .catch(err => {
@@ -118,6 +124,7 @@ export default {
       this.data = {}
       this.services = {}
       this.datasets = []
+      this.labels = []
       this.loading = false
       /* Trick to reset/clear native browser form validation state */
       this.show = false

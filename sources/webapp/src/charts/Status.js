@@ -2,20 +2,13 @@ import {Line} from 'vue-chartjs'
 
 export default {
   extends: Line,
-  props: ['metrics', 'services', 'datasets'],
+  props: ['metrics', 'services', 'datasets', 'labels'],
   mounted () {
     this.renderLinesChart()
   },
   computed: {
     linesChartData: function() {
       return this.metrics
-    },
-    xaxisLabels: function() {
-      var labels = []
-      for (var i = 0; i < this.metrics.length; ++i) {
-        labels.push(this.metrics[i].date_time)
-      }
-      return labels
     },
     latencies: function() {
       var latencies = []
@@ -41,7 +34,7 @@ export default {
   methods: {
     renderLinesChart: function() {
       this.renderChart({
-        labels: this.xaxisLabels,
+        labels: this.labels,
         datasets: this.charts
       },
       {
