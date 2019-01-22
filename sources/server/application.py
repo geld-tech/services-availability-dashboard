@@ -80,9 +80,10 @@ def status():
             service = ''.join(service)
             services.append(service)
 
-        for service in services:
+        for index, service in services:
             dataset = {}
             dataset["label"] = service
+            dataset["colors"] = colors[index]
             dataset["data"] = []
             dataset["availability"] = []
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90):
