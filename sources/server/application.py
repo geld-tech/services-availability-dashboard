@@ -80,7 +80,7 @@ def status():
             service = ''.join(service)
             services.append(service)
 
-        for index, service in services:
+        for service in services:
             dataset = {}
             dataset["label"] = service
             dataset["colors"] = next(colors)
