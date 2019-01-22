@@ -50,7 +50,7 @@ class ServiceStatus:
             end = time.time()
             req.close()
             del page  # Avoids linter issue
-            return round((end - start) * 1000)  # Time interval in milliseconds
+            return round((end - start) * 1000, 2)  # Time interval in milliseconds
         except Exception, e:
             self.logger.debug('Error retrieving latency status (%s): %s' % (url, e))
             return False

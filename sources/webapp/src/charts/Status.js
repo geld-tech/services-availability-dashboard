@@ -60,7 +60,7 @@ export default {
             stacked: false,
             ticks: {
               beginAtZero: true,
-              stepSize: 1
+              min: 0
             },
             scaleLabel: {
               display: true,
