@@ -23,13 +23,26 @@ export default {
         latencies.push(this.metrics[i].latency)
       }
       return latencies
+    },
+    charts: function() {
+      var charts = []
+      for (var i = 0; i < this.datasets.length; ++i) {
+        var chart = {}
+        chart.label = this.datasets[i].label
+        chart.fill = false
+        chart.backgroundColor = this.datasets[i].colors
+        chart.borderColor = this.datasets[i].colors
+        chart.data = this.datasets[i].data
+        charts.push(chart)
+      }
+      return charts
     }
   },
   methods: {
     renderLinesChart: function() {
       this.renderChart({
         labels: this.xaxisLabels,
-        datasets: this.datasets
+        datasets: this.charts
       },
       {
         maintainAspectRatio: false,
