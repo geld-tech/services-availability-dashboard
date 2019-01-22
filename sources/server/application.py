@@ -66,7 +66,6 @@ def index():
 
 @app.route("/api/services/status", strict_slashes=False)
 def status():
-    colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]
     try:
         services = []
         datasets = []
@@ -75,6 +74,7 @@ def status():
         xaxis_labels = set()
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
+        colors = colors_generator()
 
         for service in db_session.query(Metrics.service_name).distinct().all():
             service = ''.join(service)
@@ -83,7 +83,7 @@ def status():
         for index, service in services:
             dataset = {}
             dataset["label"] = service
-            dataset["colors"] = colors[index]
+            dataset["colors"] = next(colors)
             dataset["data"] = []
             dataset["availability"] = []
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90):
@@ -129,6 +129,13 @@ def set_password():
             return jsonify({"data": {}, "error": "Password needs to be specified"}), 500
     else:
         return jsonify({"data": {}, "error": "Password can not be empty"}), 500
+
+
+def colors_generator():                                                                                             
+    colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]
+    while True:
+        for color in colors:
+            yield color
 
 
 def store_password(password):
