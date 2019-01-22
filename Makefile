@@ -8,7 +8,7 @@ all: stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-insta
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
-clean: clean-pyc
+clean: stop clean-pyc
 	$(call echo_title, "LOCAL DEV ENV CLEANUP")
 	rm -rf $(LOCAL_DEV_ENV)
 
@@ -85,8 +85,8 @@ npm-lint: npm-install
 
 ## Runs NPM audit to flag security issues
 npm-audit: npm-install
-	$(call echo_title, "NPM AUDIT")
-	-cd $(NPM_DEV_ENV) ; npm audit 2> /dev/null # Run conditionally as not installed on all systems (ignore failures with -)
+	$(call echo_title, "NPM AUDIT") # Run conditionally as not installed on all systems
+	-cd $(NPM_DEV_ENV) ; npm audit 2> /dev/null # Failures ignored locally with -, but will be executed on Travis before distribution
 
 ## Runs a full build using NPM
 npm-build: npm-install
