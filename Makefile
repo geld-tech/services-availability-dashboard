@@ -115,6 +115,12 @@ webapp-settings:
 	@echo "geld.tech = https://geld.tech" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "wikipedia = https://en.wikipedia.org" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "yahoo.co.jp = https://www.yahoo.co.jp" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "google = https://www.google.com" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "youtube = https://www.youtube.com" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "facebook = https://www.facebook.com" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "baidu = https://www.baidu.com" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "qq = https://www.qq.com" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "Taobao = https://www.taobao.com" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 
 ## Configure stub settings.cfg
 webapp-config: webapp-settings
