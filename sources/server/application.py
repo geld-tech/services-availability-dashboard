@@ -131,7 +131,7 @@ def set_password():
         return jsonify({"data": {}, "error": "Password can not be empty"}), 500
 
 
-def colors_generator():                                                                                             
+def colors_generator():
     colors = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]
     while True:
         for color in colors:
