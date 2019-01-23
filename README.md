@@ -14,18 +14,18 @@
     <tbody class="odd">
       <tr>
         <td>
-            <a href="https://bintray.com/geldtech/debian/services-availability-monitor#files">
-                <img src="https://api.bintray.com/packages/geldtech/debian/services-availability-monitor/images/download.svg" alt="Download DEBs">
+            <a href="https://bintray.com/geldtech/debian/services-availability-daashboard#files">
+                <img src="https://api.bintray.com/packages/geldtech/debian/services-availability-daashboard/images/download.svg" alt="Download DEBs">
             </a>
         </td>
         <td>
-            <a href="https://bintray.com/geldtech/rpm/services-availability-monitor#files">
-                <img src="https://api.bintray.com/packages/geldtech/rpm/services-availability-monitor/images/download.svg" alt="Download RPMs">
+            <a href="https://bintray.com/geldtech/rpm/services-availability-daashboard#files">
+                <img src="https://api.bintray.com/packages/geldtech/rpm/services-availability-daashboard/images/download.svg" alt="Download RPMs">
             </a>
         </td>
         <td>
-            <a href="https://travis-ci.org/geld-tech/services-availability-monitor">
-                <img src="https://travis-ci.org/geld-tech/services-availability-monitor.svg?branch=master" alt="Build Status">
+            <a href="https://travis-ci.org/geld-tech/services-availability-daashboard">
+                <img src="https://travis-ci.org/geld-tech/services-availability-daashboard.svg?branch=master" alt="Build Status">
             </a>
         </td>
         <td>
