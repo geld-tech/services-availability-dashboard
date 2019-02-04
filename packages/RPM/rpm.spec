@@ -5,7 +5,7 @@ Summary:    Running application locally
 
 License:    __LICENSE__
 
-Requires:   bash, python, nginx, python-daemon, python-flask, python-httplib2, python-requests, python-sqlalchemy, python-gunicorn, nodejs, npm
+Requires:   bash, python, epel-release, nginx, python-daemon, python-flask, python-httplib2, python-requests, python-sqlalchemy, python-gunicorn, nodejs, npm
 
 ##############################################################################
 # description macro to include information in the RPM header
