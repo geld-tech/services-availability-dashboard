@@ -66,7 +66,7 @@ $ sudo apt clean
 
 * Install package
 ```
-$ sudo apt install services-availability-monitor
+$ sudo apt install services-availability-dashboard
 ```
 
 ### CentOS/Red Hat
