@@ -97,7 +97,7 @@ sudo yum install services-availability-dashboard
 * Adds Google Analytics User Agent ID (optional)
   * Edit configuration file
   ```
-  vim /opt/geld/webapps/services-availability-monitor/config/settings.cfg
+  vim /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
   ```
 
   * Replace <GA_UA_ID> with own value
