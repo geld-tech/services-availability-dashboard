@@ -106,11 +106,11 @@ sudo yum install services-availability-dashboard
   ua_id=<GA_UA_ID>
   ```
 
-* Reload systemd services configuration and start services-availability-monitor service
+* Reload systemd services configuration and start services-availability-dashboard service
 ```
 $ sudo systemctl daemon-reload
-$ sudo systemctl start services-availability-monitor
-$ sudo systemctl status services-availability-monitor
+$ sudo systemctl start services-availability-dashboard
+$ sudo systemctl status services-availability-dashboard
 ```
 
 
