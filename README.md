@@ -75,7 +75,7 @@ sudo apt install services-availability-dashboard
 ```
 echo "[geld.tech]
 name=geld.tech
-baseurl=https://dl.bintray.com/geldtech/rpm
+baseurl=http://dl.bintray.com/geldtech/rpm
 gpgcheck=0
 repo_gpgcheck=0
 enabled=1" | sudo tee -a /etc/yum.repos.d/geld.tech.repo
