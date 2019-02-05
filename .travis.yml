@@ -54,15 +54,15 @@ before_install:
   - export PACKAGE_VERSION_RPM=$PACKAGE_NAME-$SOFTWARE_VERSION-$RELEASE_VERSION.$TARGET_ARCH.rpm
 
   # Replace placeholders in the Debian control file and the RPM .spec file
-  - find . -type f | xargs sed -i "s/localdev/$PACKAGE_NAME/g"
-  - find . -type f | xargs sed -i "s/Running application locally/$PACKAGE_DESC/g"
-  - find . -type f | xargs sed -i "s/geld.tech/$PACKAGE_AUTHOR/g"
+  - find . -type f | xargs sed -i "s/__PACKAGE_NAME__/$PACKAGE_NAME/g"
+  - find . -type f | xargs sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g"
+  - find . -type f | xargs sed -i "s/__PACKAGE_AUTHOR__/$PACKAGE_AUTHOR/g"
   - find . -type f | xargs sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g"
   - find . -type f | xargs sed -i "s/__SOFTWARE_VERSION__/$SOFTWARE_VERSION/g"
   - find . -type f | xargs sed -i "s/__RELEASE_VERSION__/$RELEASE_VERSION/g"
-  - find . -type f | xargs sed -i "s/0.0.1/$BUILD_VERSION/g"
+  - find . -type f | xargs sed -i "s/__VERSION__/$BUILD_VERSION/g"
   - find . -type f | xargs sed -i "s/__USER__/$BINTRAY_USER/g"
-  - find . -type f | xargs sed -i "s/01-01-1970/$BUILD_DATE/g"
+  - find . -type f | xargs sed -i "s/__DATE__/$BUILD_DATE/g"
   - find . -type f | xargs sed -i "s.__PACKAGE_DIR__.$PACKAGE_DIR.g"
 
 install:
@@ -136,20 +136,20 @@ after_success:
 before_deploy:
   # Set the packages name and details in the DEBIAN descriptor file
   - sed -i "s/__NAME__/$PACKAGE_NAME/g" $BINTRAY_DESCRIPTOR_DEB
-  - sed -i "s/Running application locally/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR_DEB
-  - sed -i "s/geld.tech/$PACKAGE_AUTHOR/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__PACKAGE_AUTHOR__/$PACKAGE_AUTHOR/g" $BINTRAY_DESCRIPTOR_DEB
   - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME_DEB/g" $BINTRAY_DESCRIPTOR_DEB
   - sed -i "s/__SUBJECT__/$BINTRAY_SUBJECT/g" $BINTRAY_DESCRIPTOR_DEB
   - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" $BINTRAY_DESCRIPTOR_DEB
-  - sed -i "s/0.0.1/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR_DEB
   # Set the packages name and details in the RPM descriptor file
   - sed -i "s/__NAME__/$PACKAGE_NAME/g" $BINTRAY_DESCRIPTOR_RPM
-  - sed -i "s/Running application locally/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR_RPM
-  - sed -i "s/geld.tech/$PACKAGE_AUTHOR/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__PACKAGE_AUTHOR__/$PACKAGE_AUTHOR/g" $BINTRAY_DESCRIPTOR_RPM
   - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME_RPM/g" $BINTRAY_DESCRIPTOR_RPM
   - sed -i "s/__SUBJECT__/$BINTRAY_SUBJECT/g" $BINTRAY_DESCRIPTOR_RPM
   - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" $BINTRAY_DESCRIPTOR_RPM
-  - sed -i "s/0.0.1/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR_RPM
 
 deploy:
   # Upload Debian packages to Bintray
