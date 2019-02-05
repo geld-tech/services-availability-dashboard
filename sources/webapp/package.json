@@ -1,6 +1,6 @@
 {
-  "name": "localdev",
-  "version": "0.0.1",
+  "name": "__PACKAGE_NAME__",
+  "version": "__VERSION__",
   "description": "__DESC__",
   "author": "__USER__",
   "private": true,
