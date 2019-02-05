@@ -7,17 +7,17 @@ case "$1" in
 	install)
 		if [ -f __PACKAGE_DIR__/config/settings.cfg ]; then
 			echo -n "Preserving local configuration before upgrade..."
-			dpkg-divert --add --package localdev --rename --divert /tmp/localdev.settings.cfg __PACKAGE_DIR__/config/settings.cfg
+			dpkg-divert --add --package __PACKAGE_NAME__ --rename --divert /tmp/__PACKAGE_NAME__.settings.cfg __PACKAGE_DIR__/config/settings.cfg
 		fi
 		;;
 	upgrade)
-		echo -n "Stopping service localdev ..."
-		systemctl stop localdev || true
+		echo -n "Stopping service __PACKAGE_NAME__ ..."
+		systemctl stop __PACKAGE_NAME__ || true
 		echo " OK"
 		echo ""
 		if [ -f __PACKAGE_DIR__/config/settings.cfg ]; then
 			echo -n "Preserving local configuration before upgrade..."
-			dpkg-divert --add --package localdev --rename --divert /tmp/localdev.settings.cfg __PACKAGE_DIR__/config/settings.cfg
+			dpkg-divert --add --package __PACKAGE_NAME__ --rename --divert /tmp/__PACKAGE_NAME__.settings.cfg __PACKAGE_DIR__/config/settings.cfg
 		fi
 		;;
 	abort-upgrade)
