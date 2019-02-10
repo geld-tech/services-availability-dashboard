@@ -54,19 +54,19 @@ A sample demo of the project is hosted on <a href="http://geld.tech">geld.tech</
 
 * Install the repository information and associated GPG key (to ensure authenticity):
 ```
-echo "deb https://dl.bintray.com/geldtech/debian /" | sudo tee -a /etc/apt/sources.list.d/geld-tech.list
-sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
+echo "deb https://dl.bintray.com/geldtech/debian /" |  tee -a /etc/apt/sources.list.d/geld-tech.list
+ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
 ```
 
 * Update repository list of available packages and clean already installed versions
 ```
-sudo apt clean all
-sudo apt update
+ apt clean all
+ apt update
 ```
 
 * Install package
 ```
-sudo apt install services-availability-dashboard
+ apt install services-availability-dashboard
 ```
 
 ### CentOS/Red Hat
@@ -78,17 +78,17 @@ name=geld.tech
 baseurl=http://dl.bintray.com/geldtech/rpm
 gpgcheck=0
 repo_gpgcheck=0
-enabled=1" | sudo tee -a /etc/yum.repos.d/geld.tech.repo
+enabled=1" |  tee -a /etc/yum.repos.d/geld.tech.repo
 ```
 
 * Install EPEL repository for external dependencies
 ```
-sudo yum install epel-release
+ yum install epel-release
 ```
 
 * Install the package
 ```
-sudo yum install services-availability-dashboard
+ yum install services-availability-dashboard
 ```
 
 
@@ -108,9 +108,9 @@ sudo yum install services-availability-dashboard
 
 * Reload systemd services configuration and start services-availability-dashboard service
 ```
-sudo systemctl daemon-reload
-sudo systemctl start services-availability-dashboard
-sudo systemctl status services-availability-dashboard
+ systemctl daemon-reload
+ systemctl start services-availability-dashboard
+ systemctl status services-availability-dashboard
 ```
 
 
