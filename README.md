@@ -54,7 +54,7 @@ A sample demo of the project is hosted on <a href="http://geld.tech">geld.tech</
 
 * Install the repository information and associated GPG key (to ensure authenticity):
 ```
-echo "deb https://dl.bintray.com/geldtech/debian /" |  tee -a /etc/apt/sources.list.d/geld-tech.list
+echo "deb http://dl.bintray.com/geldtech/debian /" |  tee -a /etc/apt/sources.list.d/geld-tech.list
  apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
 ```
 
