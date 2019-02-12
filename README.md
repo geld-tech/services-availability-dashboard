@@ -93,7 +93,7 @@ enabled=1" |  tee -a /etc/yum.repos.d/geld.tech.repo
 
 ### Docker
 
-Installation on Docker is similar to the base image, CentOS or Ubuntu, but with the difference of the following as pre-requisites.
+Installation on Docker is similar to the base image, CentOS or Ubuntu, but with the following differences pre-requisites.
 
 * Install Python and wget (if not installed yet)
   * CentOS-based image: `yum install -y python wget`
