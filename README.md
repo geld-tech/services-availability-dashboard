@@ -91,6 +91,22 @@ enabled=1" |  tee -a /etc/yum.repos.d/geld.tech.repo
  yum install services-availability-dashboard
 ```
 
+### Docker
+
+Installation on Docker is similar to the base image, CentOS or Ubuntu, but with the difference of the following as pre-requisites.
+
+* Install Python and wget (if not installed yet)
+  * CentOS-based image: `yum install -y python wget`
+  * Ubuntu-based image: `apt install -y python wget`
+* Download Docker systemctl replacement
+```
+wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py
+```
+* Replace systemctl (which doesn't work on Docker as PIDs aren't starting at 1):
+```
+cp systemctl.py /usr/bin/systemctl
+test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
+```
 
 ## Usage
 
