@@ -105,6 +105,7 @@ wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/mas
 * Replace systemctl (which doesn't work on Docker as PIDs aren't starting at 1):
 ```
 cp systemctl.py /usr/bin/systemctl
+chmod a+x /usr/bin/systemctl
 test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
 ```
 
