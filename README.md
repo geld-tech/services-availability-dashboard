@@ -97,7 +97,7 @@ Installation on Docker is similar to the base image, CentOS or Ubuntu, but with 
 
 * Install Python and wget (if not installed yet)
   * CentOS-based image: `yum install -y python wget`
-  * Ubuntu-based image: `apt install -y python wget`
+  * Ubuntu-based image: `apt update && apt install -y python wget`
 * Download Docker systemctl replacement
 ```
 wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py
