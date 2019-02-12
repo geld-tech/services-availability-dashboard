@@ -55,18 +55,18 @@ A sample demo of the project is hosted on <a href="http://geld.tech">geld.tech</
 * Install the repository information and associated GPG key (to ensure authenticity):
 ```
 echo "deb http://dl.bintray.com/geldtech/debian /" |  tee -a /etc/apt/sources.list.d/geld-tech.list
- apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4
 ```
 
 * Update repository list of available packages and clean already installed versions
 ```
- apt clean all
- apt update
+apt clean all
+apt update
 ```
 
 * Install package
 ```
- apt install services-availability-dashboard
+apt install services-availability-dashboard
 ```
 
 ### CentOS/Red Hat
@@ -83,12 +83,12 @@ enabled=1" |  tee -a /etc/yum.repos.d/geld.tech.repo
 
 * Install EPEL repository for external dependencies
 ```
- yum install epel-release
+yum install epel-release
 ```
 
 * Install the package
 ```
- yum install services-availability-dashboard
+yum install services-availability-dashboard
 ```
 
 ### Docker
@@ -112,21 +112,21 @@ test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
 
 * Adds Google Analytics User Agent ID (optional)
   * Edit configuration file
-  ```
-  vim /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
-  ```
+```
+vim /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
+```
 
   * Replace <GA_UA_ID> with own value
-  ```
-  [ganalytics]
-  ua_id=<GA_UA_ID>
-  ```
+```
+[ganalytics]
+ua_id=<GA_UA_ID>
+```
 
 * Reload systemd services configuration and start services-availability-dashboard service
 ```
- systemctl daemon-reload
- systemctl start services-availability-dashboard
- systemctl status services-availability-dashboard
+systemctl daemon-reload
+systemctl start services-availability-dashboard
+systemctl status services-availability-dashboard
 ```
 
 
