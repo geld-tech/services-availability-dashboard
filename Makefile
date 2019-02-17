@@ -162,7 +162,7 @@ start: all daemon-start webapp-start
 ## Stop local development environment
 stop: daemon-stop webapp-stop
 
-## Validate latest package on a local Ubuntu image with Docker
+## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
 	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c " apt clean all && apt update && apt install -y python wget ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
@@ -174,10 +174,30 @@ docker-run-deb:
 		apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EA3E6BAEB37CF5E4 ; \
 		apt clean all ; \
 		apt update ; \
-		apt install services-availability-dashboard ; \
+		apt install -y services-availability-dashboard ; \
 		systemctl daemon-reload ; \
 		systemctl start services-availability-dashboard ; \
 		systemctl status services-availability-dashboard ; "
+
+## Validate latest .rpm package on a local CentOS image with Docker
+docker-run-rpm:
+	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum install -y python wget ; \
+		yum install -y epel-release ; \
+		echo "[geld.tech]\
+		name=geld.tech\
+		baseurl=http://dl.bintray.com/geldtech/rpm\
+		gpgcheck=0\
+		repo_gpgcheck=0\
+		enabled=1" |  tee -a /etc/yum.repos.d/geld.tech.repo ; \
+		yum install -y services-availability-dashboard ; \
+		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
+		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
+		yes | cp -f systemctl.py /usr/bin/systemctl ; \
+		chmod a+x /usr/bin/systemctl ; \
+		test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl ; \
+		systemctl daemon-reload ; \
+		systemctl start services-availability-dashboard ; \
+		systemctl status services-availability-dashboard '
 
 
 # PHONYs
