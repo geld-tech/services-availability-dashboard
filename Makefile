@@ -164,7 +164,7 @@ stop: daemon-stop webapp-stop
 
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
-	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c " apt clean all && apt update && apt install -y python wget ; \
+	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c ' apt clean all && apt update && apt install -y python wget ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
 		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
 		yes | cp -f systemctl.py /usr/bin/systemctl ; \
@@ -177,7 +177,8 @@ docker-run-deb:
 		apt install -y services-availability-dashboard ; \
 		systemctl daemon-reload ; \
 		systemctl start services-availability-dashboard ; \
-		systemctl status services-availability-dashboard ; "
+		systemctl status services-availability-dashboard ; \
+		$$SHELL '
 
 ## Validate latest .rpm package on a local CentOS image with Docker
 docker-run-rpm:
@@ -197,7 +198,8 @@ docker-run-rpm:
 		test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl ; \
 		systemctl daemon-reload ; \
 		systemctl start services-availability-dashboard ; \
-		systemctl status services-availability-dashboard '
+		systemctl status services-availability-dashboard ; \
+		$$SHELL '
 
 
 # PHONYs
