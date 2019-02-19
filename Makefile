@@ -175,6 +175,7 @@ docker-run-deb:
 		apt clean all ; \
 		apt update ; \
 		apt install -y services-availability-dashboard ; \
+		useradd -MU www-data && usermod -L www-data ; \
 		systemctl daemon-reload ; \
 		systemctl start services-availability-dashboard ; \
 		systemctl status services-availability-dashboard ; \
