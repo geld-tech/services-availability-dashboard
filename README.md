@@ -117,6 +117,7 @@ test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
 ```
 cp  /opt/geld/webapps/services-availability-dashboard/config/settings.cfg.template /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
 ```
+
   * Edit configuration file
 ```
 vim /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
