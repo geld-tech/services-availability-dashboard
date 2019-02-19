@@ -86,7 +86,7 @@ echo "Executing Post-Uninstallation macro.. "
 %files
 %defattr(755,root,www-data,755)
 %dir __PACKAGE_DIR__
-/etc/systemd/system/__PACKAGE_NAME__.service
+/etc/systemd/system/*.service
 /etc/geld/nginx.conf.d/__PACKAGE_NAME__.conf
 
 %doc
