@@ -88,7 +88,7 @@ echo "Executing Post-Uninstallation macro.. "
 __PACKAGE_DIR__
 /etc/systemd/system/__PACKAGE_NAME__.service
 /etc/geld/nginx.conf.d/__PACKAGE_NAME__.conf
-%config(noreplace) __PACKAGE_DIR__/config/settings.cfg
+%config(missingok, noreplace) __PACKAGE_DIR__/config/settings.cfg
 
 %doc
 
@@ -97,6 +97,8 @@ __PACKAGE_DIR__
 # changelog macro to comment on package revisions (date format important)
 ##############################################################################
 %changelog
+* Tue Feb 19 2019 zlig <noreply@gdevnet.com>
+- Optional configuration file
 * Sat Jul 28 2018 zlig <noreply@gdevnet.com>
 - Initial build
 
