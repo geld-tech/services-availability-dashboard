@@ -113,6 +113,10 @@ test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
 ## Usage
 
 * Adds Google Analytics User Agent ID (optional)
+  * Create configuration if doesn't exist
+```
+cp  /opt/geld/webapps/services-availability-dashboard/config/settings.cfg.template /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
+```
   * Edit configuration file
 ```
 vim /opt/geld/webapps/services-availability-dashboard/config/settings.cfg
