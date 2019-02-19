@@ -88,7 +88,6 @@ echo "Executing Post-Uninstallation macro.. "
 __PACKAGE_DIR__
 /etc/systemd/system/__PACKAGE_NAME__.service
 /etc/geld/nginx.conf.d/__PACKAGE_NAME__.conf
-%config(ghost) __PACKAGE_DIR__/config/settings.cfg
 
 %doc
 
