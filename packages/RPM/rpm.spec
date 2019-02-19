@@ -58,7 +58,7 @@ if [ $1 -gt 1 ] ; then
 
 else
     # Performing a fresh install of  the package
-    echo -n "Starting service..."
+    echo -n "Installing service..."
     systemctl daemon-reload
     systemctl enable __PACKAGE_NAME__ || true
     echo " OK"

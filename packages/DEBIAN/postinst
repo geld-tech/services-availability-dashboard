@@ -35,11 +35,10 @@ case "$1" in
 			echo "Service __PACKAGE_NAME__ upgraded successfully!!"
 		else
 			# Performing a fresh install of the package
-			echo -n "Starting service..."
+			echo -n "Installing service..."
 			systemctl daemon-reload
 			systemctl enable __PACKAGE_NAME__ || true
 			echo " OK"
-			cp -p __PACKAGE_DIR__/config/settings.cfg.template __PACKAGE_DIR__/config/settings.cfg
 			echo ""
 			echo "Service __PACKAGE_NAME__ installed successfully!"
 			echo ""
