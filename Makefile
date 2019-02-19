@@ -192,6 +192,7 @@ docker-run-rpm:
 		yes | cp -f systemctl.py /usr/bin/systemctl ; \
 		chmod a+x /usr/bin/systemctl ; \
 		test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl ; \
+		useradd -MU www-data && usermod -L www-data ; \
 		systemctl daemon-reload ; \
 		systemctl start services-availability-dashboard ; \
 		systemctl status services-availability-dashboard ; \
