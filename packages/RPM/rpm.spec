@@ -84,8 +84,8 @@ echo "Executing Post-Uninstallation macro.. "
 # The files will be installed as the below structure on the target system
 ##############################################################################
 %files
-%defattr(755,root,www-data)
-__PACKAGE_DIR__
+%defattr(755,root,www-data,755)
+%dir __PACKAGE_DIR__
 /etc/systemd/system/__PACKAGE_NAME__.service
 /etc/geld/nginx.conf.d/__PACKAGE_NAME__.conf
 
