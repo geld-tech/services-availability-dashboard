@@ -184,12 +184,8 @@ docker-run-deb:
 docker-run-rpm:
 	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum install -y python wget ; \
 		yum install -y epel-release ; \
-		echo "[geld.tech]\
-		name=geld.tech\
-		baseurl=http://dl.bintray.com/geldtech/rpm\
-		gpgcheck=0\
-		repo_gpgcheck=0\
-		enabled=1" |  tee -a /etc/yum.repos.d/geld.tech.repo ; \
+		echo -e "[geld.tech]\nname=geld.tech\nbaseurl=http://dl.bintray.com/geldtech/rpm\ngpgcheck=0\nrepo_gpgcheck=0\nenabled=1" | \
+			tee -a /etc/yum.repos.d/geld.tech.repo ; \
 		yum install -y services-availability-dashboard ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
 		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
