@@ -164,7 +164,7 @@ stop: daemon-stop webapp-stop
 
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
-	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c ' apt clean all && apt update && apt install -y python wget ; \
+	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c ' apt clean all && apt update && apt install -y python wget vim ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
 		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
 		yes | cp -f systemctl.py /usr/bin/systemctl ; \
@@ -183,7 +183,7 @@ docker-run-deb:
 
 ## Validate latest .rpm package on a local CentOS image with Docker
 docker-run-rpm:
-	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum install -y python wget ; \
+	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum install -y python wget vim ; \
 		yum install -y epel-release ; \
 		echo -e "[geld.tech]\nname=geld.tech\nbaseurl=http://dl.bintray.com/geldtech/rpm\ngpgcheck=0\nrepo_gpgcheck=0\nenabled=1" | \
 			tee -a /etc/yum.repos.d/geld.tech.repo ; \
