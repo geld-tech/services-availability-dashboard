@@ -1,5 +1,5 @@
 [Unit]
-Description=__PACKAGE_DESC__
+Description=__PACKAGE_NAME__ Collector Daemon
 
 [Service]
 User=root
