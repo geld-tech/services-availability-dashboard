@@ -69,6 +69,8 @@ else
     echo " OK"
     echo ""
     echo "Service __PACKAGE_NAME__ installed successfully!"
+    echo ""
+    echo "Connect to the Web Interface using a browser to complete first configuration (default: http://0.0.0.0:8005)"
 
 fi
 
