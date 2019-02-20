@@ -1,6 +1,6 @@
 [Unit]
 Description=__PACKAGE_NAME__ Collector Daemon
-After=syslog.target network.target
+After=__PACKAGE_NAME__.service
 
 [Service]
 Type=forking
@@ -12,4 +12,4 @@ ExecStart=__PACKAGE_DIR__/monitor-collectord.py start
 ExecStop=__PACKAGE_DIR__/monitor-collectord.py stop
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=__PACKAGE_NAME__.service
