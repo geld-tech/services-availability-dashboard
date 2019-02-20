@@ -29,7 +29,8 @@ case "$1" in
 			echo ""
 			echo -n "Restarting service..."
 			systemctl daemon-reload
-			systemctl start __PACKAGE_NAME__ || true
+			systemctl restart __PACKAGE_NAME__-collector || true
+			systemctl restart __PACKAGE_NAME__ || true
 			echo " OK"
 			echo ""
 			echo "Service __PACKAGE_NAME__ upgraded successfully!!"
@@ -37,13 +38,16 @@ case "$1" in
 			# Performing a fresh install of the package
 			echo -n "Installing service..."
 			systemctl daemon-reload
+			systemctl enable __PACKAGE_NAME__-collector || true
 			systemctl enable __PACKAGE_NAME__ || true
 			echo " OK"
 			echo ""
-			echo "Service __PACKAGE_NAME__ installed successfully!"
+			echo -n "Starting service..."
+			systemctl start __PACKAGE_NAME__-collector || true
+			systemctl start __PACKAGE_NAME__ || true
+			echo " OK"
 			echo ""
-			echo "Edit the file __PACKAGE_DIR__/config/settings.cfg with your credentials, then start the service with the following:"
-			echo "  systemctl start __PACKAGE_NAME__"
+			echo "Service __PACKAGE_NAME__ installed successfully!"
 		fi
 		;;
 esac
