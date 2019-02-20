@@ -1,5 +1,5 @@
 [Unit]
-Description=Running application locally
+Description=__PACKAGE_DESC__
 After=network.target
 
 [Service]
