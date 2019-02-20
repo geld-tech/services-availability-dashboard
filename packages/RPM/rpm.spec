@@ -39,14 +39,6 @@ echo "Executing Pre-Installation macro.. "
 
 echo "Executing Post-Installation macro.. "
 
-
-##############################################################################
-# preun macro to run prior to uninstallation
-##############################################################################
-%preun
-
-echo "Executing Pre-Uninstallation macro.. "
-
 if [ $1 -gt 1 ] ; then
     # Upgrading already installed package
     echo -n "Restarting service..."
@@ -73,6 +65,28 @@ else
     echo "Connect to the Web Interface using a browser to complete first configuration (default: http://0.0.0.0:8005)"
 
 fi
+
+
+##############################################################################
+# preun macro to run prior to uninstallation
+##############################################################################
+%preun
+
+echo "Executing Pre-Uninstallation macro.. "
+
+case "$1" in
+  0)
+    systemctl disable __PACKAGE_NAME__-collector || true
+    systemctl stop __PACKAGE_NAME__-collector || true
+    systemctl disable __PACKAGE_NAME__ || true
+    systemctl stop __PACKAGE_NAME__ || true
+    rm -f __PACKAGE_DIR__/config/settings.cfg
+  ;;
+  1)
+    exit 0
+  ;;
+esac
+
 
 ##############################################################################
 # postun to execute after uninstallation 
