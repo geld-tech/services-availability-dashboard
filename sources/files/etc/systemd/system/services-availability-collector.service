@@ -1,7 +1,10 @@
 [Unit]
 Description=__PACKAGE_NAME__ Collector Daemon
+After=syslog.target network.target
 
 [Service]
+Type=forking
+PIDFile=/var/run/__PACKAGE_NAME__-collector.pid
 User=root
 Group=www-data
 WorkingDirectory=__PACKAGE_DIR__
@@ -10,4 +13,3 @@ ExecStop=__PACKAGE_DIR__/monitor-collectord.py stop
 
 [Install]
 WantedBy=multi-user.target
-
