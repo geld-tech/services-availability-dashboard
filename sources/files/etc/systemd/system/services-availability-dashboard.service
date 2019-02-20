@@ -1,6 +1,7 @@
 [Unit]
 Description=__PACKAGE_DESC__
 After=network.target
+Wants=__PACKAGE_NAME__-collector.service
 
 [Service]
 User=www-data
