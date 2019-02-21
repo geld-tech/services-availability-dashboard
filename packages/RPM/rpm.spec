@@ -57,7 +57,9 @@ else
     systemctl enable __PACKAGE_NAME__-collector || true
     echo " OK"
     echo ""
-    echo -n "Restarting service..."
+    echo -n "Starting service..."
+    systemctl start __PACKAGE_NAME__ || true
+    systemctl start __PACKAGE_NAME__collector || true
     echo " OK"
     echo ""
     echo "Service __PACKAGE_NAME__ installed successfully!"
