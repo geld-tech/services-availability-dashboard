@@ -175,24 +175,23 @@ docker-run-deb:
 		apt clean all ; \
 		apt update ; \
 		apt install -y services-availability-dashboard ; \
-		useradd -MU www-data && usermod -L www-data ; \
 		systemctl status services-availability-dashboard ; \
 		systemctl status services-availability-dashboard-collector ; \
 		$$SHELL '
 
 ## Validate latest .rpm package on a local CentOS image with Docker
 docker-run-rpm:
-	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum install -y python wget vim ; \
+	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum clean all && yum install -y python wget vim ; \
 		yum install -y epel-release ; \
-		echo -e "[geld.tech]\nname=geld.tech\nbaseurl=http://dl.bintray.com/geldtech/rpm\ngpgcheck=0\nrepo_gpgcheck=0\nenabled=1" | \
-			tee -a /etc/yum.repos.d/geld.tech.repo ; \
-		yum install -y services-availability-dashboard ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
 		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
 		yes | cp -f systemctl.py /usr/bin/systemctl ; \
 		chmod a+x /usr/bin/systemctl ; \
 		test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl ; \
 		useradd -MU www-data && usermod -L www-data ; \
+		echo -e "[geld.tech]\nname=geld.tech\nbaseurl=http://dl.bintray.com/geldtech/rpm\ngpgcheck=0\nrepo_gpgcheck=0\nenabled=1" | \
+			tee -a /etc/yum.repos.d/geld.tech.repo ; \
+		yum install -y services-availability-dashboard ; \
 		systemctl status services-availability-dashboard ; \
 		systemctl status services-availability-dashboard-collector ; \
 		$$SHELL '
