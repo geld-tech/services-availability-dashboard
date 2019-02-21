@@ -8,6 +8,10 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 class FirstSetup(unittest.TestCase):
+    proto = "http"
+    host = "0.0.0.0"
+    port = 5000
+    delay = 30
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(30)
@@ -17,7 +21,8 @@ class FirstSetup(unittest.TestCase):
     
     def test_first_setup(self):
         driver = self.driver
-        driver.get("http://0.0.0.0:5000/#/Setup")
+        url = "%s://%s:%d" % (self.proto, self.host, self.port)
+        driver.get(url)
         driver.find_element_by_id("nextButton").click()
         driver.find_element_by_id("adminPassword").click()
         driver.find_element_by_id("adminPassword").clear()
@@ -63,7 +68,7 @@ class FirstSetup(unittest.TestCase):
         driver.find_element_by_id("addRowButton").click()
         driver.find_element_by_id("servicesSubmitButton").click()
         driver.find_element_by_id("startButton").click()
-        time.sleep(30)
+        time.sleep(self.delay)
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
@@ -91,4 +96,21 @@ class FirstSetup(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
+    from optparse import OptionParser
+
+    # Parse the input options
+    parser = OptionParser()
+    parser.add_option("--proto", dest="proto", default="http", help="Protocol")
+    parser.add_option("--host", dest="host", default="0.0.0.0", help="Host")
+    parser.add_option("--port", dest="port", default=5000, type=int, help="Port")
+    parser.add_option("--delay", dest="delay", default=30, type="int", help="Default delay after steps to keep browser open")
+    (options, args) = parser.parse_args()
+
+    # Set parameters
+    FirstSetup.proto = options.proto
+    FirstSetup.host = options.host
+    FirstSetup.port = options.port
+    FirstSetup.delay = options.delay
+
+    # Execute test
     unittest.main()
