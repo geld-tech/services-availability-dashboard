@@ -24,15 +24,23 @@
                         <b-form @submit="onSubmitPassword" @reset="onResetPassword" id="adminPasswordForm" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
-                                <b-col sm="5"><label>Password</label></b-col>
-                                <b-col sm="7"><b-form-input type="password" autocomplete="new-password" v-model="form.adminPassword" required></b-form-input></b-col>
-                                <b-col sm="5"><label>Password (repeat)</label></b-col>
-                                <b-col sm="7"><b-form-input type="password" autocomplete="new-password" v-model="form.adminPasswordRepeat" required></b-form-input></b-col>
+                                <b-col sm="5">
+                                    <label>Password</label>
+                                </b-col>
+                                <b-col sm="7">
+                                    <b-form-input type="password" autocomplete="new-password" v-model="form.adminPassword" id="adminPassword" required></b-form-input>
+                                </b-col>
+                                <b-col sm="5">
+                                    <label>Password (repeat)</label>
+                                </b-col>
+                                <b-col sm="7">
+                                    <b-form-input type="password" autocomplete="new-password" v-model="form.adminPasswordRepeat" id="adminPasswordRepeat" required></b-form-input>
+                                </b-col>
                               </b-row>
                               <b-row class="my-1">
                                 <b-col sm="10">
-                                    <b-button type="reset" variant="danger" v-bind:disabled="disableAdminResetButton">Clear</b-button>
-                                    <b-button type="submit" variant="primary" v-bind:disabled="disableAdminSubmitButton">Submit</b-button>
+                                    <b-button type="reset" variant="danger" v-bind:disabled="disableAdminResetButton" id="adminResetButton">Clear</b-button>
+                                    <b-button type="submit" variant="primary" v-bind:disabled="disableAdminSubmitButton" id="adminSubmitButton">Submit</b-button>
                                 </b-col>
                               </b-row>
                               <b-row class="my-1">
@@ -59,13 +67,17 @@
                         <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
                             <b-container fluid>
                               <b-row class="my-1">
-                                <b-col sm="5"><label>Google Analytics UA ID</label></b-col>
-                                <b-col sm="7"><b-form-input type="text" autocomplete="new-password" v-model="form.uaid" required></b-form-input></b-col>
+                                <b-col sm="5">
+                                    <label>Google Analytics UA ID</label>
+                                </b-col>
+                                <b-col sm="7">
+                                    <b-form-input type="text" v-model="form.uaid" id="uaIdInput" required></b-form-input>
+                                </b-col>
                               </b-row>
                               <b-row class="my-1">
                                 <b-col sm="12">
-                                  <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons">Clear</b-button>
-                                  <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons">Submit</b-button>
+                                  <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="uaidClearButton">Clear</b-button>
+                                  <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="uaidAdminButton">Submit</b-button>
                                 </b-col>
                               </b-row>
                             </b-container>
@@ -95,15 +107,15 @@
                                 <b-col sm="1"><b-button @click="deleteRow(index)"><strong> - </strong></b-button></b-col>
                               </b-row>
                               <b-row class="my-1" no-gutters>
-                                <b-col sm="5"><b-form-input type="text" v-model="form.serviceName"></b-form-input></b-col>
-                                <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl"></b-form-input></b-col>
-                                <b-col sm="2"><b-form-input type="text" v-model="form.servicePort"></b-form-input></b-col>
-                                <b-col sm="1"><b-button @click="addRow"><strong> + </strong></b-button></b-col>
+                                <b-col sm="5"><b-form-input type="text" v-model="form.serviceName" id="serviceName"></b-form-input></b-col>
+                                <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl" id="serviceUrl"></b-form-input></b-col>
+                                <b-col sm="2"><b-form-input type="text" v-model="form.servicePort" id="servicePort"></b-form-input></b-col>
+                                <b-col sm="1"><b-button @click="addRow" id="addRowButton"><strong> + </strong></b-button></b-col>
                               </b-row>
                               <b-row class="my-1" no-gutters>
                                 <b-col sm="10">
-                                  <b-button type="reset" variant="danger" v-bind:disabled="disableServicesButtons">Clear</b-button>
-                                  <b-button type="submit" variant="primary" v-bind:disabled="disableServicesButtons">Submit</b-button>
+                                  <b-button type="reset" variant="danger" v-bind:disabled="disableServicesButtons" id="servicesClearButton">Clear</b-button>
+                                  <b-button type="submit" variant="primary" v-bind:disabled="disableServicesButtons" id="servicesSubmitButton">Submit</b-button>
                                 </b-col>
                               </b-row>
                             </b-container>
@@ -116,16 +128,17 @@
                 </div>
             </div>
             <div class="float-right" v-if="servicesSet">
-              <b-button variant="primary" disabled>Back</b-button>
-              <b-button variant="primary" v-on:click="startApplication" autofocus>Next</b-button>
+              <b-button variant="primary" id="backButton" disabled>Back</b-button>
+              <b-button variant="primary" v-on:click="startApplication" id="startButton" autofocus>Start</b-button>
             </div>
             <div class="float-right" v-else>
-              <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1">Back</b-button>
+              <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1" id="defaultBackButton">Back</b-button>
               <b-button variant="primary"
                 v-on:click="nextStep"
                 v-bind:disabled="nowStep == stepList.length ||
                     (nowStep > 1 && !adminPasswordSet) ||
-                    (nowStep > 2 && !ganalyticsIdSet)" autofocus>Next</b-button>
+                    (nowStep > 2 && !ganalyticsIdSet)"
+                id="nextButton" autofocus>Next</b-button>
             </div>
         </div>
     </b-container>
