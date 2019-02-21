@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
+import unittest, time, sys, re
 
 class FirstSetup(unittest.TestCase):
     proto = "http"
@@ -111,6 +111,9 @@ if __name__ == "__main__":
     FirstSetup.host = options.host
     FirstSetup.port = options.port
     FirstSetup.delay = options.delay
+
+    # Remove parameters from argv to not pass them to unittest
+    sys.argv = [sys.argv[0]]
 
     # Execute test
     unittest.main()
