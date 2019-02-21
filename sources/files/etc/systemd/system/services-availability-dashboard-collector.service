@@ -1,5 +1,5 @@
 [Unit]
-Description=__PACKAGE_NAME__ Collector Daemon
+Description=Collector Daemon associated with the service __PACKAGE_NAME__
 After=__PACKAGE_NAME__.service
 
 [Service]
