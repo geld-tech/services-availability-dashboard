@@ -176,9 +176,8 @@ docker-run-deb:
 		apt update ; \
 		apt install -y services-availability-dashboard ; \
 		useradd -MU www-data && usermod -L www-data ; \
-		systemctl daemon-reload ; \
-		systemctl start services-availability-dashboard ; \
 		systemctl status services-availability-dashboard ; \
+		systemctl status services-availability-dashboard-collector ; \
 		$$SHELL '
 
 ## Validate latest .rpm package on a local CentOS image with Docker
@@ -194,9 +193,8 @@ docker-run-rpm:
 		chmod a+x /usr/bin/systemctl ; \
 		test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl ; \
 		useradd -MU www-data && usermod -L www-data ; \
-		systemctl daemon-reload ; \
-		systemctl start services-availability-dashboard ; \
 		systemctl status services-availability-dashboard ; \
+		systemctl status services-availability-dashboard-collector ; \
 		$$SHELL '
 
 
