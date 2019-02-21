@@ -44,7 +44,7 @@ if [ $1 -gt 1 ] ; then
     echo -n "Restarting service..."
     systemctl daemon-reload
     systemctl restart __PACKAGE_NAME__ || true
-    systemctl restart __PACKAGE_NAME__collector || true
+    systemctl restart __PACKAGE_NAME__-collector || true
     echo " OK"
     echo ""
     echo "Service __PACKAGE_NAME__ upgraded successfully!!"
@@ -59,7 +59,7 @@ else
     echo ""
     echo -n "Starting service..."
     systemctl start __PACKAGE_NAME__ || true
-    systemctl start __PACKAGE_NAME__collector || true
+    systemctl start __PACKAGE_NAME__-collector || true
     echo " OK"
     echo ""
     echo "Service __PACKAGE_NAME__ installed successfully!"
