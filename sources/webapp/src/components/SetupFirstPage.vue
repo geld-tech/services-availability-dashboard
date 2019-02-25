@@ -7,6 +7,9 @@
 </template>
 
 <script>
+export default {
+  name: 'SetupFirstPage'
+}
 </script>
 
 <style scoped>
