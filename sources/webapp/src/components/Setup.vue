@@ -10,9 +10,7 @@
             <vue-step v-bind:now-step="nowStep" v-bind:step-list="stepList" v-bind:style-type="stepperStyle" v-bind:active-color="stepperColor"></vue-step>
             <div class="text-center steps-container">
                 <div v-if="nowStep == 1" class="h-100 d-inline-block pt-5">
-                    <h2>First Setup</h2>
-                    <p>Welcome to the first setup!</p>
-                    <p>The following pages will guide you through the configuration to start using you service.</p>
+                    <setup-first-page></setup-first-page>
                 </div>
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block pt-5">
                     <setup-password
@@ -110,6 +108,7 @@
 <script>
 import vueStep from 'vue-step'
 import { storeGanalytics, storeServices } from '@/api'
+import SetupFirstPage from '@/components/SetupFirstPage'
 import SetupPassword from '@/components/SetupPassword'
 
 export default {
@@ -117,6 +116,7 @@ export default {
   props: ['loading', 'data'],
   components: {
     vueStep,
+    'setup-first-page': SetupFirstPage,
     'setup-password': SetupPassword
   },
   data () {
