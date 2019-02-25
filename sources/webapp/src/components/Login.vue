@@ -1,0 +1,128 @@
+<template>
+  <div class="index">
+    <!-- Container -->
+    <b-container class="bv-example-row">
+        <h2>Login</h2>
+        <div v-if="loggedIn" class="pt-1">
+            <p>Login successful!</p>
+        </div>
+        <div v-else>
+            <p>Enter the system administration password in the following input field, then Submit</p>
+            <b-form @submit="onSubmitPassword" @reset="onResetPassword" id="adminPasswordForm" v-if="show">
+                <b-container fluid>
+                  <b-row class="my-1">
+                    <b-col sm="5">
+                        <label>Password</label>
+                    </b-col>
+                    <b-col sm="7">
+                        <b-form-input type="password" autocomplete="new-password" v-model="form.adminPassword" id="adminPassword" required></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="10">
+                        <b-button type="reset" variant="danger" v-bind:disabled="disableAdminResetButton" id="adminResetButton">Clear</b-button>
+                        <b-button type="submit" variant="primary" v-bind:disabled="disableAdminSubmitButton" id="adminSubmitButton">Submit</b-button>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col md="6" offset-md="3">
+                       <!-- Alerting -->
+                       <div class="alerting">
+                         <b-alert :show="dismissCountDown" dismissible variant="danger" @dismissed="error=''" @dismiss-count-down="countDownChanged">
+                           <p>{{ error }}</p>
+                         </b-alert>
+                       </div>
+                    </b-col>
+                  </b-row>
+                </b-container>
+            </b-form>
+        </div>
+    </b-container>
+  </div>
+</template>
+
+<script>
+import { authenticate } from '@/api'
+
+export default {
+  name: 'Login',
+  props: ['loggedIn'],
+  data () {
+    return {
+      form: {
+        adminPassword: ''
+      },
+      error: '',
+      show: true
+    }
+  },
+  computed: {
+    disableResetButton() {
+      return (this.form.adminPassword === '')
+    },
+    disableSubmitButton() {
+      return (this.form.adminPassword === '')
+    }
+  },
+  methods: {
+    onSubmitPassword(evt) {
+      evt.preventDefault()
+      var password = this.sanitizeString(this.form.adminPassword)
+      this.form.adminPassword = ''
+      this.dismissCountDown = 0
+      this.error = ''
+      if (password !== '') {
+        /* Trick to reset/clear native browser form validation state */
+        this.show = false
+        this.$nextTick(() => { this.show = true })
+        /* Fetching the data */
+        authenticate(password)
+          .then(response => {
+            this.$emit('set-logged-in', true)
+          })
+          .catch(err => {
+            this.error = err.message
+            this.dismissCountDown = 6
+          })
+      } else {
+        this.error = 'Authentication failed!'
+        this.dismissCountDown = 6
+      }
+    },
+    sanitizeString(input) {
+      input = input.trim()
+      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '')
+      input = input.replace('/', '')
+      input = input.trim()
+      return input
+    },
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+    onResetPassword(evt) {
+      evt.preventDefault()
+      /* Reset our form values */
+      this.form.adminPassword = ''
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
+    }
+  }
+}
+</script>
+
+<style scoped>
+h2 {
+  font-weight: normal;
+}
+.container {
+  max-width: 1200px;
+  margin:  0 auto;
+}
+.alerting {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  line-height: 15px;
+}
+</style>
