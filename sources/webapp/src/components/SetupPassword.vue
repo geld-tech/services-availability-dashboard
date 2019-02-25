@@ -49,7 +49,7 @@ import { storeAdminPassword } from '@/api'
 
 export default {
   name: 'SetupPassword',
-  props: ['loading', 'data', 'adminPasswordSet'],
+  props: ['loading', 'data'],
   data () {
     return {
       form: {
