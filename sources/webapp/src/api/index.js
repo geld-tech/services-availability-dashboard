@@ -29,3 +29,8 @@ export function storeServices(services) {
   axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
   return axios.post('/setup/services/', payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
+
+export function authenticate(password) {
+  var payload = { password: password }
+  return postPayload('/authenticate/', payload)
+}
