@@ -107,13 +107,6 @@ export default {
     },
     deleteRow(index) {
       this.services.splice(index, 1)
-    },
-    sanitizeString(input) {
-      input = input.trim()
-      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '')
-      input = input.replace('/', '')
-      input = input.trim()
-      return input
     }
   }
 }

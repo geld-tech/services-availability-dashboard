@@ -43,6 +43,7 @@
 
 <script>
 import { authenticate } from '@/api'
+import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'Login',
@@ -67,7 +68,7 @@ export default {
   methods: {
     onSubmitPassword(evt) {
       evt.preventDefault()
-      var password = this.sanitizeString(this.form.adminPassword)
+      var password = sanitizeString(this.form.adminPassword)
       this.form.adminPassword = ''
       this.dismissCountDown = 0
       this.error = ''
@@ -88,13 +89,6 @@ export default {
         this.error = 'Authentication failed!'
         this.dismissCountDown = 6
       }
-    },
-    sanitizeString(input) {
-      input = input.trim()
-      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '')
-      input = input.replace('/', '')
-      input = input.trim()
-      return input
     },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown

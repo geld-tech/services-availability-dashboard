@@ -30,6 +30,7 @@
 
 <script>
 import { storeGanalytics } from '@/api'
+import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'SetupGanalytics',
@@ -51,7 +52,7 @@ export default {
   methods: {
     onSubmitGaId(evt) {
       evt.preventDefault()
-      var uaid = this.sanitizeString(this.form.uaid)
+      var uaid = sanitizeString(this.form.uaid)
       this.form.uaid = ''
       this.error = ''
       if (uaid !== '') {
@@ -77,13 +78,6 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
-    },
-    sanitizeString(input) {
-      input = input.trim()
-      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '')
-      input = input.replace('/', '')
-      input = input.trim()
-      return input
     }
   }
 }
