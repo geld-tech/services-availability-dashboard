@@ -49,7 +49,6 @@ import { storeAdminPassword } from '@/api'
 
 export default {
   name: 'SetupPassword',
-  props: ['loading'],
   data () {
     return {
       form: {
@@ -75,7 +74,6 @@ export default {
       var passwordRepeat = this.sanitizeString(this.form.adminPasswordRepeat)
       this.form.adminPassword = ''
       this.form.adminPasswordRepeat = ''
-      this.loading = false
       this.dismissCountDown = 0
       this.error = ''
       if (password !== '' && password === passwordRepeat) {
@@ -83,15 +81,12 @@ export default {
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
-        this.loading = true
         storeAdminPassword(password)
           .then(response => {
-            this.loading = false
             this.$emit('set-admin-password', true)
           })
           .catch(err => {
             this.error = err.message
-            this.loading = false
             this.dismissCountDown = 6
           })
       } else {
