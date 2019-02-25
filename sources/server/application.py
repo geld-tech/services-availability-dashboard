@@ -142,7 +142,7 @@ def colors_generator():
 
 
 @app.route("/authenticate/", methods=['POST'], strict_slashes=False)
-def authenticate(password):
+def authenticate():
     global config_file
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
