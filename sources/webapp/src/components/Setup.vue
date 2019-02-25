@@ -17,7 +17,6 @@
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block pt-5">
                     <setup-password
                         v-bind:loading="loading"
-                        v-bind:data="data"
                         v-on:set-admin-password="adminPasswordSet = $event">
                     </setup-password>
                 </div>

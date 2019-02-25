@@ -49,7 +49,7 @@ import { storeAdminPassword } from '@/api'
 
 export default {
   name: 'SetupPassword',
-  props: ['loading', 'data'],
+  props: ['loading'],
   data () {
     return {
       form: {
@@ -80,14 +80,12 @@ export default {
       this.error = ''
       if (password !== '' && password === passwordRepeat) {
         /* Trick to reset/clear native browser form validation state */
-        this.data = []
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
         this.loading = true
         storeAdminPassword(password)
           .then(response => {
-            this.data = response.data
             this.loading = false
             this.$emit('set-admin-password', true)
           })
