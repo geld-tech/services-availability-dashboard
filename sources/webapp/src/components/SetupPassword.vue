@@ -115,32 +115,12 @@ export default {
 </script>
 
 <style scoped>
-h1, h2 {
+h2 {
   font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-.processesTable{
-  font-size: 14px;
-}
-.loading {
-  width: 50%;
-  margin: 0;
-  padding-top: 40px;
-  padding-left: 40px;
 }
 .container {
   max-width: 1200px;
   margin:  0 auto;
-}
-.steps-container {
-  height: 400px;
 }
 .alerting {
   margin: 0 auto;
