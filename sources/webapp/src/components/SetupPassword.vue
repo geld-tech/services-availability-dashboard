@@ -89,7 +89,6 @@ export default {
           .then(response => {
             this.data = response.data
             this.loading = false
-            this.adminPasswordSet = true
             this.$emit('adminPasswordSet', true)
           })
           .catch(err => {
