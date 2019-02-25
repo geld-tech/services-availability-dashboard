@@ -13,36 +13,12 @@
                     <setup-first-page></setup-first-page>
                 </div>
                 <div v-else-if="nowStep == 2" class="h-100 d-inline-block pt-5">
-                    <setup-password
-                        v-on:set-admin-password="adminPasswordSet = $event">
+                    <setup-password v-on:set-admin-password="adminPasswordSet = $event">
                     </setup-password>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
-                    <h2>Google Analytics</h2>
-                    <div v-if="ganalyticsIdSet" class="pt-1">
-                        <p>Analytics UA ID set successfully!</p>
-                    </div>
-                    <div v-else>
-                        <p>Enter the Google Analytics UA ID in the field below, then press Submit</p>
-                        <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
-                            <b-container fluid>
-                              <b-row class="my-1">
-                                <b-col sm="5">
-                                    <label>Google Analytics UA ID</label>
-                                </b-col>
-                                <b-col sm="7">
-                                    <b-form-input type="text" v-model="form.uaid" id="uaIdInput" required></b-form-input>
-                                </b-col>
-                              </b-row>
-                              <b-row class="my-1">
-                                <b-col sm="12">
-                                  <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="uaidClearButton">Clear</b-button>
-                                  <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="uaidAdminButton">Submit</b-button>
-                                </b-col>
-                              </b-row>
-                            </b-container>
-                        </b-form>
-                    </div>
+                    <setup-ganalytics v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
+                    </setup-ganalytics>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <h2>Services Availability</h2>
@@ -107,9 +83,10 @@
 
 <script>
 import vueStep from 'vue-step'
-import { storeGanalytics, storeServices } from '@/api'
+import { storeServices } from '@/api'
 import SetupFirstPage from '@/components/SetupFirstPage'
 import SetupPassword from '@/components/SetupPassword'
+import SetupGanalytics from '@/components/SetupGanalytics'
 
 export default {
   name: 'Setup',
@@ -117,14 +94,12 @@ export default {
   components: {
     vueStep,
     'setup-first-page': SetupFirstPage,
-    'setup-password': SetupPassword
+    'setup-password': SetupPassword,
+    'setup-ganalytics': SetupGanalytics
   },
   data () {
     return {
       form: {
-        adminPassword: '',
-        adminPasswordRepeat: '',
-        uaid: '',
         serviceName: '',
         serviceUrl: '',
         servicePort: ''
@@ -150,15 +125,6 @@ export default {
     window.clearInterval(this.refreshInterval)
   },
   computed: {
-    disableAdminResetButton() {
-      return (this.form.adminPassword === '' && this.form.adminPasswordRepeat === '')
-    },
-    disableAdminSubmitButton() {
-      return (this.form.adminPassword === '' || this.form.adminPasswordRepeat === '' || this.form.adminPassword !== this.form.adminPasswordRepeat)
-    },
-    disableGaIdButtons() {
-      return (this.form.uaid === '')
-    },
     disableServicesButtons() {
       return (this.services === undefined || this.services.length === 0)
     }
@@ -177,41 +143,6 @@ export default {
       } else {
         this.nowStep = 1
       }
-    },
-    onSubmitGaId(evt) {
-      evt.preventDefault()
-      var uaid = this.sanitizeString(this.form.uaid)
-      this.form.uaid = ''
-      this.loading = false
-      this.error = ''
-      if (uaid !== '') {
-        /* Trick to reset/clear native browser form validation state */
-        this.data = []
-        this.show = false
-        this.$nextTick(() => { this.show = true })
-        /* Fetching the data */
-        this.loading = true
-        storeGanalytics(uaid)
-          .then(response => {
-            this.data = response.data
-            this.loading = false
-            this.ganalyticsIdSet = true
-          })
-          .catch(err => {
-            this.error = err.message
-            this.loading = false
-          })
-      } else {
-        this.error = 'GA UA ID cant be empty!'
-      }
-    },
-    onResetGaId(evt) {
-      evt.preventDefault()
-      /* Reset our form values */
-      this.form.uaid = ''
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false
-      this.$nextTick(() => { this.show = true })
     },
     onSubmitServices(evt) {
       evt.preventDefault()
