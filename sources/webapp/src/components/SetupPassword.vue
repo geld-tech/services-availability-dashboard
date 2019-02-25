@@ -46,6 +46,7 @@
 
 <script>
 import { storeAdminPassword } from '@/api'
+import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'SetupPassword',
@@ -71,8 +72,8 @@ export default {
   methods: {
     onSubmitPassword(evt) {
       evt.preventDefault()
-      var password = this.sanitizeString(this.form.adminPassword)
-      var passwordRepeat = this.sanitizeString(this.form.adminPasswordRepeat)
+      var password = sanitizeString(this.form.adminPassword)
+      var passwordRepeat = sanitizeString(this.form.adminPasswordRepeat)
       this.form.adminPassword = ''
       this.form.adminPasswordRepeat = ''
       this.dismissCountDown = 0
@@ -94,13 +95,6 @@ export default {
         this.error = 'Passwords dont match!'
         this.dismissCountDown = 6
       }
-    },
-    sanitizeString(input) {
-      input = input.trim()
-      input = input.replace(/[`~!$%^&*|+?;:'",\\]/gi, '')
-      input = input.replace('/', '')
-      input = input.trim()
-      return input
     },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
