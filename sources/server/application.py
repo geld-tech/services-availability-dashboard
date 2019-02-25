@@ -141,6 +141,29 @@ def colors_generator():
             yield color
 
 
+@app.route("/authenticate/", methods=['POST'], strict_slashes=False)
+def authenticate(password):
+    global config_file
+    if request.method == 'POST':
+        data = ast.literal_eval(request.data)
+        if 'password' in data and os.path.isfile(config_file):
+            config = ConfigParser.ConfigParser()
+            config.readfp(open(config_file))
+            if 'admin' in config.sections():
+                current_password = config.get('admin', 'password')
+                password = sanitize_user_input(data['password'])
+                if obfuscate(password) == current_password:
+                    return jsonify({"data": {"response": "Login success!"}}), 200
+                else:
+                    return jsonify({"data": {}, "error": "Authentication failed.."}), 500
+            else:
+                return jsonify({'data': {}, 'error': 'Could not authenticate..'}), 500
+        else:
+            return jsonify({"data": {}, "error": "Password needs to be specified"}), 500
+    else:
+        return jsonify({"data": {}, "error": "Password can not be empty"}), 500
+
+
 def store_password(password):
     global config_file
     try:
