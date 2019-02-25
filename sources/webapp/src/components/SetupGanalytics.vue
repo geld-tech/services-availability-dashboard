@@ -33,6 +33,7 @@ import { storeGanalytics } from '@/api'
 
 export default {
   name: 'SetupGanalytics',
+  props: ['ganalyticsIdSet'],
   data () {
     return {
       form: {

@@ -17,11 +17,11 @@
                     </setup-password>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
-                    <setup-ganalytics v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
+                    <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
                     </setup-ganalytics>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
-                    <setup-services v-on:set-services="servicesSet = $event">
+                    <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
                     </setup-services>
                 </div>
                 <div v-else class="h-100 d-inline-block pt-5">
