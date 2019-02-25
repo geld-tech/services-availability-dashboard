@@ -49,6 +49,7 @@ import { storeAdminPassword } from '@/api'
 
 export default {
   name: 'SetupPassword',
+  props: ['adminPasswordSet'],
   data () {
     return {
       form: {
@@ -100,6 +101,9 @@ export default {
       input = input.replace('/', '')
       input = input.trim()
       return input
+    },
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
     },
     onResetPassword(evt) {
       evt.preventDefault()
