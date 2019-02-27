@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import { authenticate } from '@/api'
-import { sanitizeString } from '@/tools/utils'
 import SetupPassword from '@/components/SetupPassword'
 
 export default {
