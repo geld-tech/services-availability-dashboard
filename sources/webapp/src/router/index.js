@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Setup from '@/components/Setup'
 import Login from '@/components/Login'
+import Config from '@/components/Config'
 import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
