@@ -3,13 +3,21 @@
     <!-- Container -->
     <b-container class="bv-example-row">
         <h2>Configuration</h2>
-        <div v-if="loggedIn" class="pt-1">
-            <p>Configuration updated successfully!</p>
-        </div>
-        <div v-else>
-            <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
-            </setup-password>
-        </div>
+          <b-card no-body>
+            <b-tabs pills card vertical>
+              <b-tab title="Admin Password" active>
+                <div v-if="loggedIn" class="pt-1">
+                    <p>Configuration updated successfully!</p>
+                </div>
+                <div v-else>
+                    <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
+                    </setup-password>
+                </div>
+              </b-tab>
+              <b-tab title="Services">Services</b-tab>
+              <b-tab title="Analytics">Analytics</b-tab>
+            </b-tabs>
+          </b-card>
     </b-container>
   </div>
 </template>
