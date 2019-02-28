@@ -29,6 +29,12 @@ export default new Router({
       props: true
     },
     {
+      path: '/config',
+      name: 'Config',
+      component: Config,
+      props: true
+    },
+    {
       path: '/404',
       name: '404',
       component: NotFound
