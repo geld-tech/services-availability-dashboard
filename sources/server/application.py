@@ -171,8 +171,12 @@ def authenticate():
 
 @app.route("/logout/", methods=['GET', 'POST'], strict_slashes=False)
 def logout():
-    session.clear()
-    return redirect(url_for('index'))
+    try:
+        session.clear()
+        return jsonify({"data": {"response": "Logged out successfully!"}}), 200
+    except Exception, e:
+        logger.error('Error while logging out: %s' % e)
+        return jsonify({'data': {}, 'error': 'Exception encountered while logging out..'}), 500
 
 
 def store_password(password):
