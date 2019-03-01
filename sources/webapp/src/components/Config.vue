@@ -18,12 +18,14 @@
               </b-tab>
               <b-tab title="Services">
                 <div class="component">
-                    Services
+                    <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
+                    </setup-services>
                 </div>
                </b-tab>
               <b-tab title="Analytics">
                 <div class="component">
-                    Analytics
+                    <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
+                    </setup-ganalytics>
                 </div>
                </b-tab>
             </b-tabs>
@@ -34,16 +36,22 @@
 
 <script>
 import SetupPassword from '@/components/SetupPassword'
+import SetupServices from '@/components/SetupServices'
+import SetupGanalytics from '@/components/SetupGanalytics'
 
 export default {
   name: 'Config',
   props: ['loggedIn'],
   components: {
-    'setup-password': SetupPassword
+    'setup-password': SetupPassword,
+    'setup-services': SetupServices,
+    'setup-ganalytics': SetupGanalytics
   },
   data () {
     return {
       adminPasswordSet: false,
+      servicesSet: false,
+      ganalyticsIdSet: false,
       error: '',
       show: true
     }
