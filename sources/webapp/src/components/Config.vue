@@ -5,13 +5,15 @@
         <h2>Configuration</h2>
           <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab title="Admin Password" active>
-                <div v-if="loggedIn" class="pt-1">
-                    <p>Configuration updated successfully!</p>
-                </div>
-                <div v-else>
-                    <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
-                    </setup-password>
+              <b-tab bg-variant="white" title="Admin Password" active>
+                <div class="component">
+                    <div v-if="loggedIn" class="pt-1">
+                        <p>Configuration updated successfully!</p>
+                    </div>
+                    <div v-else>
+                        <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
+                        </setup-password>
+                    </div>
                 </div>
               </b-tab>
               <b-tab title="Services">Services</b-tab>
@@ -45,9 +47,16 @@ export default {
 h2 {
   font-weight: normal;
 }
+.component {
+  height: 500px;
+}
 .container {
   max-width: 1200px;
   margin:  0 auto;
+  height: 500px;
+}
+.left-pane {
+  height: 100%;
 }
 .alerting {
   margin: 0 auto;
