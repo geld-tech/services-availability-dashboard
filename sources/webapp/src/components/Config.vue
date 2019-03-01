@@ -3,9 +3,9 @@
     <!-- Container -->
     <b-container class="bv-example-row">
         <h2>Configuration</h2>
-          <b-card no-body>
+        <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab bg-variant="white" title="Admin Password" active>
+              <b-tab title="Admin Password" active>
                 <div class="component">
                     <div v-if="loggedIn" class="pt-1">
                         <p>Configuration updated successfully!</p>
@@ -19,7 +19,7 @@
               <b-tab title="Services">Services</b-tab>
               <b-tab title="Analytics">Analytics</b-tab>
             </b-tabs>
-          </b-card>
+        </b-card>
     </b-container>
   </div>
 </template>
@@ -49,14 +49,6 @@ h2 {
 }
 .component {
   height: 500px;
-}
-.container {
-  max-width: 1200px;
-  margin:  0 auto;
-  height: 500px;
-}
-.left-pane {
-  height: 100%;
 }
 .alerting {
   margin: 0 auto;
