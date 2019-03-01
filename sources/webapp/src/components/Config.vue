@@ -16,8 +16,16 @@
                     </div>
                 </div>
               </b-tab>
-              <b-tab title="Services">Services</b-tab>
-              <b-tab title="Analytics">Analytics</b-tab>
+              <b-tab title="Services">
+                <div class="component">
+                    Services
+                </div>
+               </b-tab>
+              <b-tab title="Analytics">
+                <div class="component">
+                    Analytics
+                </div>
+               </b-tab>
             </b-tabs>
         </b-card>
     </b-container>
