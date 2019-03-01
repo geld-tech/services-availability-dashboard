@@ -169,6 +169,12 @@ def authenticate():
         return jsonify({"data": {}, "error": "Password can not be empty"}), 500
 
 
+@app.route("/logout/", methods=['GET', 'POST'], strict_slashes=False)
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
 def store_password(password):
     global config_file
     try:
