@@ -15,20 +15,23 @@ import sys
 from codecs import encode
 from optparse import OptionParser
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from modules.Models import Base, Metrics
 from modules.ServiceStatus import ServiceStatus
 
-app = Flask(__name__)
-app.url_map.strict_slashes = False
-app.debug = True
-
 # Global config
 local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
+secret_key = os.urandom(24)
+
+# Flask Initialisation
+app = Flask(__name__)
+app.url_map.strict_slashes = False
+app.debug = True
+app.secret_key = secret_key
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
@@ -153,9 +156,11 @@ def authenticate():
                 current_password = config.get('admin', 'password')
                 password = sanitize_user_input(data['password'])
                 if obfuscate(password) == current_password:
+                    session.clear()
+                    session['admin_user'] = True
                     return jsonify({"data": {"response": "Login success!"}}), 200
                 else:
-                    return jsonify({"data": {}, "error": "Authentication failed.."}), 500
+                    return jsonify({"data": {}, "error": "Unauthorised, authentication failure.."}), 401
             else:
                 return jsonify({'data': {}, 'error': 'Could not authenticate..'}), 500
         else:
