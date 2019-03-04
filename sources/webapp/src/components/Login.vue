@@ -3,7 +3,7 @@
     <!-- Container -->
     <b-container class="bv-example-row">
         <h2>Login</h2>
-        <div v-if="loggedIn" class="pt-1">
+        <div v-if="authenticated" class="pt-1">
             <p>Login successful!</p>
         </div>
         <div v-else>
@@ -47,12 +47,12 @@ import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'Login',
-  props: ['loggedIn'],
   data () {
     return {
       form: {
         adminPassword: ''
       },
+      authenticated: false,
       error: '',
       show: true
     }
@@ -79,7 +79,7 @@ export default {
         /* Fetching the data */
         authenticate(password)
           .then(response => {
-            this.$emit('set-logged-in', true)
+            this.authenticated = true
           })
           .catch(err => {
             this.error = err.message
