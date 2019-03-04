@@ -32,5 +32,5 @@ export function storeServices(services) {
 
 export function authenticate(password) {
   var payload = { password: password }
-  return postPayload('/authenticate/', payload)
+  return postPayload('/auth/login/', payload)
 }
