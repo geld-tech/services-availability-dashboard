@@ -7,12 +7,13 @@
 import ast
 import base64
 import ConfigParser
+import datetime
 import logging
 import logging.handlers
 import os
 import sys
 from codecs import encode
-import datetime
+from functools import wraps
 from optparse import OptionParser
 
 from flask import Flask, jsonify, render_template, request, session
@@ -51,10 +52,10 @@ def authenticated(func):
     """Checks whether user is logged in or raises error 401."""
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if 'admin_user' in session and session.get('admin_user') == True:
+        if session.get('admin_user', False):
             return func(*args, **kwargs)
         else:
-            abort(401)
+            return jsonify({"data": {}, "error": "Authentication required.", "authenticated": False}), 401
     return wrapper
 
 
@@ -169,7 +170,7 @@ def login():
                 if obfuscate(password) == current_password:
                     session.clear()
                     session['admin_user'] = True
-                    return jsonify({"data": {"response": "Login success!", "authenticated": True}), 200
+                    return jsonify({"data": {"response": "Login success!", "authenticated": True}}), 200
                 else:
                     return jsonify({"data": {}, "error": "Unauthorised, authentication failure.."}), 401
             else:
