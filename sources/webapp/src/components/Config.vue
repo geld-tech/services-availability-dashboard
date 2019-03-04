@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <!-- Container -->
-    <b-container v-if="loggedIn" class="bv-example-row">
+    <b-container v-if="authenticated" class="bv-example-row">
         <h2>Configuration</h2>
         <b-card no-body>
             <b-tabs pills card vertical>
@@ -31,24 +31,32 @@
             </b-tabs>
         </b-card>
     </b-container>
+    <b-container v-else class="bv-example-row">
+        <div>
+            <login v-bind:authenticated="authenticated" v-on:set-authenticated="authenticated = $event">
+            </login>
+        </div>
+    </b-container>
   </div>
 </template>
 
 <script>
+import Login from '@/components/Login'
 import SetupPassword from '@/components/SetupPassword'
 import SetupServices from '@/components/SetupServices'
 import SetupGanalytics from '@/components/SetupGanalytics'
 
 export default {
   name: 'Config',
-  props: ['loggedIn'],
   components: {
+    'login': Login,
     'setup-password': SetupPassword,
     'setup-services': SetupServices,
     'setup-ganalytics': SetupGanalytics
   },
   data () {
     return {
+      authenticated: false,
       adminPasswordSet: false,
       servicesSet: false,
       ganalyticsIdSet: false,

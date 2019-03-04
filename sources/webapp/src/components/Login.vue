@@ -3,10 +3,7 @@
     <!-- Container -->
     <b-container class="bv-example-row">
         <h2>Login</h2>
-        <div v-if="authenticated" class="pt-1">
-            <p>Login successful!</p>
-        </div>
-        <div v-else>
+        <div v-if="!authenticated" class="pt-1">
             <p>Enter the system administration password in the following input field, then Submit</p>
             <b-form @submit="onSubmitPassword" @reset="onResetPassword" id="adminPasswordForm" v-if="show">
                 <b-container fluid>
@@ -80,6 +77,7 @@ export default {
         authenticate(password)
           .then(response => {
             this.authenticated = true
+            this.$emit('set-authenticated', true)
           })
           .catch(err => {
             this.error = err.message
