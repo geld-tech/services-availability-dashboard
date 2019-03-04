@@ -145,7 +145,7 @@ def colors_generator():
 
 
 @app.route("/auth/login/", methods=['POST'], strict_slashes=False)
-def authenticate():
+def login():
     global config_file
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
@@ -162,7 +162,7 @@ def authenticate():
                 else:
                     return jsonify({"data": {}, "error": "Unauthorised, authentication failure.."}), 401
             else:
-                return jsonify({'data': {}, 'error': 'Could not authenticate..'}), 500
+                return jsonify({'data': {}, 'error': 'Could not retrieve current credentials..'}), 500
         else:
             return jsonify({"data": {}, "error": "Password needs to be specified"}), 500
     else:
