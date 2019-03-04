@@ -31,7 +31,7 @@
             </b-tabs>
         </b-card>
     </b-container>
-    <b-container v-else class="bv-example-row">
+    <b-container class="bv-example-row">
         <div>
             <login v-bind:authenticated="authenticated" v-on:set-authenticated="authenticated = $event">
             </login>
