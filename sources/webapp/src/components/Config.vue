@@ -1,16 +1,16 @@
 <template>
   <div class="index">
     <!-- Container -->
-    <b-container class="bv-example-row">
+    <b-container v-if="loggedIn" class="bv-example-row">
         <h2>Configuration</h2>
         <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab title="Admin Password" active>
                 <div class="component">
-                    <div v-if="loggedIn" class="pt-1">
+                    <div class="pt-1">
                         <p>Configuration updated successfully!</p>
                     </div>
-                    <div v-else>
+                    <div class="component">
                         <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
                         </setup-password>
                     </div>
