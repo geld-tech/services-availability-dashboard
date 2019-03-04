@@ -5,7 +5,7 @@
         <h2>Configuration</h2>
         <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab title="Admin Password" active>
+              <b-tab title="Admin Password" id="admin-password-tab" active>
                 <div class="component">
                     <div class="pt-1">
                         <p>Configuration updated successfully!</p>
@@ -16,13 +16,13 @@
                     </div>
                 </div>
               </b-tab>
-              <b-tab title="Services">
+              <b-tab title="Services" id="services-tab">
                 <div class="component">
                     <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
                     </setup-services>
                 </div>
                </b-tab>
-              <b-tab title="Analytics">
+              <b-tab title="Analytics" id="analytics-tab">
                 <div class="component">
                     <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
                     </setup-ganalytics>
