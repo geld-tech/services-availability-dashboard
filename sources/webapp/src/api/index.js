@@ -34,3 +34,7 @@ export function authenticate(password) {
   var payload = { password: password }
   return postPayload('/auth/login/', payload)
 }
+
+export function deauthenticate() {
+  return postPayload('/auth/logout/')
+}

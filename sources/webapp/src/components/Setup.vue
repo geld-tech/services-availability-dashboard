@@ -49,6 +49,7 @@
 
 <script>
 import vueStep from 'vue-step'
+import { deauthenticate } from '@/api'
 import SetupFirstPage from '@/components/SetupFirstPage'
 import SetupPassword from '@/components/SetupPassword'
 import SetupGanalytics from '@/components/SetupGanalytics'
@@ -99,6 +100,11 @@ export default {
       }
     },
     startApplication() {
+      deauthenticate()
+        .catch(err => {
+          this.error = err.message
+          this.dismissCountDown = 6
+        })
       this.$router.push('/')
     }
   }
