@@ -2,8 +2,19 @@
   <div class="index">
     <!-- Container -->
     <b-container class="bv-example-row">
-        <h2>Login</h2>
-        <div v-if="!authenticated" class="pt-1">
+        <div v-if="authenticated" class="pt-1">
+            <b-form @submit="onSubmitLogout" id="adminLogoutForm" v-if="show">
+                <b-container fluid>
+                  <b-row class="my-1">
+                    <b-col sm="10" class="float-right">
+                        <b-button type="submit" variant="primary" id="adminLogoutButton">Logout</b-button>
+                    </b-col>
+                  </b-row>
+                </b-container>
+            </b-form>
+        </div>
+        <div v-else class="pt-1">
+            <h2>Login</h2>
             <p>Enter the system administration password in the following input field, then Submit</p>
             <b-form @submit="onSubmitPassword" @reset="onResetPassword" id="adminPasswordForm" v-if="show">
                 <b-container fluid>
@@ -16,7 +27,7 @@
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
-                    <b-col sm="10">
+                    <b-col sm="10" class="float-right">
                         <b-button type="reset" variant="danger" v-bind:disabled="disableAdminResetButton" id="adminResetButton">Clear</b-button>
                         <b-button type="submit" variant="primary" v-bind:disabled="disableAdminSubmitButton" id="adminSubmitButton">Submit</b-button>
                     </b-col>
@@ -39,7 +50,7 @@
 </template>
 
 <script>
-import { authenticate } from '@/api'
+import { authenticate, deauthenticate } from '@/api'
 import { sanitizeString } from '@/tools/utils'
 
 export default {
@@ -63,6 +74,15 @@ export default {
     }
   },
   methods: {
+    onSubmitLogout() {
+      deauthenticate()
+        .catch(err => {
+          this.error = err.message
+          this.dismissCountDown = 6
+        })
+      this.authenticated = false
+      this.$emit('set-authenticated', false)
+    },
     onSubmitPassword(evt) {
       evt.preventDefault()
       var password = sanitizeString(this.form.adminPassword)

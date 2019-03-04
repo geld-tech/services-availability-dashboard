@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Index from '@/components/Index'
 import Setup from '@/components/Setup'
-import Login from '@/components/Login'
 import Config from '@/components/Config'
 import NotFound from '@/components/NotFound'
 
@@ -21,12 +20,6 @@ export default new Router({
       path: '/setup',
       name: 'Setup',
       component: Setup,
-      props: true
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login,
       props: true
     },
     {
