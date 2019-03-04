@@ -7,12 +7,12 @@
 import ast
 import base64
 import ConfigParser
-import datetime
 import logging
 import logging.handlers
 import os
 import sys
 from codecs import encode
+import datetime
 from optparse import OptionParser
 
 from flask import Flask, jsonify, render_template, request, session
@@ -45,6 +45,17 @@ engine = create_engine('sqlite:///'+db_path)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 db_session = DBSession()
+
+
+def authenticated(func):
+    """Checks whether user is logged in or raises error 401."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'admin_user' in session and session.get('admin_user') == True:
+            return func(*args, **kwargs)
+        else:
+            abort(401)
+    return wrapper
 
 
 @app.route("/")
@@ -158,7 +169,7 @@ def login():
                 if obfuscate(password) == current_password:
                     session.clear()
                     session['admin_user'] = True
-                    return jsonify({"data": {"response": "Login success!"}}), 200
+                    return jsonify({"data": {"response": "Login success!", "authenticated": True}), 200
                 else:
                     return jsonify({"data": {}, "error": "Unauthorised, authentication failure.."}), 401
             else:
@@ -170,6 +181,7 @@ def login():
 
 
 @app.route("/auth/logout/", methods=['GET', 'POST'], strict_slashes=False)
+@authenticated
 def logout():
     try:
         session.clear()
