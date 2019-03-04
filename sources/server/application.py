@@ -63,15 +63,17 @@ def authenticated(func):
 def index():
     global config_file
     try:
-        settings = {'firstSetup': True}
-        ganalytics_id = False
-
         if os.path.isfile(config_file):
             settings = {'firstSetup': False}
             config = ConfigParser.ConfigParser()
             config.readfp(open(config_file))
             if 'ganalytics' in config.sections():
                 ganalytics_id = config.get('ganalytics', 'ua_id')
+        else:
+            settings = {'firstSetup': True}
+            ganalytics_id = False
+            session.clear()
+            session['admin_user'] = True
 
         return render_template('index.html', settings=settings, ga_ua_id=ganalytics_id)
     except Exception, e:
@@ -131,6 +133,7 @@ def status():
 
 
 @app.route("/setup/password/", methods=['POST'], strict_slashes=False)
+@authenticated
 def set_password():
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
@@ -206,6 +209,7 @@ def store_password(password):
 
 
 @app.route("/setup/ganalytics/", methods=['POST'], strict_slashes=False)
+@authenticated
 def set_ganalytics():
     if request.method == 'POST':
         data = ast.literal_eval(request.data)
@@ -235,6 +239,7 @@ def store_ua_id(ua_id):
 
 
 @app.route("/setup/services/", methods=['POST'], strict_slashes=False)
+@authenticated
 def set_services(services=[]):
     if request.method == 'POST':
         services = request.data
