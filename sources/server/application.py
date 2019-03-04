@@ -144,7 +144,7 @@ def colors_generator():
             yield color
 
 
-@app.route("/authenticate/", methods=['POST'], strict_slashes=False)
+@app.route("/auth/login/", methods=['POST'], strict_slashes=False)
 def authenticate():
     global config_file
     if request.method == 'POST':
@@ -169,7 +169,7 @@ def authenticate():
         return jsonify({"data": {}, "error": "Password can not be empty"}), 500
 
 
-@app.route("/logout/", methods=['GET', 'POST'], strict_slashes=False)
+@app.route("/auth/logout/", methods=['GET', 'POST'], strict_slashes=False)
 def logout():
     try:
         session.clear()
