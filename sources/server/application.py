@@ -225,6 +225,20 @@ def set_ganalytics():
         return jsonify({"data": {}, "error": "UA ID can not be empty"}), 500
 
 
+def get_ua_id():
+    global config_file
+    try:
+        with open(config_file, 'r') as infile:
+            config = ConfigParser.ConfigParser()
+            config.read(infile)
+            if 'ganalytics' in config.sections():
+                ganalytics_id = config.get('ganalytics', 'ua_id')
+            return ganalytics_id
+        return True
+    except Exception:
+        return False
+
+
 def store_ua_id(ua_id):
     global config_file
     try:
@@ -285,6 +299,17 @@ def store_services(services):
         logger.error('Error while storing services: %s' % e)
         logger.error('Services: %s' % services)
         return False
+
+
+@app.route("/setup/config/", methods=['GET'], strict_slashes=False)
+@authenticated
+def get_config():
+    if request.method == 'GET':
+        services = get_services()
+        ua_id = get_ua_id()
+        return jsonify({"data": {"response": "Success!", "services": services, "ua_id": ua_id}}), 200
+    else:
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
 def sanitize_user_input(word):
