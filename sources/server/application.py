@@ -146,7 +146,7 @@ def set_password():
         else:
             return jsonify({"data": {}, "error": "Password needs to be specified"}), 500
     else:
-        return jsonify({"data": {}, "error": "Password can not be empty"}), 500
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
 def colors_generator():
@@ -181,7 +181,7 @@ def login():
         else:
             return jsonify({"data": {}, "error": "Password needs to be specified"}), 500
     else:
-        return jsonify({"data": {}, "error": "Password can not be empty"}), 500
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
 @app.route("/auth/logout/", methods=['GET', 'POST'], strict_slashes=False)
@@ -222,7 +222,7 @@ def set_ganalytics():
         else:
             return jsonify({"data": {}, "error": "Google Analytics User Agent ID needs to be specified"}), 500
     else:
-        return jsonify({"data": {}, "error": "UA ID can not be empty"}), 500
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
 def get_ua_id():
@@ -265,11 +265,7 @@ def set_services(services=[]):
         else:
             return jsonify({"data": {}, "error": "Services can not be empty"}), 500
     else:
-        services = get_services()
-        if services:
-            return jsonify({"data": {"response": "Success!"}, "services": services}), 200
-        else:
-            return jsonify({"data": {}, "error": "Could not get services"}), 500
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
 def get_services():
