@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { getConfig } from '@/api'
 import Login from '@/components/Login'
 import SetupPassword from '@/components/SetupPassword'
 import SetupServices from '@/components/SetupServices'
@@ -60,8 +61,30 @@ export default {
       adminPasswordSet: false,
       servicesSet: false,
       ganalyticsIdSet: false,
+      services: [],
+      ua_id: '',
       error: '',
+      loading: false,
       show: true
+    }
+  },
+  watch: {
+    authenticated: function (isAuthenticated) {
+      this.loading = true
+      if (isAuthenticated === true) {
+        getConfig()
+          .then(response => {
+            this.services = response.services
+            this.ua_id = ua_id
+          })
+          .catch(err => {
+            this.error = err.message
+          })
+      } else {
+        this.services = []
+        this.ua_id = ''
+      }
+      this.loading = false
     }
   }
 }
