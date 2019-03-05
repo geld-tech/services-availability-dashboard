@@ -276,9 +276,9 @@ def get_services():
     global config_file
     services = []
     try:
-        with open(config_file, 'r') as infile:
+        if os.path.isfile(config_file):
             config = ConfigParser.ConfigParser()
-            config.read(infile)
+            config.readfp(open(config_file))
             if 'services' in config.sections():
                 for service in config.items('services'):
                     services.append({'name': service[0], 'url': service[1]})
