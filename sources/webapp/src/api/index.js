@@ -40,5 +40,5 @@ export function deauthenticate() {
 }
 
 export function getConfig() {
-  return postPayload('/setup/config/')
+  return axios.get('/setup/config/').then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
