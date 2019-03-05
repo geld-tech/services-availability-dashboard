@@ -38,3 +38,7 @@ export function authenticate(password) {
 export function deauthenticate() {
   return postPayload('/auth/logout/')
 }
+
+export function getConfig() {
+  return postPayload('/setup/config/')
+}
