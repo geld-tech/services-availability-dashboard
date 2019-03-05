@@ -62,7 +62,7 @@ export default {
       servicesSet: false,
       ganalyticsIdSet: false,
       services: [],
-      ua_id: '',
+      uaId: '',
       error: '',
       loading: false,
       show: true
@@ -75,14 +75,14 @@ export default {
         getConfig()
           .then(response => {
             this.services = response.services
-            this.ua_id = ua_id
+            this.uaId = response.ua_id
           })
           .catch(err => {
             this.error = err.message
           })
       } else {
         this.services = []
-        this.ua_id = ''
+        this.uaId = ''
       }
       this.loading = false
     }
