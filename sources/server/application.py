@@ -227,16 +227,17 @@ def set_ganalytics():
 
 def get_ua_id():
     global config_file
+    ua_id = ''
     try:
-        with open(config_file, 'r') as infile:
+        if os.path.isfile(config_file):
             config = ConfigParser.ConfigParser()
-            config.read(infile)
+            config.readfp(open(config_file))
             if 'ganalytics' in config.sections():
-                ganalytics_id = config.get('ganalytics', 'ua_id')
-            return ganalytics_id
-        return True
-    except Exception:
-        return False
+                ua_id = config.get('ganalytics', 'ua_id')
+    except Exception, e:
+        logger.error('Error while retrieving UA ID: %s' % e)
+    finally:
+        return ua_id
 
 
 def store_ua_id(ua_id):
