@@ -274,14 +274,18 @@ def set_services(services=[]):
 
 def get_services():
     global config_file
+    services = []
     try:
         with open(config_file, 'r') as infile:
             config = ConfigParser.ConfigParser()
             config.read(infile)
-            return config.get_section('services')
-        return True
-    except Exception:
-        return False
+            if 'services' in config.sections():
+                for service in config.items('services'):
+                    services.append({'name': service[0], 'url': service[1]})
+    except Exception, e:
+        logger.error('Error while retrieving services: %s' % e)
+    finally:
+        return services
 
 
 def store_services(services):
