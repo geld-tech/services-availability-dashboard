@@ -289,8 +289,11 @@ def store_services(services):
     global config_file
     try:
         services = ast.literal_eval(services)
-        with open(config_file, 'ab') as outfile:
+        with open(config_file, 'w+') as outfile:
             config = ConfigParser.ConfigParser()
+            config.readfp(open(config_file))
+            if 'services' in config.sections():
+                config.remove_section('services')
             config.add_section('services')
             for service in services.get('services', []):
                 config.set('services', service.get('name'), '%s:%s' % (service.get('url'), service.get('port')))
