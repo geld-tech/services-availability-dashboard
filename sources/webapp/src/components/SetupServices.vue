@@ -3,7 +3,6 @@
         <h2>Services Availability</h2>
         <div v-if="servicesSet" class="pt-1">
             <p>Services Availability monitor successfully configured!</p>
-            <p>Press Next to start using the application.</p>
         </div>
         <div v-else>
             <p>Enter the name, URL and port of the service(s) to monitor the availability for:</p>
