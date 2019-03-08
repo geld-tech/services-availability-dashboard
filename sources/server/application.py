@@ -199,11 +199,17 @@ def logout():
 def store_password(password):
     global config_file
     try:
-        with open(config_file, 'ab') as outfile:
-            config = ConfigParser.ConfigParser()
-            config.add_section('admin')
-            config.set('admin', 'password', obfuscate(password))
+        config = ConfigParser.ConfigParser()
+        if os.path.isfile(config_file):
+            config.readfp(open(config_file))
+            if 'admin' in config.sections():
+                config.remove_section('admin')
+        config.add_section('admin')
+        config.set('admin', 'password', obfuscate(password))
+
+        with open(config_file, 'w') as outfile:
             config.write(outfile)
+
         return True
     except Exception:
         return False
@@ -244,11 +250,17 @@ def get_ua_id():
 def store_ua_id(ua_id):
     global config_file
     try:
-        with open(config_file, 'ab') as outfile:
-            config = ConfigParser.ConfigParser()
-            config.add_section('ganalytics')
-            config.set('ganalytics', 'ua_id', ua_id)
+        config = ConfigParser.ConfigParser()
+        if os.path.isfile(config_file):
+            config.readfp(open(config_file))
+            if 'ganalytics' in config.sections():
+                config.remove_section('ganalytics')
+        config.add_section('ganalytics')
+        config.set('ganalytics', 'ua_id', ua_id)
+
+        with open(config_file, 'w') as outfile:
             config.write(outfile)
+
         return True
     except Exception:
         return False
@@ -290,15 +302,18 @@ def store_services(services):
     global config_file
     try:
         services = ast.literal_eval(services)
-        with open(config_file, 'ab') as outfile:
-            config = ConfigParser.ConfigParser()
+        config = ConfigParser.ConfigParser()
+        if os.path.isfile(config_file):
             config.readfp(open(config_file))
             if 'services' in config.sections():
                 config.remove_section('services')
-            config.add_section('services')
-            for service in services.get('services', []):
-                config.set('services', service.get('name'), '%s:%s' % (service.get('url'), service.get('port')))
+        config.add_section('services')
+        for service in services.get('services', []):
+            config.set('services', service.get('name'), '%s:%s' % (service.get('url'), service.get('port')))
+
+        with open(config_file, 'w') as outfile:
             config.write(outfile)
+
         return True
     except Exception, e:
         logger.error('Error while storing services: %s' % e)
