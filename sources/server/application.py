@@ -63,6 +63,7 @@ def authenticated(func):
 def index():
     global config_file
     try:
+        ganalytics_id = ''
         if os.path.isfile(config_file):
             settings = {'firstSetup': False}
             config = ConfigParser.ConfigParser()
@@ -71,7 +72,7 @@ def index():
                 ganalytics_id = config.get('ganalytics', 'ua_id')
         else:
             settings = {'firstSetup': True}
-            ganalytics_id = False
+            # Bypass authentication during first setup
             session.clear()
             session['admin_user'] = True
 
