@@ -34,7 +34,7 @@ import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'SetupGanalytics',
-  props: ['ganalyticsIdSet'],
+  props: ['ganalyticsIdSet', 'initialGanalytics'],
   data () {
     return {
       form: {
@@ -43,6 +43,9 @@ export default {
       error: '',
       show: true
     }
+  },
+  created: {
+      this.form.uaid = this.initialGanalytics
   },
   computed: {
     disableGaIdButtons() {
