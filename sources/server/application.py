@@ -290,7 +290,7 @@ def store_services(services):
     global config_file
     try:
         services = ast.literal_eval(services)
-        with open(config_file, 'w+') as outfile:
+        with open(config_file, 'ab') as outfile:
             config = ConfigParser.ConfigParser()
             config.readfp(open(config_file))
             if 'services' in config.sections():
