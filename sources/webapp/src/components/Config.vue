@@ -74,8 +74,8 @@ export default {
       if (isAuthenticated === true) {
         getConfig()
           .then(response => {
-            this.services = response.services
-            this.uaId = response.ua_id
+            this.services = response.data.services
+            this.uaId = response.data.ua_id
           })
           .catch(err => {
             this.error = err.message
