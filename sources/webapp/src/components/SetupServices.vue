@@ -56,10 +56,12 @@ export default {
       show: true
     }
   },
-  created() {
-    if (this.initialServices !== undefined && this.initialServices.length !== 0) {
-      this.services = this.initialServices
-    }
+  mounted: function() {
+    this.$nextTick(function () {
+      if (this.initialServices !== undefined && this.initialServices.length !== 0) {
+        this.services = this.initialServices
+      }
+    })
   },
   computed: {
     disableServicesButtons() {
