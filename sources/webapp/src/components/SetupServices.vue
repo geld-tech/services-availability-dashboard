@@ -57,7 +57,9 @@ export default {
     }
   },
   created() {
-    this.services = this.initialServices
+    if (this.initialServices !== undefined && this.initialServices.length !== 0) {
+      this.services = this.initialServices
+    }
   },
   computed: {
     disableServicesButtons() {

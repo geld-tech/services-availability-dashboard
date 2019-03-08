@@ -18,7 +18,7 @@
               </b-tab>
               <b-tab title="Services" id="services-tab">
                 <div class="component">
-                    <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
+                    <setup-services v-bind:services="initialServices" v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
                     </setup-services>
                 </div>
                </b-tab>
