@@ -43,7 +43,7 @@ import { storeServices } from '@/api'
 
 export default {
   name: 'SetupServices',
-  props: ['servicesSet'],
+  props: ['servicesSet', 'initialServices'],
   data () {
     return {
       form: {
@@ -55,6 +55,9 @@ export default {
       error: '',
       show: true
     }
+  },
+  created: {
+      this.services = this.initialServices
   },
   computed: {
     disableServicesButtons() {
