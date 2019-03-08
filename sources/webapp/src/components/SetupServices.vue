@@ -56,8 +56,8 @@ export default {
       show: true
     }
   },
-  created: {
-      this.services = this.initialServices
+  created() {
+    this.services = this.initialServices
   },
   computed: {
     disableServicesButtons() {

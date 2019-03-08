@@ -44,8 +44,8 @@ export default {
       show: true
     }
   },
-  created: {
-      this.form.uaid = this.initialGanalytics
+  created() {
+    this.form.uaid = this.initialGanalytics
   },
   computed: {
     disableGaIdButtons() {
