@@ -18,7 +18,7 @@
               </b-tab>
               <b-tab title="Services" id="services-tab">
                 <div class="component">
-                    <setup-services v-bind:services="initialServices" v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
+                    <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
                     </setup-services>
                 </div>
                </b-tab>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { getConfig } from '@/api'
 import Login from '@/components/Login'
 import SetupPassword from '@/components/SetupPassword'
 import SetupServices from '@/components/SetupServices'
@@ -60,31 +59,7 @@ export default {
       authenticated: false,
       adminPasswordSet: false,
       servicesSet: false,
-      ganalyticsIdSet: false,
-      services: [],
-      uaId: '',
-      error: '',
-      loading: false,
-      show: true
-    }
-  },
-  watch: {
-    authenticated: function (isAuthenticated) {
-      this.loading = true
-      if (isAuthenticated === true) {
-        getConfig()
-          .then(response => {
-            this.services = response.data.services
-            this.uaId = response.data.ua_id
-          })
-          .catch(err => {
-            this.error = err.message
-          })
-      } else {
-        this.services = []
-        this.uaId = ''
-      }
-      this.loading = false
+      ganalyticsIdSet: false
     }
   }
 }
