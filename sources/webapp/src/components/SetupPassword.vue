@@ -13,14 +13,14 @@
                         <label>Password</label>
                     </b-col>
                     <b-col sm="7">
-                        <b-form-input type="password" autocomplete="new-password" v-model="form.adminPassword" id="adminPassword" name="adminPassword" required>
+                        <b-form-input type="password" autocomplete="new-password" v-model="form.adminPassword" id="adminPassword" aria-label="adminPassword" required>
                         </b-form-input>
                     </b-col>
                     <b-col sm="5">
                         <label>Password (repeat)</label>
                     </b-col>
                     <b-col sm="7">
-                        <b-form-input type="password" autocomplete="new-password" v-model="form.adminPasswordRepeat" id="adminPasswordRepeat" name="adminPasswordRepeat" required>
+                        <b-form-input type="password" autocomplete="new-password" v-model="form.adminPasswordRepeat" id="adminPasswordRepeat" aria-label="adminPasswordRepeat" required>
                         </b-form-input>
                     </b-col>
                   </b-row>

@@ -23,7 +23,7 @@
                         <label>Password</label>
                     </b-col>
                     <b-col sm="7">
-                        <b-form-input type="password" autocomplete="current-password" v-model="form.adminPassword" id="adminPassword" name="adminPassword" required></b-form-input>
+                        <b-form-input type="password" autocomplete="current-password" v-model="form.adminPassword" id="adminPassword" aria-label="adminPassword" required></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
