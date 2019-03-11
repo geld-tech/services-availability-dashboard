@@ -43,7 +43,7 @@ import { storeServices } from '@/api'
 
 export default {
   name: 'SetupServices',
-  props: ['servicesSet', 'initialServices'],
+  props: ['servicesSet'],
   data () {
     return {
       form: {
@@ -55,13 +55,6 @@ export default {
       error: '',
       show: true
     }
-  },
-  mounted: function() {
-    this.$nextTick(function () {
-      if (this.initialServices !== undefined && this.initialServices.length !== 0) {
-        this.services = this.initialServices
-      }
-    })
   },
   computed: {
     disableServicesButtons() {
