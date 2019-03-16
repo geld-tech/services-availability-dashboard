@@ -89,7 +89,7 @@ def status():
         datasets = []
         data = []
         time_labels = []
-        xaxis_labels = set()
+        xaxis_labels = []
         now = datetime.datetime.utcnow()
         last_2_hours = now - datetime.timedelta(hours=2)
         colors = colors_generator()
@@ -105,7 +105,9 @@ def status():
             dataset["data"] = []
             dataset["availability"] = []
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90):
-                xaxis_labels.add(service_metrics.date_time.strftime("%H:%M"))
+                xaxis_label = service_metrics.date_time.strftime("%H:%M")
+                if xaxis_label not in xaxis_labels:
+                    xaxis_labels.add(xaxis_label)
                 dataset["data"].append(service_metrics.latency)
                 dataset["availability"].append(service_metrics.available)
             datasets.append(dataset)
@@ -118,7 +120,7 @@ def status():
             status['date_time'] = metric.date_time.strftime("%H:%M")
             data.append(status)
 
-        return jsonify({'labels': list(xaxis_labels),
+        return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
                         'data': data,
                         'time_labels': time_labels,
