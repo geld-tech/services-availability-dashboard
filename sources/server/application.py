@@ -107,7 +107,7 @@ def status():
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.desc()).limit(90):
                 xaxis_label = service_metrics.date_time.strftime("%H:%M")
                 if xaxis_label not in xaxis_labels:
-                    xaxis_labels.add(xaxis_label)
+                    xaxis_labels.append(xaxis_label)
                 dataset["data"].append(service_metrics.latency)
                 dataset["availability"].append(service_metrics.available)
             datasets.append(dataset)
