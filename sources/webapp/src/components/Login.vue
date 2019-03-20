@@ -3,15 +3,13 @@
     <!-- Container -->
     <b-container class="bv-example-row">
         <div v-if="authenticated" class="pt-1">
-            <b-form @submit="onSubmitLogout" id="adminLogoutForm" v-if="show">
-                <b-container fluid>
-                  <b-row class="my-1">
-                    <b-col sm="10" class="float-right">
-                        <b-button @click="onSubmitLogout" type="button" variant="primary" id="adminLogoutButton">Logout</b-button>
-                    </b-col>
-                  </b-row>
-                </b-container>
-            </b-form>
+          <b-container fluid>
+            <b-row class="my-1">
+              <b-col sm="10" class="float-right">
+                  <b-button @click="onSubmitLogout" type="button" variant="primary" id="adminLogoutButton">Logout</b-button>
+              </b-col>
+            </b-row>
+          </b-container>
         </div>
         <div v-else class="pt-1">
             <h2>Login</h2>
