@@ -18,7 +18,7 @@
             </b-row>
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
-                    <div v-if="data" class="Chart__list">
+                    <div v-if="datasets" class="Chart__list">
                         <div class="Chart">
                             <status v-bind:metrics="data"
                                     v-bind:services="services"
