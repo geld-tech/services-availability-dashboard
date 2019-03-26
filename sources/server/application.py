@@ -124,8 +124,7 @@ def status():
                         'datasets': datasets,
                         'time_labels': time_labels,
                         'services':
-                        {'names': services,
-                         'metrics': data}}), 200
+                        {'names': services}}), 200
     except Exception, e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         del exc_type
