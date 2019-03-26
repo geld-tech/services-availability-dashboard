@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { storeServices } from '@/api'
+import { getConfig, storeServices } from '@/api'
 
 export default {
   name: 'SetupServices',
@@ -53,6 +53,7 @@ export default {
       },
       services: [],
       error: '',
+      loading: false,
       show: true
     }
   },
@@ -93,6 +94,23 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
+    },
+    getServicesConfig() {
+      this.loading = false
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
+      /* Fetching the data */
+      this.loading = true
+      getConfig()
+        .then(response => {
+          this.services = response.services
+          this.loading = false
+        })
+        .catch(err => {
+          this.error = err.message
+          this.loading = false
+        })
     },
     addRow() {
       this.services.push({
