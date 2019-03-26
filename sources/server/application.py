@@ -122,7 +122,6 @@ def status():
 
         return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
-                        'data': data,
                         'time_labels': time_labels,
                         'services':
                         {'names': services,
