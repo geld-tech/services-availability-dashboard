@@ -106,7 +106,7 @@ webapp-settings:
 	$(call echo_title, "CREATE STUB SETTINGS")
 	@touch $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "[admin]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
-	@echo "password = Y25mZmpiZXE=" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "password = Y25mZmpiZXExMjM=" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "[ganalytics]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "ua_id = 1234567" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
