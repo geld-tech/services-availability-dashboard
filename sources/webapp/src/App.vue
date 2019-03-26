@@ -15,7 +15,6 @@
     <!-- Container -->
     <div id="app-container">
         <router-view
-            v-bind:data="data"
             v-bind:services="services"
             v-bind:loading="loading"
             v-bind:datasets="datasets"
@@ -36,7 +35,6 @@ export default {
       form: {
         keyword: ''
       },
-      data: {},
       services: {},
       datasets: [],
       labels: [],
@@ -51,7 +49,6 @@ export default {
     var firstSetup = window.settings.firstSetup
     this.loading = false
     /* Trick to reset/clear native browser form validation state */
-    this.data = {}
     this.services = {}
     this.datasets = []
     this.labels = []
@@ -75,7 +72,6 @@ export default {
       this.loading = true
       fetchData()
         .then(response => {
-          this.data = response.data
           this.services = response.services
           this.datasets = response.datasets
           this.labels = response.labels
@@ -95,7 +91,6 @@ export default {
       this.error = ''
       if (searchKeyword !== '') {
         /* Trick to reset/clear native browser form validation state */
-        this.data = {}
         this.services = {}
         this.datasets = []
         this.labels = []
@@ -105,7 +100,6 @@ export default {
         this.loading = true
         fetchData(searchKeyword)
           .then(response => {
-            this.data = response.data
             this.services = response.services
             this.datasets = response.datasets
             this.labels = response.labels
@@ -122,7 +116,6 @@ export default {
       evt.preventDefault()
       /* Reset our form values */
       this.form.keyword = ''
-      this.data = {}
       this.services = {}
       this.datasets = []
       this.labels = []

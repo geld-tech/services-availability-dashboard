@@ -87,7 +87,6 @@ def status():
     try:
         services = []
         datasets = []
-        data = []
         time_labels = []
         xaxis_labels = []
         now = datetime.datetime.utcnow()
@@ -111,14 +110,6 @@ def status():
                 dataset["data"].append(service_metrics.latency)
                 dataset["availability"].append(service_metrics.available)
             datasets.append(dataset)
-
-        for metric in db_session.query(Metrics).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.id):
-            status = {}
-            status['name'] = metric.service_name
-            status['latency'] = metric.latency
-            status['available'] = metric.available
-            status['date_time'] = metric.date_time.strftime("%H:%M")
-            data.append(status)
 
         return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
