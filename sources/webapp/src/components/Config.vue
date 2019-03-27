@@ -6,9 +6,6 @@
         <b-tabs pills card vertical>
           <b-tab title="Admin Password" id="admin-password-tab" active>
             <div class="component">
-                <div class="pt-1">
-                    <p>Configuration updated successfully!</p>
-                </div>
                 <div class="component">
                     <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
                     </setup-password>
