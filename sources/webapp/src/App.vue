@@ -26,15 +26,11 @@
 
 <script>
 import { fetchData } from '@/api'
-import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'App',
   data() {
     return {
-      form: {
-        keyword: ''
-      },
       services: {},
       datasets: [],
       labels: [],
@@ -81,48 +77,6 @@ export default {
           this.error = err.message
           this.loading = false
         })
-    },
-    onSubmit(evt) {
-      evt.preventDefault()
-      var searchKeyword = sanitizeString(this.form.keyword)
-      this.form.keyword = ''
-      this.loading = false
-      this.dismissCountDown = 0
-      this.error = ''
-      if (searchKeyword !== '') {
-        /* Trick to reset/clear native browser form validation state */
-        this.services = {}
-        this.datasets = []
-        this.labels = []
-        this.show = false
-        this.$nextTick(() => { this.show = true })
-        /* Fetching the data */
-        this.loading = true
-        fetchData(searchKeyword)
-          .then(response => {
-            this.services = response.services
-            this.datasets = response.datasets
-            this.labels = response.labels
-            this.loading = false
-          })
-          .catch(err => {
-            this.error = err.message
-            this.loading = false
-            this.dismissCountDown = 6
-          })
-      }
-    },
-    onReset(evt) {
-      evt.preventDefault()
-      /* Reset our form values */
-      this.form.keyword = ''
-      this.services = {}
-      this.datasets = []
-      this.labels = []
-      this.loading = false
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false
-      this.$nextTick(() => { this.show = true })
     },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
