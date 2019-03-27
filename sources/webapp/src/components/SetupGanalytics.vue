@@ -29,23 +29,27 @@
 </template>
 
 <script>
-import { storeGanalytics } from '@/api'
+import { getConfig, storeGanalytics } from '@/api'
 import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'SetupGanalytics',
-  props: ['ganalyticsIdSet', 'initialGanalytics'],
+  props: ['ganalyticsIdSet'],
   data () {
     return {
       form: {
         uaid: ''
       },
       error: '',
+      loading: false,
       show: true
     }
   },
-  created() {
-    this.form.uaid = this.initialGanalytics
+  mounted: function() {
+    var firstSetup = window.settings.firstSetup
+    if (!firstSetup) {
+      this.getGanalyticsConfig()
+    }
   },
   computed: {
     disableGaIdButtons() {
@@ -81,6 +85,23 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
+    },
+    getGanalyticsConfig() {
+      this.loading = false
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
+      /* Fetching the data */
+      this.loading = true
+      getConfig()
+        .then(response => {
+          this.uaid = response.data.uaid
+          this.loading = false
+        })
+        .catch(err => {
+          this.error = err.message
+          this.loading = false
+        })
     }
   }
 }
