@@ -57,7 +57,7 @@ export default {
       show: true
     }
   },
-  mounted: function() {
+  created() {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
       this.getServicesConfig()
@@ -110,7 +110,7 @@ export default {
       this.loading = true
       getConfig()
         .then(response => {
-          this.services = response.services
+          this.services = response.data.services
           this.loading = false
         })
         .catch(err => {
