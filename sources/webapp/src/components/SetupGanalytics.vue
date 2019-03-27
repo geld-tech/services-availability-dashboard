@@ -46,7 +46,7 @@ export default {
       show: true
     }
   },
-  mounted: function() {
+  mounted() {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
       this.getGanalyticsConfig()
@@ -98,7 +98,7 @@ export default {
       getConfig()
         .then(response => {
           this.initialUaid = response.data.ua_id
-          this.uaid = response.data.ua_id
+          this.form.uaid = this.initialUaid
           this.loading = false
         })
         .catch(err => {
