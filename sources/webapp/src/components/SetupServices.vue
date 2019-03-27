@@ -57,7 +57,7 @@ export default {
       show: true
     }
   },
-  created() {
+  mounted: function() {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
       this.getServicesConfig()
