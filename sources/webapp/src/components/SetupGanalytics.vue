@@ -40,6 +40,7 @@ export default {
       form: {
         uaid: ''
       },
+      initialUaid: '',
       error: '',
       loading: false,
       show: true
@@ -60,9 +61,8 @@ export default {
     onSubmitGaId(evt) {
       evt.preventDefault()
       var uaid = sanitizeString(this.form.uaid)
-      this.form.uaid = ''
-      this.error = ''
       if (uaid !== '') {
+        this.error = ''
         /* Trick to reset/clear native browser form validation state */
         this.show = false
         this.$nextTick(() => { this.show = true })
@@ -72,6 +72,12 @@ export default {
             this.$emit('set-ganalytics-uaid', true)
           })
           .catch(err => {
+            /* Reset our form values */
+            if (this.initialUaid === '') {
+              this.form.uaid = ''
+            } else {
+              this.form.uaid = this.initialUaid
+            }
             this.error = err.message
           })
       } else {
@@ -81,7 +87,11 @@ export default {
     onResetGaId(evt) {
       evt.preventDefault()
       /* Reset our form values */
-      this.form.uaid = ''
+      if (this.initialUaid === '') {
+        this.form.uaid = ''
+      } else {
+        this.form.uaid = this.initialUaid
+      }
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
@@ -95,7 +105,8 @@ export default {
       this.loading = true
       getConfig()
         .then(response => {
-          this.uaid = response.data.uaid
+          this.initialUaid = response.data.ua_id
+          this.uaid = response.data.ua_id
           this.loading = false
         })
         .catch(err => {
