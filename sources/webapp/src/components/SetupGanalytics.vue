@@ -73,11 +73,7 @@ export default {
           })
           .catch(err => {
             /* Reset our form values */
-            if (this.initialUaid === '') {
-              this.form.uaid = ''
-            } else {
-              this.form.uaid = this.initialUaid
-            }
+            this.form.uaid = this.initialUaid
             this.error = err.message
           })
       } else {
@@ -87,11 +83,7 @@ export default {
     onResetGaId(evt) {
       evt.preventDefault()
       /* Reset our form values */
-      if (this.initialUaid === '') {
-        this.form.uaid = ''
-      } else {
-        this.form.uaid = this.initialUaid
-      }
+      this.form.uaid = this.initialUaid
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
