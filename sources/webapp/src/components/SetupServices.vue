@@ -57,6 +57,12 @@ export default {
       show: true
     }
   },
+  created() {
+    var firstSetup = window.settings.firstSetup
+    if (!firstSetup) {
+      this.getServicesConfig()
+    }
+  },
   computed: {
     disableServicesButtons() {
       return (this.services === undefined || this.services.length === 0)
