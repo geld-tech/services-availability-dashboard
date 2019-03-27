@@ -1,35 +1,33 @@
 <template>
   <div class="index">
     <!-- Container -->
-    <b-container v-if="authenticated" class="bv-example-row">
+    <b-container v-if="authenticated">
         <h2>Configuration</h2>
-        <b-card no-body>
-            <b-tabs pills card vertical>
-              <b-tab title="Admin Password" id="admin-password-tab" active>
-                <div class="component">
-                    <div class="pt-1">
-                        <p>Configuration updated successfully!</p>
-                    </div>
-                    <div class="component">
-                        <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
-                        </setup-password>
-                    </div>
+        <b-tabs pills card vertical>
+          <b-tab title="Admin Password" id="admin-password-tab" active>
+            <div class="component">
+                <div class="pt-1">
+                    <p>Configuration updated successfully!</p>
                 </div>
-              </b-tab>
-              <b-tab title="Services" id="services-tab">
                 <div class="component">
-                    <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
-                    </setup-services>
+                    <setup-password v-bind:adminPasswordSet="adminPasswordSet" v-on:set-admin-password="adminPasswordSet = $event">
+                    </setup-password>
                 </div>
-               </b-tab>
-              <b-tab title="Analytics" id="analytics-tab">
-                <div class="component">
-                    <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
-                    </setup-ganalytics>
-                </div>
-               </b-tab>
-            </b-tabs>
-        </b-card>
+            </div>
+          </b-tab>
+          <b-tab title="Services" id="services-tab">
+            <div class="component">
+                <setup-services v-bind:servicesSet="servicesSet" v-on:set-services="servicesSet = $event">
+                </setup-services>
+            </div>
+           </b-tab>
+          <b-tab title="Analytics" id="analytics-tab">
+            <div class="component">
+                <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
+                </setup-ganalytics>
+            </div>
+           </b-tab>
+        </b-tabs>
     </b-container>
     <b-container class="bv-example-row">
         <div>
