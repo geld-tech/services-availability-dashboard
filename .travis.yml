@@ -93,7 +93,9 @@ before_script:
   - rsync -a sources/files/ $PACKAGE_VERSION/
   - rsync -a sources/server/ $PACKAGE_VERSION/$PACKAGE_DIR
   - rsync -a sources/webapp/dist/*.html $PACKAGE_VERSION/$PACKAGE_DIR/templates/
-  - rsync -a -r sources/webapp/dist/static/ $PACKAGE_VERSION/$PACKAGE_DIR/static/
+  - rsync -a -r sources/webapp/static/ $PACKAGE_VERSION/$PACKAGE_DIR/static/
+  - rsync -a -r sources/webapp/dist/css/ $PACKAGE_VERSION/$PACKAGE_DIR/static/
+  - rsync -a -r sources/webapp/dist/js/ $PACKAGE_VERSION/$PACKAGE_DIR/static/
   - rsync -a -r packages/DEBIAN/ $PACKAGE_VERSION/DEBIAN/
   ## Output files and directories for debugging purpose
   - ls -lsthRA $PACKAGE_VERSION/
@@ -106,7 +108,9 @@ before_script:
   - rsync -a --chown=root:www-data sources/files/ $PACKAGE_NAME/BUILD/
   - rsync -a --chown=root:www-data sources/server/ $PACKAGE_NAME/BUILD/$PACKAGE_DIR
   - rsync -a --chown=root:www-data sources/webapp/dist/*.html $PACKAGE_NAME/BUILD/$PACKAGE_DIR/templates/
-  - rsync -a -r --chown=root:www-data sources/webapp/dist/static/ $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static/
+  - rsync -a -r --chown=root:www-data sources/webapp/static/ $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static/
+  - rsync -a -r --chown=root:www-data sources/webapp/dist/css/ $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static/
+  - rsync -a -r --chown=root:www-data sources/webapp/dist/js/ $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static/
   - rsync -a --chown=root:www-data packages/RPM/* $PACKAGE_NAME/
   ## Output files and directories for debugging purpose
   - ls -lsthRA $PACKAGE_NAME/
