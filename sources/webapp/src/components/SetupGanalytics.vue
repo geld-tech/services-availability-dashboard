@@ -124,4 +124,7 @@ h2 {
   display: block;
   line-height: 15px;
 }
+button{
+  margin: 1px;
+}
 </style>
