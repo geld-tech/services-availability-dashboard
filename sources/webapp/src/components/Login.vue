@@ -93,7 +93,7 @@ export default {
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
         authenticate(password)
-          .then(response => {
+          .then(() => {
             this.authenticated = true
             this.$emit('set-authenticated', true)
           })
