@@ -86,7 +86,7 @@ export default {
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
         storeAdminPassword(password)
-          .then(response => {
+          .then(() => {
             this.$emit('set-admin-password', true)
           })
           .catch(err => {
