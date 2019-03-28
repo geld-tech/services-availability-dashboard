@@ -68,7 +68,7 @@ export default {
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
         storeGanalytics(uaid)
-          .then(response => {
+          .then(() => {
             this.$emit('set-ganalytics-uaid', true)
           })
           .catch(err => {
