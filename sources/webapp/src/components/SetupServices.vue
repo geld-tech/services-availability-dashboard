@@ -80,7 +80,7 @@ export default {
         /* Storing the data */
         this.loading = true
         storeServices(this.services)
-          .then(response => {
+          .then(() => {
             this.servicesSet = true
             this.$emit('set-services', true)
             this.loading = false
