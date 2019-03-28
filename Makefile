@@ -106,10 +106,12 @@ npm-build: npm-install
 ## Prepare application
 webapp-setup: npm-build
 	$(call echo_title, "PREPARE")
-	mkdir $(SRV_DEV_ENV)/templates/
 	mkdir $(SRV_DEV_ENV)/static/
+	cp -r $(NPM_DEV_ENV)/static/* $(SRV_DEV_ENV)/static/
+	cp -r $(NPM_DEV_ENV)/dist/css/ $(SRV_DEV_ENV)/static/
+	cp -r $(NPM_DEV_ENV)/dist/js/ $(SRV_DEV_ENV)/static/
+	mkdir $(SRV_DEV_ENV)/templates/
 	cp $(NPM_DEV_ENV)/dist/*.html $(SRV_DEV_ENV)/templates/
-	cp -r $(NPM_DEV_ENV)/dist/static/* $(SRV_DEV_ENV)/static/
 
 ## Create a stub settings.cfg file
 webapp-settings:
