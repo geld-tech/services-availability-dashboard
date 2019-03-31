@@ -53,12 +53,12 @@ lint:
 
 ## Run unit tests
 test:
-	$(call echo_title, "python unit tests")
+	$(call echo_title, "PYTHON UNIT TESTS")
 	python -m unittest discover -s tests
 
 ## Run UI tests (overridable parameters: TEST_PROT, TEST_HOST, TEST_PORT, TEST_WAIT)
 test-ui:
-	$(call echo_title, "python selenium UI tests")
+	$(call echo_title, "PYTHON SELENIUM UI TESTS")
 	@echo "Executing UI tests on $(TEST_PROT)://$(TEST_HOST):$(TEST_PORT) (delay of $(TEST_WAIT) seconds)"
 	ls -t tests/uiTest*.py | xargs -i python {} --proto=$(TEST_PROT) --host=$(TEST_HOST) --port=$(TEST_PORT) --delay=$(TEST_WAIT)
 
@@ -190,6 +190,7 @@ stop: daemon-stop webapp-stop
 
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
+	$(call echo_title, "DOCKER RUN DEB")
 	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c ' apt clean all && apt update && apt install -y python wget vim ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
 		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
@@ -207,6 +208,7 @@ docker-run-deb:
 
 ## Validate latest .rpm package on a local CentOS image with Docker
 docker-run-rpm:
+	$(call echo_title, "DOCKER RUN RPM")
 	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum clean all && yum install -y python wget vim ; \
 		yum install -y epel-release ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
