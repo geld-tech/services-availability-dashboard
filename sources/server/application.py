@@ -12,7 +12,6 @@ import logging
 import logging.handlers
 import os
 import sys
-
 from codecs import encode
 from functools import wraps
 from optparse import OptionParser
