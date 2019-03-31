@@ -49,7 +49,7 @@ test:
 	python -m unittest discover -s tests
 
 ## run UI tests
-ui-test:
+test-ui:
 	$(call echo_title, "python & Selenium UI tests")
 	ls -t tests/uiTest*.py | xargs -i python {}
 
