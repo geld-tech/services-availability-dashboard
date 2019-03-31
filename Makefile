@@ -51,12 +51,12 @@ lint:
 	$(call echo_title, "PYTHON LINTER")
 	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
 
-## run unit tests
+## Run unit tests
 test:
 	$(call echo_title, "python unit tests")
 	python -m unittest discover -s tests
 
-## run UI tests (overridable parameters: TEST_PROT, TEST_HOST, TEST_PORT, TEST_WAIT)
+## Run UI tests (overridable parameters: TEST_PROT, TEST_HOST, TEST_PORT, TEST_WAIT)
 test-ui:
 	$(call echo_title, "python selenium UI tests")
 	@echo "Executing UI tests on $(TEST_PROT)://$(TEST_HOST):$(TEST_PORT) (delay of $(TEST_WAIT) seconds)"
