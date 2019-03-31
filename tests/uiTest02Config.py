@@ -13,7 +13,7 @@ class ConfigSection(unittest.TestCase):
     port = 5000
     delay = 30
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(30)
         self.base_url = "https://geld.tech/"
         self.verificationErrors = []
