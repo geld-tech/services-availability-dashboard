@@ -107,7 +107,7 @@ if __name__ == "__main__":
     parser.add_option("--proto", dest="proto", default="http", help="Protocol")
     parser.add_option("--host", dest="host", default="0.0.0.0", help="Host")
     parser.add_option("--port", dest="port", default=5000, type=int, help="Port")
-    parser.add_option("--delay", dest="delay", default=30, type="int", help="Default delay after steps to keep browser open")
+    parser.add_option("--delay", dest="delay", default=10, type="int", help="Default delay after steps to keep browser open (for visual validation)")
     (options, args) = parser.parse_args()
 
     # Set parameters
