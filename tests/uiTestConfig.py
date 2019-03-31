@@ -7,7 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class Config(unittest.TestCase):
+class ConfigSection(unittest.TestCase):
     proto = "http"
     host = "0.0.0.0"
     port = 5000
@@ -79,10 +79,10 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
 
     # Set parameters
-    FirstSetup.proto = options.proto
-    FirstSetup.host = options.host
-    FirstSetup.port = options.port
-    FirstSetup.delay = options.delay
+    ConfigSection.proto = options.proto
+    ConfigSection.host = options.host
+    ConfigSection.port = options.port
+    ConfigSection.delay = options.delay
 
     # Remove parameters from argv to not pass them to unittest
     sys.argv = [sys.argv[0]]
