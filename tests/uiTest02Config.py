@@ -34,7 +34,6 @@ class ConfigSection(unittest.TestCase):
         driver.find_element_by_id("analytics-tab___BV_tab_button__").click()
         driver.find_element_by_id("admin-password-tab___BV_tab_button__").click()
         driver.find_element_by_id("adminLogoutButton").click()
-        driver.find_element_by_xpath("//html").click()
         try:
                 self.assertEqual("Login",
                         driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='localdev'])[2]/following::h2[1]").text)
