@@ -43,10 +43,15 @@ lint:
 	$(call echo_title, "PYTHON LINTER")
 	flake8 sources/server/ --show-source --max-line-length=239 --max-complexity=10 --statistics --count
 
-## Run unit tests
+## run unit tests
 test:
-	$(call echo_title, "PYTHON UNIT TESTS")
+	$(call echo_title, "python unit tests")
 	python -m unittest discover -s tests
+
+## run UI tests
+ui-test:
+	$(call echo_title, "python & Selenium UI tests")
+	ls -t tests/uiTest*.py | xargs -i python {}
 
 ## Prepare local development environment
 local-dev-env:
