@@ -50,7 +50,7 @@ test:
 
 ## run UI tests
 test-ui:
-	$(call echo_title, "python & Selenium UI tests")
+	$(call echo_title, "python selenium UI tests")
 	ls -t tests/uiTest*.py | xargs -i python {}
 
 ## Prepare local development environment
