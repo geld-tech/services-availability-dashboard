@@ -282,7 +282,10 @@ def get_services():
             config.readfp(open(config_file))
             if 'services' in config.sections():
                 for service in config.items('services'):
-                    services.append({'name': service[0], 'url': service[1]})
+                    name = service[0]
+                    url = service[1].split(':')[0]
+                    port = service[1].split(':')[1]
+                    services.append({'name': name, 'url': url, 'port': port})
     except Exception, e:
         logger.error('Error while retrieving services: %s' % e)
     finally:
