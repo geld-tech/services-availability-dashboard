@@ -12,9 +12,11 @@ import logging
 import logging.handlers
 import os
 import sys
+
 from codecs import encode
 from functools import wraps
 from optparse import OptionParser
+from urlparse import urlparse
 
 from flask import Flask, jsonify, render_template, request, session
 from sqlalchemy import create_engine
@@ -283,8 +285,8 @@ def get_services():
             if 'services' in config.sections():
                 for service in config.items('services'):
                     name = service[0]
-                    url = service[1].split(':')[0]
-                    port = service[1].split(':')[1]
+                    port = urlparse(service[1]).port
+                    url = service[1].replace(':%s' % port, '')
                     services.append({'name': name, 'url': url, 'port': port})
     except Exception, e:
         logger.error('Error while retrieving services: %s' % e)
