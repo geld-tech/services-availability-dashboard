@@ -56,7 +56,7 @@ test:
 	$(call echo_title, "python unit tests")
 	python -m unittest discover -s tests
 
-## run UI tests
+## run UI tests (overridable parameters: TEST_PROT, TEST_HOST, TEST_PORT, TEST_WAIT)
 test-ui:
 	$(call echo_title, "python selenium UI tests")
 	@echo "Executing UI tests on $(TEST_PROT)://$(TEST_HOST):$(TEST_PORT) (delay of $(TEST_WAIT) seconds)"
