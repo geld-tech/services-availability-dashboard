@@ -23,6 +23,7 @@ class FirstSetup(unittest.TestCase):
         driver = self.driver
         url = "%s://%s:%d" % (self.proto, self.host, self.port)
         driver.get(url)
+        driver.refresh()
         driver.find_element_by_id("nextButton").click()
         driver.find_element_by_id("adminPassword").click()
         driver.find_element_by_id("adminPassword").clear()
