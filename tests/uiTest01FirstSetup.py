@@ -70,9 +70,8 @@ class FirstSetup(unittest.TestCase):
         driver.find_element_by_id("servicesSubmitButton").click()
         driver.find_element_by_id("startButton").click()
         driver.refresh()
-        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='localdev'])[2]/following::h5[1]").click()
-        self.assertEqual("Services Status", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='localdev'])[2]/following::h5[1]").text)
-
+        self.assertEqual("Services Status", driver.find_element_by_id("serviceStatusHeader").text)
+        # Wait for visual validation
         time.sleep(self.delay)
     
     def is_element_present(self, how, what):
