@@ -29,19 +29,24 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
 secret_file = local_path+'/config/secret.uti'
 
+# Initialisation
+logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
+logger = logging.getLogger('root')
+
 # Shared secret for threads sessions
-with open(secret_file, 'r') as file:
-    secret_key = file.read()
+if os.path.isfile(secret_file):
+    with open(secret_file, 'r') as file:
+        secret_key = file.read()
+else:
+    generate_command = 'python -c  "import os; print os.urandom(24)" > %s' % secret_file
+    logger.critical('Session secret does not exist! Generate it with: %s' % generate_command)
+    sys.exit(-1)
 
 # Flask Initialisation
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.secret_key = secret_key
 app.debug = True
-
-# Initialisation
-logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
-logger = logging.getLogger('root')
 
 service_status = ServiceStatus()
 
