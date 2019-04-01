@@ -50,6 +50,9 @@ if [ $1 -gt 1 ] ; then
     echo "Service __PACKAGE_NAME__ upgraded successfully!!"
 
 else
+    # Creates unique session secret
+    python -c  "import os; print os.urandom(24)" > __PACKAGE_DIR__/config/secret.uti
+
     # Performing a fresh install of  the package
     echo -n "Installing service..."
     systemctl daemon-reload

@@ -27,13 +27,17 @@ from modules.ServiceStatus import ServiceStatus
 # Global config
 local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
-secret_key = os.urandom(24)
+secret_file = local_path+'/config/secret.uti'
+
+# Shared secret for threads sessions
+with open(secret_file, 'r') as file:
+    secret_key = file.read()
 
 # Flask Initialisation
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-app.debug = True
 app.secret_key = secret_key
+app.debug = True
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)

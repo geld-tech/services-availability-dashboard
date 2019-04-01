@@ -13,6 +13,9 @@ case "$1" in
 		chown -R root:www-data __PACKAGE_DIR__
 		chmod 775  __PACKAGE_DIR__/data
 
+                # Creates unique session secret
+                python -c  "import os; print os.urandom(24)" > __PACKAGE_DIR__/config/secret.uti
+
 		# If $1=configure and $2 is set, this is an upgrade
 		if [ "$2" != "" ]; then
 			IS_UPGRADE=true
