@@ -7,10 +7,9 @@
             <img src="/static/images/spinner.gif" width="32" height="32"/>
         </div>
         <div v-else>
-            <h3>{{ msg }}</h3>
             <b-row align-v="start" align-h="around">
                 <b-col sm="4">
-                    <h5>Services Status</h5>
+                    <h5 id="serviceStatusHeader">Services Status</h5>
                 </b-col>
                 <b-col sm="8">
                     <p></p>
@@ -46,11 +45,6 @@ export default {
   props: ['loading', 'services', 'datasets', 'labels'],
   components: {
     Status
-  },
-  data () {
-    return {
-      msg: ''
-    }
   }
 }
 </script>
