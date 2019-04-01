@@ -12,7 +12,7 @@
           </b-container>
         </div>
         <div v-else class="pt-1">
-            <h2>Login</h2>
+            <h2 id="loginHeader">Login</h2>
             <p>Enter the system administration password in the following input field, then Submit</p>
             <b-form @submit="onSubmitPassword" @reset="onResetPassword" id="adminPasswordForm" v-if="show">
                 <b-container fluid>
