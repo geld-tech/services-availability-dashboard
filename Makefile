@@ -5,11 +5,10 @@ SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
 # UI Tests
-TEST_PROT=http
-TEST_HOST=0.0.0.0
-TEST_PORT=5000
-TEST_WAIT=10
-
+PROTO=http
+HOST=0.0.0.0
+PORT=5000
+WAIT=10
 
 ## Run all targets locally
 all: stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
@@ -56,11 +55,11 @@ test:
 	$(call echo_title, "PYTHON UNIT TESTS")
 	python -m unittest discover -s tests
 
-## Run UI tests (overridable parameters: TEST_PROT, TEST_HOST, TEST_PORT, TEST_WAIT)
+## Run UI Tests (overridable parameters: PROTO, HOST, PORT, WAIT)
 test-ui:
 	$(call echo_title, "PYTHON SELENIUM UI TESTS")
-	@echo "Executing UI tests on $(TEST_PROT)://$(TEST_HOST):$(TEST_PORT) (delay of $(TEST_WAIT) seconds)"
-	ls tests/uiTest*.py | xargs -i python {} --proto=$(TEST_PROT) --host=$(TEST_HOST) --port=$(TEST_PORT) --delay=$(TEST_WAIT)
+	@echo "Executing UI tests on $(PROTO)://$(HOST):$(PORT) (delay of $(WAIT) seconds)"
+	ls tests/uiTest*.py | xargs -i python {} --proto=$(PROTO) --host=$(HOST) --port=$(PORT) --delay=$(WAIT)
 
 ## Prepare local development environment
 local-dev-env:
