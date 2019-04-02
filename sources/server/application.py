@@ -113,7 +113,6 @@ def status():
             dataset["colors"] = next(colors)
             dataset["data"] = []
             dataset["availability"] = []
-            #for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.asc()).limit(90):
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_2_hours.strftime('%s')).order_by(Metrics.timestamp.asc()):
                 xaxis_label = service_metrics.date_time.strftime("%H:%M")
                 if xaxis_label not in xaxis_labels:
