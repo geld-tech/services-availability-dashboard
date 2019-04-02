@@ -81,8 +81,6 @@ export default {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
       this.$router.push({name: 'Index'})
-    } else {
-      window.clearInterval(this.refreshInterval)
     }
   },
   methods: {
