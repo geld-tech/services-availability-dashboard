@@ -4,6 +4,13 @@ LOCAL_CACHE=.cache
 SRV_DEV_ENV=local-dev-env/server
 NPM_DEV_ENV=local-dev-env/webapp
 
+# Package Details
+PACKAGE_NAME=localdev
+PACKAGE_DESC=Running application locally
+PACKAGE_AUTHOR=geld.tech
+PACKAGE_VERSION=0.0.1
+PACKAGE_DATE=01-01-1970
+
 # UI Tests
 PROTO=http
 HOST=0.0.0.0
@@ -69,11 +76,11 @@ local-dev-env:
 	cp -r sources/server/ $(LOCAL_DEV_ENV)
 	cp -r sources/webapp/ $(LOCAL_DEV_ENV)
 	@echo "== Replace place holders =="
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_NAME__/localdev/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_DESC__/Running application locally/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_AUTHOR__/geld.tech/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__VERSION__/0.0.1/g"
-	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__DATE__/01-01-1970/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_NAME__/$(PACKAGE_NAME)/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_DESC__/$(PACKAGE_DESC)/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__PACKAGE_AUTHOR__/$(PACKAGE_AUTHOR)/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__VERSION__/$(PACKAGE_VERSION)/g"
+	find $(LOCAL_DEV_ENV) -type f | xargs sed -i "s/__DATE__/$(PACKAGE_DATE)/g"
 	@if [ -d "$(LOCAL_CACHE)/node_modules/" ]; then \
 		echo "== Restore NPM cache =="; \
 		set -x; \
