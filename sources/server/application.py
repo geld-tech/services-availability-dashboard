@@ -99,9 +99,13 @@ def status():
         datasets = []
         time_labels = []
         xaxis_labels = []
-        now = datetime.datetime.utcnow()
-        last_hour = now - datetime.timedelta(hours=1)
         colors = colors_generator()
+        offset = 1  # GMT+1 as Default Timezone offset
+
+        if request.headers.get('offset'):
+            offset = int(request.headers.get('offset'))
+        now = datetime.datetime.utcnow() + datetime.timedelta(hours=offset)
+        last_hour = now - datetime.timedelta(hours=1)
 
         for service in db_session.query(Metrics.service_name).distinct().all():
             service = ''.join(service)
@@ -124,8 +128,7 @@ def status():
         return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
                         'time_labels': time_labels,
-                        'services':
-                        {'names': services}}), 200
+                        'services': {'names': services}}), 200
     except Exception, e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         del exc_type
