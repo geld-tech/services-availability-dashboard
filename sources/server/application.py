@@ -100,11 +100,12 @@ def status():
         time_labels = []
         xaxis_labels = []
         colors = colors_generator()
-        offset = 1  # GMT+1 as Default Timezone offset
 
+        offset = 1  # GMT+1 as Default Timezone offset
         if request.headers.get('offset'):
             offset = int(request.headers.get('offset'))
-        now = datetime.datetime.utcnow() + datetime.timedelta(hours=offset)
+
+        now = datetime.datetime.utcnow()
         last_hour = now - datetime.timedelta(hours=1)
 
         for service in db_session.query(Metrics.service_name).distinct().all():
@@ -118,7 +119,7 @@ def status():
             dataset["data"] = []
             dataset["availability"] = []
             for service_metrics in db_session.query(Metrics).filter(Metrics.service_name == service).filter(Metrics.timestamp >= last_hour.strftime('%s')).order_by(Metrics.timestamp.asc()):
-                xaxis_label = service_metrics.date_time.strftime("%H:%M")
+                xaxis_label = (service_metrics.date_time + datetime.timedelta(hours=offset)).strftime("%H:%M")
                 if xaxis_label not in xaxis_labels:
                     xaxis_labels.append(xaxis_label)
                 dataset["data"].append(service_metrics.latency)
