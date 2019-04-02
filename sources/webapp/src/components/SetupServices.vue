@@ -9,14 +9,14 @@
             <b-form @submit="onSubmitServices" @reset="onResetServices" id="servicesForm" v-if="show">
                 <b-container fluid>
                   <b-row class="my-1" no-gutters>
-                    <b-col sm="5"><label>Service Name</label></b-col>
-                    <b-col sm="4"><label>URL</label></b-col>
+                    <b-col sm="4"><label>Service Name</label></b-col>
+                    <b-col sm="5"><label>URL</label></b-col>
                     <b-col sm="2"><label>Port</label></b-col>
                     <b-col sm="1"></b-col>
                   </b-row>
                   <b-row class="my-1" no-gutters v-for="(service, index) in services" v-bind:key="index">
-                    <b-col sm="5">{{ service.name }}</b-col>
-                    <b-col sm="4">{{ service.url }}</b-col>
+                    <b-col sm="4">{{ service.name }}</b-col>
+                    <b-col sm="5">{{ service.url }}</b-col>
                     <b-col sm="2">{{ service.port }}</b-col>
                     <b-col sm="1"><b-button @click="deleteRow(index)"><strong> - </strong></b-button></b-col>
                   </b-row>
