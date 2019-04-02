@@ -21,8 +21,8 @@
                     <b-col sm="1"><b-button @click="deleteRow(index)"><strong> - </strong></b-button></b-col>
                   </b-row>
                   <b-row class="my-1" no-gutters>
-                    <b-col sm="5"><b-form-input type="text" v-model="form.serviceName" id="serviceName"></b-form-input></b-col>
-                    <b-col sm="4"><b-form-input type="text" v-model="form.serviceUrl" id="serviceUrl"></b-form-input></b-col>
+                    <b-col sm="4"><b-form-input type="text" v-model="form.serviceName" id="serviceName"></b-form-input></b-col>
+                    <b-col sm="5"><b-form-input type="text" v-model="form.serviceUrl" id="serviceUrl"></b-form-input></b-col>
                     <b-col sm="2"><b-form-input type="text" v-model="form.servicePort" id="servicePort"></b-form-input></b-col>
                     <b-col sm="1"><b-button @click="addRow" id="addRowButton"><strong> + </strong></b-button></b-col>
                   </b-row>
