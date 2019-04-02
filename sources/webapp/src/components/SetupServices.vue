@@ -40,6 +40,7 @@
 
 <script>
 import { getConfig, storeServices } from '@/api'
+import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'SetupServices',
@@ -119,8 +120,9 @@ export default {
         })
     },
     addRow() {
+      var serviceName = sanitizeString(this.form.serviceName)
       this.services.push({
-        name: this.form.serviceName,
+        name: serviceName,
         url: this.form.serviceUrl,
         port: this.form.servicePort
       })
