@@ -136,7 +136,7 @@ def is_running(pid_file):
 # Main
 SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 DB_PATH = SCRIPT_PATH + '/data/metrics.sqlite3'
-CONFIG_FILE = SCRIPT_PATH + '/config/settings.cfg'
+CFG_FILE = SCRIPT_PATH + '/config/settings.cfg'
 PID_FILE = SCRIPT_PATH + '/.__PACKAGE_NAME__-collector.pid'
 POLL_INTERVAL = 30
 DEBUG = False
@@ -159,7 +159,7 @@ if __name__ == "__main__":
                 running, pid = is_running(PID_FILE)
                 print '%s is running as pid %s' % (sys.argv[0], pid)
             else:
-                collector = MetricsCollector(PID_FILE, DB_PATH, CONFIG_FILE, poll_interval=POLL_INTERVAL, debug=DEBUG)
+                collector = MetricsCollector(PID_FILE, DB_PATH, CFG_FILE, poll_interval=POLL_INTERVAL, debug=DEBUG)
                 daemon = runner.DaemonRunner(collector)
                 daemon.do_action()  # start|stop|restart as sys.argv[1]
                 running, pid = is_running(PID_FILE)
