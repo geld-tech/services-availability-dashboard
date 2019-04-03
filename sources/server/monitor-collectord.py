@@ -156,11 +156,16 @@ if __name__ == "__main__":
         elif 'stop' == sys.argv[1] and not is_running(PID_FILE)[0]:
             print '%s is not running.' % sys.argv[0]
         else:
-            collector = MetricsCollector(PID_FILE, DB_PATH, CONFIG_FILE, poll_interval=POLL_INTERVAL, debug=DEBUG)
-            daemon = runner.DaemonRunner(collector)
-            daemon.do_action()  # start|stop|restart as sys.argv[1]
-            running, pid = is_running(PID_FILE)
-            sys.exit(0)
+            lockfile = runner.make_pidlockfile(PID_FILE, 1)
+            if lockfile.is_locked():
+                running, pid = is_running(PID_FILE)
+                print '%s is running as pid %s' % (sys.argv[0], pid)
+            else:
+                collector = MetricsCollector(PID_FILE, DB_PATH, CONFIG_FILE, poll_interval=POLL_INTERVAL, debug=DEBUG)
+                daemon = runner.DaemonRunner(collector)
+                daemon.do_action()  # start|stop|restart as sys.argv[1]
+                running, pid = is_running(PID_FILE)
+                sys.exit(0)
     else:
         print "Usage: %s start|stop|restart|status" % sys.argv[0]
         sys.exit(2)
