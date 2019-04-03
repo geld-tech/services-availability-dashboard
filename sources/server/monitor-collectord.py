@@ -56,7 +56,6 @@ class MetricsCollector():
                 # Poll and store
                 dt = datetime.datetime.utcnow()
                 services = self.get_services(self.config_file)
-                #print "Services: %s" % services
                 data = services_status.poll_metrics(services)
                 self.store_status(dt, data)
                 time.sleep(self.poll_interval)
