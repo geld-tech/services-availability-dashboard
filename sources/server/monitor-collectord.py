@@ -135,9 +135,9 @@ def is_running(pid_file):
 
 # Main
 SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
-DB_PATH = SCRIPT_PATH+'/data/metrics.sqlite3'
-CONFIG_FILE = SCRIPT_PATH+'/config/settings.cfg'
-PID_FILE = '/var/run/__PACKAGE_NAME__-collector.pid'
+DB_PATH = SCRIPT_PATH + '/data/metrics.sqlite3'
+CONFIG_FILE = SCRIPT_PATH + '/config/settings.cfg'
+PID_FILE = SCRIPT_PATH + '/.__PACKAGE_NAME__-collector.pid'
 POLL_INTERVAL = 30
 DEBUG = False
 
