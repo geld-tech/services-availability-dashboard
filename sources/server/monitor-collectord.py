@@ -145,7 +145,6 @@ DEBUG = False
 if __name__ == "__main__":
     if len(sys.argv) == 3:
         DEBUG = True
-        PID_FILE = '/tmp/__PACKAGE_NAME__-collector.pid'
     if len(sys.argv) >= 2:
         if 'status' == sys.argv[1]:
             running, pid = is_running(PID_FILE)
