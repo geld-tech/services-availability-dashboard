@@ -3,7 +3,7 @@ Description=Collector Daemon associated with the service __PACKAGE_NAME__
 After=__PACKAGE_NAME__.service
 
 [Service]
-Type=forking
+Type=simple
 PIDFile=/var/run/__PACKAGE_NAME__-collector.pid
 User=root
 Group=www-data
