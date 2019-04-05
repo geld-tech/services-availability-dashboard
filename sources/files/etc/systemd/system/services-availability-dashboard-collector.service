@@ -10,6 +10,7 @@ Group=www-data
 WorkingDirectory=__PACKAGE_DIR__
 ExecStart=__PACKAGE_DIR__/monitor-collectord.py start
 ExecStop=__PACKAGE_DIR__/monitor-collectord.py stop
+TimeoutStartSec=10
 
 [Install]
 WantedBy=__PACKAGE_NAME__.service
